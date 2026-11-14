@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Strapontin · propositions de galerie</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Instrument+Serif:ital@0;1&family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<style>
+/* Internal study: three ways to lay out the home gallery. Same fonts and palette as v3. Posters are looked up on Wikipedia at view time (review only, rights not cleared). */
+:root{--paper:#DCDDD1;--paper-2:#E8E9DF;--ink:#231417;--ink-2:#574B49;--accent:#A82F0C;--line:rgba(35,20,23,.25);
+--display:"Playfair Display",Didot,Georgia,serif;--italic:"Instrument Serif",Georgia,serif;--sans:"Archivo","Helvetica Neue",Arial,sans-serif;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+.lab{font:500 11.5px/1.4 var(--sans);font-stretch:118%;letter-spacing:.09em;text-transform:uppercase}
+.caps{font:600 1em/1.08 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.it{font:italic 400 1.1em/1.1 var(--italic)}
+/* study bar */
+.study{position:sticky;top:0;z-index:30;background:var(--ink);color:var(--paper-2);display:flex;gap:6px 18px;align-items:center;flex-wrap:wrap;padding:8px 16px}
+.study b{font-weight:600}
+.study .tabs{display:flex;gap:4px;margin-left:auto}
+.study button{background:none;border:1px solid rgba(232,233,223,.4);border-radius:99px;padding:6px 14px;color:inherit}
+.study button[aria-pressed=true]{background:var(--paper-2);color:var(--ink);border-color:var(--paper-2)}
+/* shared mock chrome */
+.bar{display:flex;align-items:baseline;gap:10px 22px;flex-wrap:wrap;padding:18px clamp(16px,3vw,40px) 10px}
+.bar h1{margin:0;font-size:clamp(22px,3vw,38px)}
+.bar .f{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.bar .f span{padding-bottom:3px}
+.bar .f .on{border-bottom:1.5px solid var(--ink);color:var(--ink)}
+.bar .f span:not(.on){color:var(--ink-2)}
+.pitch{padding:0 clamp(16px,3vw,40px) 16px;max-width:86ch;color:var(--ink-2)}
+.pitch b{color:var(--ink)}
+.t{position:relative;overflow:hidden;background:#2a2023;cursor:pointer;border:0;padding:0;text-align:left;color:#F6F3EA;display:block}
+.t img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .5s}
+.t:hover img{transform:scale(1.04)}
+.t .sc{position:absolute;inset:auto 0 0 0;padding:44px 14px 12px;background:linear-gradient(transparent,rgba(20,10,12,.82));display:grid;gap:3px}
+.t .sc .caps{font-size:clamp(12px,1.15vw,17px)}
+.t .sc .nx{font-size:12.5px;opacity:.95}
+.t .sc .nx b{font-weight:700;font-variant-numeric:tabular-nums}
+.more{display:none;gap:10px;margin-top:8px}
+.more p{margin:0;max-width:52ch;font-size:14px}
+.more .aw{font:italic 400 18px var(--italic);color:#E9D9A8}
+.times{display:flex;gap:8px 18px;flex-wrap:wrap;font-size:13.5px}
+.times span b{font-variant-numeric:tabular-nums}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#FBF7F0;padding:12px 18px;border:0;border-radius:2px;width:max-content}
+.x{position:absolute;top:10px;right:12px;z-index:3;background:none;border:0;color:#F6F3EA;font-size:22px;line-height:1;display:none}
+.on>.x{display:block}
+.on .more{display:grid}
+.on .sc{padding:90px clamp(16px,2.4vw,34px) clamp(16px,2vw,28px);background:linear-gradient(transparent,rgba(20,10,12,.9) 55%)}
+.on .sc .caps{font-size:clamp(22px,3vw,44px)}
+.on .sc .it{font-size:22px}
+
+/* A · Mosaïque: full-bleed asymmetric grid, thin paper gaps as implied lines */
+.A{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:13.2vw;grid-auto-flow:dense;gap:5px;padding:0 5px 5px}
+.A .t{grid-column:span var(--c);grid-row:span var(--r)}
+.A.has .t:not(.on){--c:1!important;--r:2!important}
+.A .t.on{grid-column:2/span 4;grid-row:span 4}
+@media(max-width:760px){.A{grid-template-columns:repeat(4,1fr);grid-auto-rows:24vw;gap:4px;padding:0 4px 4px}.A .t{grid-column:span min(var(--c),2)}.A .t.big{grid-column:span 4}.A.has .t:not(.on){grid-column:span 2;--r:2!important}.A .t.on{grid-column:1/span 4;grid-row:span 6}}
+
+/* B · Dérive: uncropped posters drifting on the paper, captions aligned to edges */
+.B{display:grid;grid-template-columns:1.25fr .9fr 1.5fr 1fr;gap:clamp(20px,4vw,64px);padding:10px clamp(16px,5vw,80px) 80px;align-items:start;transition:transform .6s var(--ease),opacity .5s,filter .5s;transform-origin:50% 30vh}
+.B .col{display:grid;gap:clamp(28px,5vw,72px)}
+.B .col:nth-child(2){margin-top:9vw}.B .col:nth-child(3){margin-top:2.5vw}.B .col:nth-child(4){margin-top:14vw}
+.B .item{cursor:pointer;display:grid;gap:8px;background:none;border:0;padding:0;text-align:left}
+.B .item img{width:100%;height:auto;display:block;transition:transform .8s var(--ease)}
+.B .item:hover img{transform:translateY(-6px)}
+.B .item .caps{font-size:clamp(12px,1.1vw,16px)}
+.B .item .it{color:var(--ink-2);font-size:17px;margin-top:-4px}
+.B .item .nx{font-size:13px;border-top:1px solid var(--line);padding-top:6px}
+.B .item:nth-child(even) .cap{padding-left:18%}
+.B.dim{transform:scale(.86);opacity:.28;filter:blur(1px);pointer-events:none}
+@media(max-width:760px){.B{grid-template-columns:1.2fr 1fr;gap:18px}.B .col:nth-child(2){margin-top:22vw}.B .col:nth-child(3),.B .col:nth-child(4){margin-top:0}.B .col:nth-child(4){margin-top:10vw}}
+.focus{position:fixed;inset:0;z-index:20;display:none;place-items:center;padding:70px 16px 16px}
+.focus.open{display:grid}
+.focus .card{display:grid;grid-template-columns:minmax(0,340px) minmax(0,400px);gap:clamp(18px,3vw,44px);align-items:end;animation:grow .5s var(--ease)}
+.focus img{width:100%;height:auto;display:block;box-shadow:0 30px 60px -30px rgba(35,20,23,.7)}
+.focus .caps{font-size:clamp(24px,3.2vw,44px)}
+.focus .it{font-size:24px;color:var(--ink-2)}
+.focus .aw{font:italic 400 19px var(--italic);color:#5E4A05}
+.focus .txt{display:grid;gap:12px}
+.focus p{margin:0}
+.focus .close{background:none;border:0;border-bottom:1px solid var(--ink);padding:0 0 2px;width:max-content}
+@keyframes grow{from{transform:scale(.8);opacity:0}}
+@media(max-width:760px){.focus{align-items:start;overflow:auto}.focus .card{grid-template-columns:1fr;max-width:340px}.focus .card img{max-width:220px}}
+
+/* C · Accordéon: slices that open; the chosen one takes the middle, the others fold */
+.C{display:flex;gap:4px;height:calc(100vh - 210px);min-height:440px;padding:0 4px 4px}
+.C .t{flex:1 1 0;min-width:0;transition:flex-grow .7s var(--ease)}
+.C .t:hover{flex-grow:1.6}
+.C .t.on{flex-grow:9}
+.C .t .sc{padding:60px 10px 12px}
+.C .t:not(.on) .sc .caps{writing-mode:vertical-rl;transform:rotate(180deg);font-size:14px;white-space:nowrap;max-height:60vh;overflow:hidden}
+.C .t:not(.on) .sc .it,.C .t:not(.on) .sc .nx span{display:none}
+.C .t:not(.on) .sc .nx{font-size:12px}
+.C .t.on img{object-position:50% 20%}
+@media(max-width:760px){.C{flex-direction:column;height:auto;min-height:0}.C .t{flex:none;height:74px;transition:height .6s var(--ease)}.C .t:hover{flex-grow:0}.C .t.on{height:74vh}.C .t:not(.on) .sc{padding:8px 12px;inset:0;align-content:center;background:linear-gradient(90deg,rgba(20,10,12,.8),rgba(20,10,12,.25))}.C .t:not(.on) .sc .caps{writing-mode:horizontal-tb;transform:none;font-size:14px}.C .t:not(.on) .sc .nx span{display:inline}}
+.note{padding:18px clamp(16px,3vw,40px) 60px;color:var(--ink-2);font-size:13px;max-width:90ch}
+</style>
+</head>
+<body>
+<div class="study lab"><b>Étude · galerie d'accueil</b><span>3 propositions · cliquez un film pour l'ouvrir</span>
+ <div class="tabs"><button data-p="A" aria-pressed="true">A · Mosaïque</button><button data-p="B" aria-pressed="false">B · Dérive</button><button data-p="C" aria-pressed="false">C · Accordéon</button></div></div>
+<div class="bar"><h1 class="caps">À l'affiche <span class="it" style="text-transform:none;letter-spacing:0">aujourd'hui</span></h1>
+ <div class="f lab"><span class="on">Aujourd'hui</span><span>Ce soir</span><span>Demain</span><span>Tout Paris ▾</span><span>VO + VF ▾</span><span>Liste</span></div></div>
+<p class="pitch" id="pitch"></p>
+<main id="stage"></main>
+<div class="focus" id="focus"></div>
+<p class="note">Maquette interne. Affiches chargées depuis Wikipédia pour revue (basse résolution, droits non acquis). Salles, horaires et prix fictifs. Les filtres du haut sont figurés, non fonctionnels dans cette étude.</p>
+
+<script>
+const F=[
+ ["Anatomie d'une chute",'Justine Triet',2023,"Palme d'or, Cannes 2023","Un homme est retrouvé mort au pied de son chalet. Sa femme est jugée, leur fils malvoyant est le seul témoin.",'Anatomy_of_a_Fall',[['14h00','Le Lucernaire Bleu, 5e','9,50 €'],['18h15','L’Éden Ménilmontant, 20e','8,00 €'],['20h30','Le Lucernaire Bleu, 5e','9,50 €']],2,3],
+ ['Perfect Days','Wim Wenders',2023,"Prix d'interprétation masculine, Cannes 2023","Hirayama nettoie les toilettes publiques de Tokyo, écoute des cassettes et photographie les arbres.",'Perfect_Days',[['18h30','Studio des Abbesses, 18e','8,50 €'],['21h10','Le Cinématographe, 6e','10,00 €']],1,2],
+ ['In the Mood for Love','Wong Kar-wai',2000,"Prix d'interprétation masculine, Cannes 2000","Hong Kong, 1962. Deux voisins découvrent que leurs conjoints ont une liaison.",'In_the_Mood_for_Love',[['16h30','Studio des Abbesses, 18e','8,50 €'],['18h45','Le Lucernaire Bleu, 5e','9,50 €']],2,2],
+ ["La Zone d'intérêt",'Jonathan Glazer',2023,'Grand Prix, Cannes 2023',"La vie domestique d'un commandant et de sa famille, dans la maison qui jouxte le camp.",'The_Zone_of_Interest_(film)',[['19h00','Le Cinématographe, 6e','10,00 €'],['22h00','Le Lucernaire Bleu, 5e','9,50 €']],1,2],
+ ['Past Lives','Celine Song',2023,'Compétition, Berlinale 2023',"Deux amis d'enfance se retrouvent à New York, vingt-quatre ans plus tard, le temps d'une semaine.",'Past_Lives_(film)',[['16h00','L’Éden Ménilmontant, 20e','8,00 €'],['20h40','L’Éden Ménilmontant, 20e','8,00 €']],1,1],
+ ['Portrait de la jeune fille en feu','Céline Sciamma',2019,'Prix du scénario, Cannes 2019',"1770. Une peintre doit faire le portrait de mariage d'une jeune femme qui refuse de poser.",'Portrait_of_a_Lady_on_Fire',[['18h00','L’Éden Ménilmontant, 20e · ST EN','8,00 €'],['21h00','Studio des Abbesses, 18e','8,50 €']],2,3],
+ ['Les Quatre Cents Coups','François Truffaut',1959,'Prix de la mise en scène, Cannes 1959',"Antoine Doinel, treize ans, entre l'école buissonnière et la mer au bout du travelling.",'The_400_Blows',[['14h15','Le Lucernaire Bleu, 5e','9,50 €'],['17h00','Le Cinématographe, 6e','10,00 €']],1,2],
+ ['Aftersun','Charlotte Wells',2022,'Semaine de la Critique, Cannes 2022',"Sophie repense aux vacances passées avec son père en Turquie, vingt ans plus tôt.",'Aftersun',[['22h15','L’Éden Ménilmontant, 20e','8,00 €']],1,1],
+ ['Parasite','Bong Joon-ho',2019,"Palme d'or, Cannes 2019","Une famille sans emploi s'installe peu à peu dans la maison d'une famille riche.",'Parasite_(2019_film)',[['15h45','L’Éden Ménilmontant, 20e','8,00 €'],['21h30','Le Cinématographe, 6e','10,00 €']],2,2],
+ ['Cléo de 5 à 7','Agnès Varda',1962,'Sélection officielle, Cannes 1962',"Cléo, chanteuse, attend les résultats d'une analyse médicale. Deux heures dans Paris.",'Cléo_from_5_to_7',[['11h30','Le Lucernaire Bleu, 5e','9,50 €'],['16h45','Le Lucernaire Bleu, 5e','9,50 €']],1,2],
+ ['Drive My Car','Ryūsuke Hamaguchi',2021,'Prix du scénario, Cannes 2021',"Un metteur en scène endeuillé monte Oncle Vania à Hiroshima. Une jeune femme conduit sa voiture.",'Drive_My_Car_(film)',[['13h30','L’Éden Ménilmontant, 20e','8,00 €']],1,2]
+].map(([t,by,y,aw,syn,wk,s,c,r],i)=>({i,t,by,y,aw,syn,wk,s,c,r}));
+const PITCH={
+ A:"<b>A · Mosaïque.</b> Plein écran, tailles inégales, façon Mondrian adouci. Les traits ne sont pas dessinés : ce sont les fins interstices de papier entre les images. Le texte repose sur l'image. Au clic, le film prend le centre avec ses infos et la réservation ; les autres rétrécissent et se rangent autour.",
+ B:"<b>B · Dérive.</b> La plus légère : affiches entières, non recadrées, posées en décalé sur le papier avec beaucoup d'air. Les légendes s'alignent sur les bords et dessinent les lignes. Au clic, le film vient au milieu en grand ; le mur recule et s'estompe derrière.",
+ C:"<b>C · Accordéon.</b> Des tranches d'affiches côte à côte, titres à la verticale. Au survol une tranche respire ; au clic elle s'ouvre au milieu avec tout le détail, les autres se replient. Sur téléphone, les tranches s'empilent."};
+let P='A',open=null,IMG={};
+try{IMG=JSON.parse(localStorage.getItem('strp_wk')||'{}')}catch(e){}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const img=f=>IMG[f.wk]?`<img src="${esc(IMG[f.wk])}" alt="Affiche : ${esc(f.t)}">`:'';
+const nx=f=>`<span class="nx"><b>${f.s[0][0]}</b><span> · ${f.s[0][1]} · ${f.s[0][2]}</span></span>`;
+const more=f=>`<div class="more"><span class="aw">${f.aw}</span><p>${f.syn}</p><div class="times">${f.s.map(x=>`<span><b>${x[0]}</b> ${x[1]} · ${x[2]}</span>`).join('')}</div><span class="cta lab">Réserver ${f.s[0][0]} · ${f.s[0][2]}</span></div>`;
+const tile=f=>`<button class="t${open===f.i?' on':''}${f.c>1&&f.r>2?' big':''}" data-i="${f.i}" style="--c:${f.c};--r:${f.r}">${img(f)}<span class="x" data-close aria-label="Fermer">×</span><span class="sc"><span class="caps">${esc(f.t)}</span><span class="it">${esc(f.by)}, ${f.y}</span>${nx(f)}${more(f)}</span></button>`;
+function render(){const st=document.getElementById('stage'),fo=document.getElementById('focus');fo.className='focus';fo.innerHTML='';
+ document.getElementById('pitch').innerHTML=PITCH[P];
+ document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===P));
+ if(P==='A'){st.innerHTML=`<div class="A${open!==null?' has':''}">${F.map(tile).join('')}</div>`}
+ if(P==='C'){st.innerHTML=`<div class="C">${F.slice(0,10).map(tile).join('')}</div>`}
+ if(P==='B'){const cols=[[],[],[],[]];F.forEach((f,k)=>cols[k%4].push(f));
+  st.innerHTML=`<div class="B${open!==null?' dim':''}">${cols.map(c=>`<div class="col">${c.map(f=>`<button class="item" data-i="${f.i}">${img(f)}<span class="cap" style="display:grid;gap:6px"><span class="caps">${esc(f.t)}</span><span class="it">${esc(f.by)}, ${f.y}</span>${nx(f)}</span></button>`).join('')}</div>`).join('')}</div>`;
+  if(open!==null){const f=F[open];fo.className='focus open';fo.innerHTML=`<div class="card">${img(f)}<div class="txt"><span class="lab">${f.y}</span><span class="caps">${esc(f.t)}</span><span class="it">${esc(f.by)}</span><span class="aw">${f.aw}</span><p>${f.syn}</p><div class="times">${f.s.map(x=>`<span><b>${x[0]}</b> ${x[1]} · ${x[2]}</span>`).join('')}</div><span class="cta lab">Réserver ${f.s[0][0]} · ${f.s[0][2]}</span><button class="close lab" data-close>Retour à la galerie</button></div></div>`}}}
+function flip(change){const els=[...document.querySelectorAll('#stage .t')],a=new Map(els.map(e=>[e.dataset.i,e.getBoundingClientRect()]));change();
+ document.querySelectorAll('#stage .t').forEach(e=>{const p=a.get(e.dataset.i),n=e.getBoundingClientRect();if(!p||!n.width)return;
+  e.animate([{transformOrigin:'0 0',transform:`translate(${p.left-n.left}px,${p.top-n.top}px) scale(${p.width/n.width},${p.height/n.height})`},{transformOrigin:'0 0',transform:'none'}],{duration:650,easing:'cubic-bezier(.2,.8,.2,1)'})})}
+document.addEventListener('click',e=>{const tab=e.target.closest('[data-p]');if(tab){P=tab.dataset.p;open=null;render();scrollTo(0,0);return}
+ if(e.target.closest('[data-close]')||e.target.id==='focus'){open=null;P==='A'?flip(render):P==='C'?toggleC():render();return}
+ const t=e.target.closest('[data-i]');if(!t)return;const i=+t.dataset.i;open=open===i?null:i;
+ if(P==='A'){flip(render);const on=document.querySelector('.A .on');if(on)on.scrollIntoView({behavior:'smooth',block:'center'})}else if(P==='C')toggleC();else render()});
+function toggleC(){document.querySelectorAll('.C .t').forEach(e=>e.classList.toggle('on',+e.dataset.i===open))}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open!==null){open=null;render()}});
+render();
+(async()=>{for(const f of F){if(IMG[f.wk])continue;try{const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(f.wk));if(!r.ok)continue;const j=await r.json(),u=(j.originalimage||j.thumbnail||{}).source;if(u){IMG[f.wk]=u;try{localStorage.setItem('strp_wk',JSON.stringify(IMG))}catch(e){}render()}}catch(e){break}}})();
+</script>
+</body>
+</html>
