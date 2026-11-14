@@ -390,12 +390,49 @@ footer .wrap{padding-block:34px 90px;display:grid;grid-template-columns:1.4fr 1f
 footer ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:14px}
 footer p{max-width:44ch;font-size:14px;color:var(--ink-2);margin-top:12px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+
+/* floating dock: search + filters, bottom centre, same on phone */
+.nav .sm{display:none}
+@media(max-width:820px){.nav .lg{display:none}.nav .sm{display:inline}.tbtn .tl{display:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.tabbar{display:none!important}
+body{padding-bottom:0}
+.dock{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:56;display:flex;align-items:center;gap:2px;background:var(--ink);color:#F2F0E7;border-radius:999px;padding:6px 7px 6px 8px;box-shadow:0 20px 44px -14px rgba(35,20,23,.7),0 0 0 1px rgba(242,240,231,.08);max-width:calc(100% - 20px);animation:dockin .6s var(--ease)}
+@keyframes dockin{from{transform:translateY(24px)}}
+.dock :focus-visible{outline:2px solid #F2F0E7;outline-offset:1px}
+.dock #q{background:none;border:0;color:inherit;width:190px;padding:10px 6px 10px 0;font-size:14.5px;outline:0;min-width:0}
+.dock #q::placeholder{color:rgba(242,240,231,.62)}
+.dock #q::-webkit-search-cancel-button{display:none}
+.dk-sep{width:1px;height:22px;background:rgba(242,240,231,.24);margin:0 6px;flex:none}
+.dk-b,.dsel{flex:none;background:transparent;border:0;color:inherit;font:500 14px var(--sans);padding:10px 13px;border-radius:99px;text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap;transition:background .2s}
+.dk-b:hover,.dsel:hover{background:rgba(242,240,231,.13)}
+.dsel{appearance:none;padding-right:26px;max-width:170px;text-overflow:ellipsis;background-image:linear-gradient(45deg,transparent 50%,#F2F0E7 50%),linear-gradient(135deg,#F2F0E7 50%,transparent 50%);background-position:calc(100% - 14px) 55%,calc(100% - 9px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.dsel.on{background-color:rgba(242,240,231,.2);font-weight:650}
+.dsel option{color:#231417;background:#fff}
+.dk-go{background:var(--accent);width:40px;height:40px;justify-content:center;padding:0;margin-left:4px}
+.dk-go:hover{background:var(--accent-2)}
+.dk-sx{display:none}
+.dock .ac{position:absolute;left:0;right:0;top:auto;bottom:calc(100% + 12px);color:var(--ink);border-radius:14px;box-shadow:0 20px 44px -14px rgba(35,20,23,.6)}
+#acbox{position:static}
+.cookie{left:auto;right:max(12px,env(safe-area-inset-right,0px));bottom:auto;top:calc(var(--hh) + 12px + env(safe-area-inset-top,0px));max-width:min(380px,calc(100% - 24px));border:1px solid var(--ink)}
+.cookie .wrap{padding:14px 16px}
+.toast{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+footer .wrap{padding-bottom:120px}
+.meta{display:flex;align-items:baseline;justify-content:space-between;gap:6px 20px;flex-wrap:wrap;padding-top:18px}
+.mt{font-size:clamp(18px,2.2vw,28px)}
+.vlink{display:none;background:none;border:0;border-bottom:1px solid var(--ink);padding:0 0 2px;color:var(--ink)}
+.meta p+p{display:block}
+@media(max-width:820px){.hd-row{flex-wrap:nowrap;gap:14px}.logo{font-size:0;gap:0;margin-right:0}.hd .nav{display:flex;order:0;flex-basis:auto;padding:0;gap:16px;margin-right:auto}.hd .tbtn{display:inline-flex}.tools{gap:12px}
+ .dock{padding:5px 6px}.dock #q{display:none}.dk-b,.dsel{padding:11px 10px;font-size:13.5px}.dsel{padding-right:22px;max-width:29vw;background-position:calc(100% - 11px) 55%,calc(100% - 6px) 55%}.dk-sep{margin:0 2px}.dk-go{width:38px;height:38px}
+ .hd .nav{gap:13px}.tools{gap:10px}.dsel{flex:1 1 0;min-width:0;max-width:none;padding:11px 20px 11px 9px}.dk-sep{display:none}#vb,#vb-sep{display:none}.vlink{display:inline-flex!important}
+ .dock.srch{width:calc(100% - 20px)}.dock.srch #q{display:block;flex:1;width:auto;font-size:16px}.dock.srch .dsel,.dock.srch .dk-sep,.dock.srch #vb,.dock.srch .dk-go{display:none}.dock.srch .dk-sx{display:inline-flex;font-size:20px}}
 </style>
 
 <a class="skip" href="#main" id="skip">Aller au contenu</a>
 <div id="chrome"></div>
 <main id="main" tabindex="-1"></main>
 <footer id="foot"></footer>
+<div id="dockbox"></div>
 <div id="layer"></div>
 
 <script>
@@ -422,13 +459,7 @@ const V=[
   desc:{fr:"Deux salles en sous-sol, un hall tapissé d'affiches d'époque, et des débats presque chaque semaine.",en:"Two basement screens, a lobby papered with vintage posters, and debates almost every week."},fac:['#8E6D06','#E5E6DB',2]},
  {id:'eden-menilmontant',name:"L'Éden Ménilmontant",type:'cinema',arr:'20e',q:'Ménilmontant',addr:'88 rue de Ménilmontant, 75020 Paris',metro:'M2 Ménilmontant · 6 min',rooms:['Grande salle','Petite salle'],seats:240,free:true,acc:true,labels:['Art et Essai','Jeune Public'],p:{full:8,red:6,child:4,carnet:5.5},
   bar:{fr:"La Buvette de l'Éden : bières locales et planches, jusqu'à minuit.",en:"La Buvette de l'Éden: local beers and sharing boards, until midnight."},
-  desc:{fr:"Ancien cinéma de quartier rouvert par ses habitants en 2014. Séances en VF sous-titrée anglais chaque semaine.",en:"A former neighbourhood cinema reopened by local residents in 2014. Weekly screenings of French films with English subtitles."},fac:['#C8502F','#3F1921',4]},
- {id:'theatre-de-la-lanterne',name:'Théâtre de la Lanterne',type:'theatre',arr:'11e',q:'Oberkampf',addr:'5 cité Griset, 75011 Paris',metro:'M3 Parmentier · 5 min',rooms:['Salle'],seats:80,free:false,acc:true,labels:['Création contemporaine','Jeune Public'],p:{full:22,red:15,child:10},
-  bar:{fr:'Le foyer ouvre une heure avant le lever de rideau.',en:'The foyer opens one hour before curtain-up.'},
-  desc:{fr:"Ancienne fabrique de lanternes devenue théâtre de poche en 1979, la Lanterne défend les écritures d'aujourd'hui et accueille trois compagnies en résidence.",en:"A former lantern factory turned pocket theatre in 1979. La Lanterne champions new writing and hosts three resident companies."},fac:['#3F1921','#8E6D06',1]},
- {id:'theatre-du-passage',name:'Théâtre du Passage',type:'theatre',arr:'10e',q:'Canal Saint-Martin',addr:'14 passage des Récollets, 75010 Paris',metro:'M5 Jacques Bonsergent · 4 min',rooms:['Salle'],seats:80,free:false,acc:false,labels:['Création contemporaine'],p:{full:20,red:14,child:10},
-  bar:{fr:'Bar de cour en été, vin chaud en hiver.',en:'Courtyard bar in summer, mulled wine in winter.'},
-  desc:{fr:"Au fond d'un passage pavé, quatre-vingts places et une scène à hauteur de regard. On y vient pour les premières pièces.",en:"At the end of a cobbled passage: eighty seats and a stage at eye level. People come here for first plays."},fac:['#90ADBF','#7D222F',2]}
+  desc:{fr:"Ancien cinéma de quartier rouvert par ses habitants en 2014. Séances en VF sous-titrée anglais chaque semaine.",en:"A former neighbourhood cinema reopened by local residents in 2014. Weekly screenings of French films with English subtitles."},fac:['#C8502F','#3F1921',4]}
 ];
 const F=(id,t,by,cast,from,y,dur,ol,aw,syn,wk,c)=>({id,t,by,cast,type:'cinema',from,y,dur,ol,aw,syn,wk,c});
 const W=[
@@ -446,9 +477,7 @@ const W=[
  F('la-chimere','La Chimère','Alice Rohrwacher',"Josh O'Connor, Carol Duarte",{fr:'Italie',en:'Italy'},2023,130,'it',{fr:'Compétition officielle, Cannes 2023',en:'Competition, Cannes 2023'},{fr:"Dans l'Italie des années 80, un Anglais qui sent les tombes étrusques sous ses pieds rejoint une bande de pilleurs.",en:"In 1980s Italy, an Englishman who can sense Etruscan tombs under his feet joins a gang of grave robbers."},'La_chimera',['#8E6D06','#231417']),
  F('close','Close','Lukas Dhont','Eden Dambrine, Gustav De Waele',{fr:'Belgique',en:'Belgium'},2022,104,'fr',{fr:'Grand Prix, Cannes 2022',en:'Grand Prix, Cannes 2022'},{fr:"Léo et Rémi, treize ans, sont inséparables. Le regard des autres, à la rentrée, change tout.",en:"Léo and Rémi, thirteen, are inseparable. The way others look at them at the start of term changes everything."},'Close_(2022_film)',['#C8502F','#E5E6DB']),
  F('all-we-imagine-as-light','All We Imagine as Light','Payal Kapadia','Kani Kusruti, Divya Prabha',{fr:'Inde / France',en:'India / France'},2024,118,'ml',{fr:'Grand Prix, Cannes 2024',en:'Grand Prix, Cannes 2024'},{fr:"À Mumbai, deux infirmières colocataires et une amie quittent la ville le temps d'un voyage au bord de la mer.",en:"In Mumbai, two nurses who share a flat and a friend leave the city for a trip to the coast."},'All_We_Imagine_as_Light',['#90ADBF','#3F1921']),
- F('sans-toit-ni-loi','Sans toit ni loi','Agnès Varda','Sandrine Bonnaire',{fr:'France',en:'France'},1985,105,'fr',{fr:"Lion d'or, Venise 1985",en:'Golden Lion, Venice 1985'},{fr:"Une jeune vagabonde est retrouvée morte de froid. Ceux qui l'ont croisée racontent ses dernières semaines.",en:"A young drifter is found frozen to death. Those who crossed her path recount her last weeks."},'Vagabond_(1985_film)',['#574B49','#E5E6DB']),
- {id:'les-veilleurs',t:'Les Veilleurs',by:'Margaux Leroy',role:{fr:'Texte et mise en scène',en:'Written and directed by'},cast:'Compagnie des Heures creuses',type:'theatre',from:{fr:'Création',en:'New work'},y:2026,dur:95,ol:'fr',syn:{fr:"Quatre gardiens de nuit d'un musée fermé pour travaux inventent les visiteurs qui ne viennent plus.",en:"Four night guards in a museum closed for renovation invent the visitors who no longer come."},c:['#7D222F','#E5E6DB']},
- {id:'la-traversee',t:'La Traversée',by:'Youssef Amrani',role:{fr:'Texte et mise en scène',en:'Written and directed by'},cast:'Collectif Passe-muraille',type:'theatre',from:{fr:'Création',en:'New work'},y:2026,dur:110,ol:'fr',syn:{fr:"Un père et sa fille refont, trente ans après, le trajet Marseille–Oran en ferry. Seul en scène à deux voix.",en:"Thirty years on, a father and daughter retrace the Marseille–Oran ferry crossing. A solo show for two voices."},c:['#90ADBF','#231417']}
+ F('sans-toit-ni-loi','Sans toit ni loi','Agnès Varda','Sandrine Bonnaire',{fr:'France',en:'France'},1985,105,'fr',{fr:"Lion d'or, Venise 1985",en:'Golden Lion, Venice 1985'},{fr:"Une jeune vagabonde est retrouvée morte de froid. Ceux qui l'ont croisée racontent ses dernières semaines.",en:"A young drifter is found frozen to death. Those who crossed her path recount her last weeks."},'Vagabond_(1985_film)',['#574B49','#E5E6DB'])
 ];
 const T=h=>{const[a,b]=h.split(':');return a*60+ +b};
 const PROG=[
@@ -466,8 +495,7 @@ const PROG=[
  ['la-chimere','le-cinematographe',['15:30'],'VOSTFR'],['la-chimere','eden-menilmontant',['20:15'],'VOSTFR'],
  ['close','lucernaire-bleu',['16:15'],'VF'],['close','eden-menilmontant',['13:45'],'VF'],
  ['all-we-imagine-as-light','le-cinematographe',['18:30'],'VOSTFR'],['all-we-imagine-as-light','lucernaire-bleu',['20:45'],'VOSTFR'],
- ['sans-toit-ni-loi','lucernaire-bleu',['12:30'],'VF'],
- ['les-veilleurs','theatre-de-la-lanterne',['20:30'],'VF'],['la-traversee','theatre-du-passage',['19:00','21:15'],'VF']
+ ['sans-toit-ni-loi','lucernaire-bleu',['12:30'],'VF']
 ];
 const KIND={re:{fr:'Rencontre',en:'Q&A'},cd:{fr:'Ciné-débat',en:'Film & debate'},cl:{fr:'Ciné-club',en:'Film club'}};
 const SPEC=[
@@ -475,7 +503,6 @@ const SPEC=[
  [2,'anatomie-d-une-chute','eden-menilmontant','20:15','cd','VFSTA',{fr:'Ciné-débat : le procès au cinéma',en:'Debate: the trial on screen'}],
  [3,'les-quatre-cents-coups','studio-des-abbesses','19:00','cl','VF',{fr:'Présenté par le ciné-club du quartier',en:'Introduced by the neighbourhood film club'}],
  [4,'in-the-mood-for-love','lucernaire-bleu','20:30','cl','VOSTFR',{fr:'Ciné-club : présentation et discussion',en:'Film club: introduction and discussion'}],
- [5,'les-veilleurs','theatre-de-la-lanterne','20:30','re','VF',{fr:"Bord de plateau avec l'équipe",en:'Post-show talk with the company'}],
  [6,'aftersun','le-cinematographe','19:30','cd','VOSTFR',{fr:'Débat en anglais avec le ciné-club Lost in Paris',en:'Debate in English with the Lost in Paris film club'}]
 ];
 const CYC=[
@@ -485,7 +512,7 @@ const CYC=[
 ];
 const PICKS=[
  [{fr:"On en sort en regardant les arbres autrement. Allez-y en fin de journée.",en:"You leave looking at trees differently. Go at the end of the day."},'perfect-days','Mathilde Roux','le-cinematographe'],
- [{fr:"Quatre comédiens qui nous ont fait rire et pleurer en répétition. Nous les accueillons toute la saison.",en:"Four actors who made us laugh and cry in rehearsal. We are hosting them all season."},'les-veilleurs','Antoine Garnier','theatre-de-la-lanterne'],
+ [{fr:"Le film qu'on recommande à ceux qui disent ne pas aimer les films d'amour.",en:"The film we recommend to people who say they don't like love stories."},'past-lives','Antoine Garnier','studio-des-abbesses'],
  [{fr:"À voir sur grand écran au moins une fois dans sa vie. C'est le moment.",en:"To be seen on a big screen at least once in your life. Now is the time."},'in-the-mood-for-love','Sophie Lemaire','lucernaire-bleu']
 ];
 const wi=id=>W.findIndex(w=>w.id===id), vi=id=>V.findIndex(v=>v.id===id);
@@ -543,29 +570,27 @@ function renderChrome(){const r=S.route.n,cur=k=>k===r||(k==='home'&&['film','bo
  $('#skip').textContent=tr('Aller au contenu','Skip to content');
  $('#chrome').innerHTML=`<header class="hd" id="hd"><div class="wrap hd-row">
   <a class="logo" href="#home" aria-label="Strapontin, ${tr('accueil','home')}">${LOGO}Strapontin</a>
-  <nav class="nav lab" aria-label="${tr('Navigation principale','Main navigation')}"><a href="#home"${cur('home')}>${tr('À l’affiche','Now showing')}</a><a href="#agenda"${cur('agenda')}>${tr('Rendez-vous','Events')}</a><a href="#salles"${cur('salles')}>${tr('Salles','Venues')}</a></nav>
-  <div class="search" role="search"><svg viewBox="0 0 20 20" fill="none" stroke="#231417" stroke-width="1.8"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg>
-   <input id="q" type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-label="${tr('Rechercher','Search')}" placeholder="${tr('Film, cinéaste, salle, quartier…','Film, director, venue, area…')}"><div id="acbox"></div></div>
-  <div class="tools lab"><button class="sbtn" data-act="so" aria-label="${tr('Rechercher','Search')}" aria-expanded="${!!S.so}"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="#231417" stroke-width="1.8"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg></button><div class="lang" role="group" aria-label="${tr('Langue','Language')}"><button data-act="lang" data-v="fr" aria-pressed="${S.lang==='fr'}">FR</button><button data-act="lang" data-v="en" aria-pressed="${S.lang==='en'}">EN</button></div>
-  <button class="tbtn lab" data-act="drawer" aria-haspopup="dialog"><span class="t">${tr('Ma liste','My list')}</span><svg width="12" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3.5 1.5h9v13L8 11l-4.5 3.5z"/></svg><b id="listn" class="num">${S.list.length+S.follow.length}</b></button></div>
- </div></header>
- <nav class="tabbar lab" aria-label="${tr('Navigation','Navigation')}"><a href="#home"${cur('home')}>${tr('Affiche','Films')}</a><a href="#agenda"${cur('agenda')}>${tr('Agenda','Events')}</a><a href="#salles"${cur('salles')}>${tr('Salles','Venues')}</a><button data-act="drawer" class="lab"><span>${tr('Liste','List')} <b class="num listn">${S.list.length+S.follow.length}</b></span></button></nav>`;
+  <nav class="nav lab" aria-label="${tr('Navigation principale','Main navigation')}"><a href="#home"${cur('home')}><span class="lg">${tr('À l’affiche','Now showing')}</span><span class="sm">${tr('Affiche','Films')}</span></a><a href="#agenda"${cur('agenda')}><span class="lg">${tr('Rendez-vous','Events')}</span><span class="sm">Agenda</span></a><a href="#salles"${cur('salles')}>${tr('Salles','Venues')}</a></nav>
+  <div class="tools lab"><div class="lang" role="group" aria-label="${tr('Langue','Language')}"><button data-act="lang" data-v="fr" aria-pressed="${S.lang==='fr'}">FR</button><button data-act="lang" data-v="en" aria-pressed="${S.lang==='en'}">EN</button></div>
+  <button class="tbtn lab" data-act="drawer" aria-haspopup="dialog"><span class="tl">${tr('Ma liste','My list')}</span><svg width="12" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3.5 1.5h9v13L8 11l-4.5 3.5z"/></svg><b id="listn" class="num">${S.list.length+S.follow.length}</b></button></div>
+ </div></header>`;
  if(S.so)$('#hd').classList.add('so');
  $('#foot').innerHTML=`<div class="wrap"><div><a class="logo" href="#home">${LOGO}Strapontin</a><p>${tr("La billetterie des cinémas indépendants et des théâtres de poche de Paris.","Tickets for the independent cinemas and pocket theatres of Paris.")}</p><p class="lab" style="margin-top:14px">${tr('Maquette interne · heure de démonstration figée à 16h00 en soirée · salles, séances et prix fictifs · affiches chargées depuis Wikipédia pour revue, droits non acquis · aucun paiement réel','Internal mockup · demo clock held at 16:00 in the evening · fictional venues, showtimes and prices · posters loaded from Wikipedia for review, rights not cleared · no real payment')}</p></div>
  <ul><li>${tr('Prix TTC, sans frais de réservation','All-in prices, no booking fees')}</li><li>${tr("Échange gratuit jusqu'à 2h avant la séance",'Free exchange up to 2 hours before')}</li><li>${tr('Remboursement si la séance est annulée','Refund if a screening is cancelled')}</li><li>${tr('Pass Culture et tarifs réduits acceptés','Pass Culture and reduced fares accepted')}</li></ul>
  <ul><li>${tr('Mentions légales','Legal notice')}</li><li>${tr('Conditions générales de vente','Terms of sale')}</li><li>${tr('Confidentialité','Privacy')}</li><li><button data-act="cookie-open" style="background:none;border:0;padding:0;text-decoration:underline">${tr('Gérer les cookies','Cookie settings')}</button></li></ul></div>`;
  document.documentElement.lang=S.lang;
+ renderDock();
  const hd=$('#hd'),setH=()=>document.documentElement.style.setProperty('--hh',hd.offsetHeight+'px');setH();if(window.ResizeObserver)new ResizeObserver(setH).observe(hd)}
 
 /* ---------- home: gallery / list ---------- */
 const WHEN=()=>[['today',tr("Aujourd'hui",'Today'),tr("aujourd'hui",'today')],['tonight',tr('Ce soir','Tonight'),tr('ce soir','tonight')],['tomorrow',tr('Demain','Tomorrow'),tr('demain','tomorrow')],['weekend',tr('Ce week-end','Weekend'),tr('ce week-end','this weekend')],['week',tr('7 jours','7 days'),tr('cette semaine','this week')]];
 const SPANS=[[2,4],[1,2],[1,2],[2,3],[1,2],[1,2],[2,3],[1,2],[1,2],[2,4],[1,2],[2,3]];
 function openRows(){const W0=innerWidth,cols=W0>=1180?6:W0>=760?4:2,pad=W0>=1180?40:W0>=760?32:16,cg=W0>=1180?20:W0>=760?18:10,rg=W0>=1180?28:W0>=760?24:14,u=(W0-2*pad-(cols-1)*cg)/cols*.7;
- const fb=$('.fb'),hh=($('#hd')||{}).offsetHeight||58,avail=innerHeight-hh-(fb?fb.offsetHeight:50)-34;let r=Math.floor((avail+rg)/(u+rg));r=Math.max(3,Math.min(6,r));if(cols===6&&r%2)r-=1;return Math.max(r,cols===6?4:3)}
+ const hh=($('#hd')||{}).offsetHeight||58,avail=innerHeight-hh-34-84;let r=Math.floor((avail+rg)/(u+rg));r=Math.max(3,Math.min(6,r));if(cols===6&&r%2)r-=1;return Math.max(r,cols===6?4:3)}
 function homeBody(){const set=finderSet(),by=new Map();set.forEach(s=>{if(!by.has(s.w))by.set(s.w,[]);by.get(s.w).push(s)});
  const ids=ORDER.filter(i=>by.has(i)),nv=new Set(set.map(s=>s.v)).size,multi=whenDays[S.when]().length>1||S.when==='tomorrow',word=WHEN().find(x=>x[0]===S.when)[2];
  const next={today:'tomorrow',tonight:'tomorrow',tomorrow:'weekend',weekend:'week',week:'week'}[S.when];
- const count=`<div class="meta lab pad"><p class="num" aria-live="polite">${ids.length} ${tr('titres','titles')} · ${set.length} ${tr('séances','showtimes')} · ${nv} ${nv>1?tr('salles','venues'):tr('salle','venue')} · ${fmtDay(0,{weekday:'short',day:'numeric',month:'short'})}</p><p>${tr('Prix TTC sans frais · échange gratuit jusqu’à 2h avant','All-in prices · free exchange up to 2h before')}</p></div>`;
+ const count=`<div class="meta pad"><h2 class="mt">${tr('À l’affiche','Now showing')} <em>${word}</em>${S.arr!=='all'?` <em>· ${S.arr}</em>`:''}</h2><p class="lab num" aria-live="polite">${ids.length} ${tr('titres','titles')} · ${set.length} ${tr('séances','showtimes')} · ${nv} ${nv>1?tr('salles','venues'):tr('salle','venue')} · ${tr('prix TTC sans frais','all-in prices')}</p><button class="vlink lab" data-act="view" data-v="${S.view==='gal'?'list':'gal'}">${S.view==='gal'?tr('Vue liste','List view'):tr('Vue galerie','Gallery view')}</button></div>`;
  if(!set.length)return `${count}<div class="empty pad"><h3>${tr('Rien à cette heure avec ces filtres','Nothing at this time with these filters')}</h3><p>${tr('Les dernières séances ont peut-être déjà commencé.','The last screenings may already have started.')}</p><div class="acts">${next!==S.when?`<button class="btn sm" data-act="when" data-v="${next}">${tr('Voir ','See ')+WHEN().find(x=>x[0]===next)[2]}</button>`:''}<button class="btn sm ghost" data-act="reset">${tr('Effacer les filtres','Clear filters')}</button></div></div>`;
  if(S.view==='list')return `${count}<div class="pad" style="margin-top:10px">${rows(set,{venue:true,day:multi,max:6})}</div>`;
  const has=S.open&&by.has(wi(S.open));
@@ -574,15 +599,20 @@ function homeBody(){const set=finderSet(),by=new Map();set.forEach(s=>{if(!by.ha
   if(has&&S.open===w.id)return `<article class="t on" data-id="${w.id}" style="--a:${w.c[0]}">${im}<div class="oi"><button class="x" data-act="tclose" aria-label="${tr('Fermer','Close')}" id="tx">×</button><p class="lab">${L(w.from)} · ${w.y} · ${dur(w.dur)}</p><h2>${esc(w.t)}</h2><p class="by">${w.role?L(w.role)+' ':''}${esc(w.by)}</p>${w.aw?`<p class="award">${L(w.aw)}</p>`:''}<p class="syn">${L(w.syn)}</p><p class="lab">${tr('Séances','Showtimes')} · ${word}</p><div class="tks">${ss.slice(0,4).map(s=>chip(s,{venue:true,day:true})).join('')}</div><div class="acts"><a class="btn sm ghost" href="#film-${w.id}">${ss.length>4?`+${ss.length-4} · `:''}${tr('Fiche complète','Full details')}</a>${bm(w.id,'inline')}</div></div></article>`;
   return `<article class="t${sp[0]>1?' c2':''}" data-id="${w.id}" style="--c:${sp[0]};--r:${sp[1]};--a:${w.c[0]}">${im}${bm(w.id)}<div class="sc"><h3><button data-act="topen" data-id="${w.id}">${esc(w.t)}</button></h3><p class="by">${esc(w.by)}, ${w.y}</p><p class="nx"><b>${multi&&nx.d>0?dayShort(nx.d)+' ':''}${fmtT(nx.t)}</b> · ${esc(v.name)}, ${v.arr} · ${fmtP(v.p.full)}</p>${ss.length>1?`<p class="mo">+${ss.length-1} ${ss.length>2?tr('séances','showtimes'):tr('séance','showtime')} · ${nvv} ${nvv>1?tr('salles','venues'):tr('salle','venue')}</p>`:''}</div></article>`}).join('')}</div>
   <div class="after pad"><button class="btn ghost" data-act="view" data-v="list">${tr('Voir toutes les séances en liste','See all showtimes as a list')} →</button><button class="btn ghost" data-act="lucky">${tr('Un film au hasard','Surprise me')}</button></div>`}
-function home(){const arrs=[...new Set(V.map(v=>v.arr))].sort((a,b)=>parseInt(a)-parseInt(b));
- return `<div class="view"><div class="fb"><div class="pad fb-in" role="group" aria-label="${tr('Filtrer','Filter')}">
-  <h1 class="fb-t">${tr('À l’affiche','Now showing')}</h1>
-  <div class="chips">${WHEN().map(([k,l])=>`<button data-act="when" data-v="${k}" aria-pressed="${S.when===k}">${l}</button>`).join('')}</div>
-  <div class="fsels"><select class="fsel ${S.arr!=='all'?'on':''}" id="f-arr" data-act="arr" aria-label="${tr('Quartier','Area')}"><option value="all">${tr('Tout Paris','All of Paris')}</option>${arrs.map(a=>`<option value="${a}" ${S.arr===a?'selected':''}>${a} · ${V.filter(v=>v.arr===a).map(v=>v.q).join(', ')}</option>`).join('')}</select>
-  <select class="fsel ${S.ver!=='all'?'on':''}" id="f-ver" data-act="ver" aria-label="Version">${[['all','VO + VF'],['vo',tr('VO sous-titrée','Original + FR subs')],['vf',tr('VF','In French')],['en','English-friendly']].map(([k,l])=>`<option value="${k}" ${S.ver===k?'selected':''}>${l}</option>`).join('')}</select>
-  <select class="fsel ${S.kind!=='all'?'on':''}" id="f-kind" data-act="kind" aria-label="${tr('Type','Type')}">${[['all',tr('Tous genres','All types')],['cinema',tr('Cinéma','Cinema')],['theatre',tr('Théâtre','Theatre')]].map(([k,l])=>`<option value="${k}" ${S.kind===k?'selected':''}>${l}</option>`).join('')}</select></div>
-  <div class="vt" role="group" aria-label="${tr('Affichage','View')}"><button data-act="view" data-v="gal" aria-pressed="${S.view==='gal'}">${tr('Galerie','Gallery')}</button><button data-act="view" data-v="list" aria-pressed="${S.view==='list'}">${tr('Liste','List')}</button></div></div></div>
- <div id="hb">${homeBody()}</div></div>`}
+function renderDock(){const box=$('#dockbox'),r=S.route.n;if(r==='book'){box.innerHTML='';return}
+ const arrs=[...new Set(V.map(v=>v.arr))].sort((a,b)=>parseInt(a)-parseInt(b)),sm=innerWidth<=820,WS={today:tr('Auj.','Today'),tonight:tr('Ce soir','Tonight'),tomorrow:tr('Demain','Tmrw'),weekend:'Week-end',week:tr('7 jours','7 days')};
+ box.innerHTML=`<div class="dock" id="dock" role="search" aria-label="${tr('Rechercher et filtrer','Search and filter')}"><div id="acbox"></div>
+  <button class="dk-b dk-so" data-act="so" aria-label="${tr('Rechercher','Search')}"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg></button>
+  <input id="q" type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-label="${tr('Rechercher','Search')}" placeholder="${tr('Film, cinéaste, salle…','Film, director, venue…')}">
+  <button class="dk-b dk-sx" data-act="so" aria-label="${tr('Fermer la recherche','Close search')}">×</button>
+  ${r==='home'?`<span class="dk-sep"></span>
+  <select class="dsel ${S.when!=='today'?'on':''}" id="f-when" data-act="whens" aria-label="${tr('Quand','When')}">${WHEN().map(([k,l])=>`<option value="${k}" ${S.when===k?'selected':''}>${sm?WS[k]:l}</option>`).join('')}</select>
+  <select class="dsel ${S.arr!=='all'?'on':''}" id="f-arr" data-act="arr" aria-label="${tr('Quartier','Area')}"><option value="all">${sm?'Paris':tr('Tout Paris','All of Paris')}</option>${arrs.map(a=>`<option value="${a}" ${S.arr===a?'selected':''}>${sm?a:a+' · '+V.filter(v=>v.arr===a).map(v=>v.q).join(', ')}</option>`).join('')}</select>
+  <select class="dsel ${S.ver!=='all'?'on':''}" id="f-ver" data-act="ver" aria-label="Version">${[['all',sm?'VO+VF':'VO + VF'],['vo',sm?'VO':tr('VO sous-titrée','Original + FR subs')],['vf',sm?'VF':tr('VF','In French')],['en',sm?'EN':'English-friendly']].map(([k,l])=>`<option value="${k}" ${S.ver===k?'selected':''}>${l}</option>`).join('')}</select>
+  <span class="dk-sep" id="vb-sep"></span><button class="dk-b" id="vb" data-act="view" data-v="${S.view==='gal'?'list':'gal'}">${S.view==='gal'?tr('Liste','List'):tr('Galerie','Gallery')}</button>
+  <button class="dk-b dk-go" data-act="lucky" aria-label="${tr('Un film au hasard','Surprise me')}" title="${tr('Un film au hasard','Surprise me')}"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 5h3c5 0 5 10 10 10h3M2 15h3c1.6 0 2.7-1 3.6-2.4M18 5h-3c-1.6 0-2.7 1-3.6 2.4M15.500 2.500L18 5l-2.500 2.500M15.500 12.500L18 15l-2.500 2.500"/></svg></button>`
+  :`<span class="dk-sep"></span><a class="dk-b" href="#home">${tr('À l’affiche','Now showing')}</a>`}</div>`}
+function home(){return `<div class="view"><h1 class="sr">${tr('À l’affiche','Now showing')}</h1><div id="hb">${homeBody()}</div></div>`}
 
 /* ---------- other pages ---------- */
 function agenda(){const specs=ALL.filter(s=>s.kind&&up(s));
@@ -714,9 +744,9 @@ const closeAc=()=>{S.q='';acSel=-1;const i=$('#q');if(i)i.value='';ac()};
 /* ---------- events ---------- */
 function flip(change){const a=new Map([...document.querySelectorAll('#hb .t')].map(e=>[e.dataset.id,e.getBoundingClientRect()]));change();if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  document.querySelectorAll('#hb .t').forEach(e=>{const p=a.get(e.dataset.id),n=e.getBoundingClientRect();if(!p||!n.width||!e.animate)return;e.animate([{transformOrigin:'0 0',transform:`translate(${p.left-n.left}px,${p.top-n.top}px) scale(${p.width/n.width},${p.height/n.height})`},{transformOrigin:'0 0',transform:'none'}],{duration:600,easing:'cubic-bezier(.2,.8,.2,1)'})})}
-function openTile(id){flip(()=>{S.open=id;part('hb',homeBody())});const on=$('.t.on');if(on){const fb=$('.fb'),off=($('#hd').offsetHeight||58)+(fb?fb.offsetHeight:50)+14;let y=0,e=on;while(e){y+=e.offsetTop;e=e.offsetParent}const ty=Math.max(0,y-off);scrollTo({top:ty,behavior:'smooth'});setTimeout(()=>{if(S.open===id&&Math.abs(scrollY-ty)>6)scrollTo({top:ty,behavior:'instant'})},900);const x=$('#tx');if(x)x.focus({preventScroll:true})}}
-let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(S.route.n==='home'&&S.view==='gal')part('hb',homeBody())},180)});
-const refreshHome=()=>{part('hb',homeBody());const c=$('#whenw');if(c)c.textContent=WHEN().find(x=>x[0]===S.when)[2];document.querySelectorAll('.fb [data-act="when"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===S.when));document.querySelectorAll('.vt [data-act="view"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===S.view));[['f-arr','arr'],['f-ver','ver'],['f-kind','kind']].forEach(([id,k])=>{const e=document.getElementById(id);if(e){e.value=S[k];e.classList.toggle('on',S[k]!=='all')}})};
+function openTile(id){flip(()=>{S.open=id;part('hb',homeBody())});const on=$('.t.on');if(on){const off=($('#hd').offsetHeight||58)+14;let y=0,e=on;while(e){y+=e.offsetTop;e=e.offsetParent}const ty=Math.max(0,y-off);scrollTo({top:ty,behavior:'smooth'});setTimeout(()=>{if(S.open===id&&Math.abs(scrollY-ty)>6)scrollTo({top:ty,behavior:'instant'})},900);const x=$('#tx');if(x)x.focus({preventScroll:true})}}
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{renderDock();if(S.route.n==='home'&&S.view==='gal')part('hb',homeBody())},180)});
+const refreshHome=()=>{part('hb',homeBody());[['f-when','when','today'],['f-arr','arr','all'],['f-ver','ver','all']].forEach(([id,k,d])=>{const e=document.getElementById(id);if(e){e.value=S[k];e.classList.toggle('on',S[k]!==d)}});const vb=$('#vb');if(vb){vb.dataset.v=S.view==='gal'?'list':'gal';vb.textContent=S.view==='gal'?tr('Liste','List'):tr('Galerie','Gallery')}};
 document.addEventListener('input',e=>{if(e.target.id==='q'){S.q=e.target.value;acSel=-1;ac()}});
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape'){if(S.drawer||S.sheet){S.drawer=false;S.sheet=null;layer()}else if(S.open&&S.route.n==='home')openTile(null);closeAc()}
@@ -724,7 +754,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();acSel=(acSel+(e.key==='ArrowDown'?1:-1)+items.length)%items.length;items.forEach((a,i)=>a.setAttribute('aria-selected',i===acSel));e.target.setAttribute('aria-activedescendant','ac'+acSel)}
   if(e.key==='Enter'){e.preventDefault();location.hash=(items[acSel<0?0:acSel]).getAttribute('href');closeAc();e.target.blur()}}});
 document.addEventListener('change',e=>{const a=e.target.dataset.act;
- if(a==='arr'||a==='ver'||a==='kind'){S[a]=e.target.value;refreshHome()}
+ if(a==='arr'||a==='ver'||a==='whens'){S[a==='whens'?'when':a]=e.target.value;refreshHome()}
  if(a==='facc'){S.facc=e.target.checked;part('fsess',filmSessions(W[wi(S.route.id)]))}
  if(e.target.name==='pay'&&S.bk)S.bk.pay=e.target.value});
 document.addEventListener('click',e=>{
@@ -736,10 +766,11 @@ document.addEventListener('click',e=>{
  const el=e.target.closest('[data-act]');if(!el)return;const a=el.dataset.act,v=el.dataset.v,b=S.bk;
  const refocus=sel=>{const x=$(sel);if(x)x.focus({preventScroll:true})};
  if(a==='lang'){S.lang=v;store.set('lang',v);renderChrome();paint(true);layer()}
- if(a==='so'){S.so=!S.so;$('#hd').classList.toggle('so',S.so);el.setAttribute('aria-expanded',S.so);if(S.so)refocus('#q')}
+ if(a==='view'&&S.route.n!=='home'){location.hash='home'}
+ if(a==='so'){const d=$('#dock'),on=!d.classList.contains('srch')||el.classList.contains('dk-so')&&innerWidth>760;d.classList.toggle('srch',el.classList.contains('dk-sx')?false:on);if(el.classList.contains('dk-sx'))closeAc();else refocus('#q')}
  if(a==='when'){S.when=v;refreshHome()}
  if(a==='view'){S.view=v;refreshHome();if(el.closest('.after'))scrollTo({top:0,behavior:'smooth'})}
- if(a==='reset'){S.arr='all';S.ver='all';S.kind='all';S.when='week';refreshHome()}
+ if(a==='reset'){S.arr='all';S.ver='all';S.when='week';refreshHome()}
  if(a==='topen'){openTile(el.dataset.id)}
  if(a==='tclose'){openTile(null)}
  if(a==='sheet'){S.sheet=el.dataset.id;layer();refocus('#sx')}

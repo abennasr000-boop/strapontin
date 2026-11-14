@@ -5,7 +5,7 @@ This folder is the project's memory. It answers two questions for anyone on the 
 1. **What do we know, and where does it come from?** → `knowledge/`
 2. **What did we decide, on what grounds, and is it still valid?** → `decisions/`
 
-Client and team reviews are logged in `feedback/`. The `contribution-matrix.md` file links the two: for each piece of knowledge, the concrete things it changed in the product.
+Client and team reviews are logged in `feedback/`. Ideas raised but not built live in `ideas/`. The `contribution-matrix.md` file links the two: for each piece of knowledge, the concrete things it changed in the product.
 
 ## How the system works
 
@@ -55,3 +55,5 @@ Client and team reviews are logged in `feedback/`. The `contribution-matrix.md` 
 | D022 | Identity v3: the grid sheet | Accepted (direction) |
 | D023 | Real film posters in the internal mockup | Internal review only; **rights not cleared** |
 | D024 | Home gallery layout: mosaic, drift or accordion | Decided: Mosaïque, built |
+| D025 | Search and filters in a floating dock at the bottom centre | Accepted; **untested** |
+| D026 | Test catalogue is films only, every title with a poster | Accepted for the test; theatre to return |
