@@ -189,6 +189,7 @@ main{display:block;min-height:70vh}
 @media(min-width:1180px){.mos{--cols:6;--cg:20px;--rg:28px;--pad:40px}}
 .t{position:relative;overflow:hidden;background:var(--a,#3F1921);grid-column:span var(--c);grid-row:span var(--r);color:#F8F5EE;min-width:0}
 .t:nth-child(3n+2){margin-top:10px}.t:nth-child(4n+3){margin-bottom:12px}.t:nth-child(5n+4){margin-right:10px}.t:nth-child(7n+1){margin-left:6px}
+.t:not(.on){cursor:pointer}
 .timg{position:absolute;inset:0;display:block}
 .timg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s var(--ease)}
 .t:not(.on):hover .timg img{transform:scale(1.045)}
@@ -763,6 +764,7 @@ document.addEventListener('click',e=>{
  const sc=e.target.closest('[data-scroll]');
  if(sc){e.preventDefault();const el=document.getElementById(sc.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth'});return}
  const acA=e.target.closest('#ac a');if(acA){setTimeout(closeAc,0);return}
+ const tile=e.target.closest('article.t:not(.on)');if(tile&&!e.target.closest('.bm')){openTile(tile.dataset.id);return}
  const el=e.target.closest('[data-act]');if(!el)return;const a=el.dataset.act,v=el.dataset.v,b=S.bk;
  const refocus=sel=>{const x=$(sel);if(x)x.focus({preventScroll:true})};
  if(a==='lang'){S.lang=v;store.set('lang',v);renderChrome();paint(true);layer()}
