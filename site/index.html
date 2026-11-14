@@ -397,19 +397,19 @@ footer p{max-width:44ch;font-size:14px;color:var(--ink-2);margin-top:12px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 .tabbar{display:none!important}
 body{padding-bottom:0}
-.dock{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:56;display:flex;align-items:center;gap:2px;background:var(--ink);color:#F2F0E7;border-radius:999px;padding:6px 7px 6px 8px;box-shadow:0 20px 44px -14px rgba(35,20,23,.7),0 0 0 1px rgba(242,240,231,.08);max-width:calc(100% - 20px);animation:dockin .6s var(--ease)}
+.dock{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:56;display:flex;align-items:center;gap:2px;background:rgba(246,246,239,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink);border-radius:999px;padding:6px 7px 6px 8px;box-shadow:0 0 0 1px rgba(35,20,23,.1),0 14px 34px -10px rgba(35,20,23,.32),0 0 46px 8px rgba(255,255,248,.75);max-width:calc(100% - 20px);animation:dockin .6s var(--ease)}
 @keyframes dockin{from{transform:translateY(24px)}}
-.dock :focus-visible{outline:2px solid #F2F0E7;outline-offset:1px}
+.dock :focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .dock #q{background:none;border:0;color:inherit;width:190px;padding:10px 6px 10px 0;font-size:14.5px;outline:0;min-width:0}
-.dock #q::placeholder{color:rgba(242,240,231,.62)}
+.dock #q::placeholder{color:var(--ink-2)}
 .dock #q::-webkit-search-cancel-button{display:none}
-.dk-sep{width:1px;height:22px;background:rgba(242,240,231,.24);margin:0 6px;flex:none}
+.dk-sep{width:1px;height:22px;background:rgba(35,20,23,.2);margin:0 6px;flex:none}
 .dk-b,.dsel{flex:none;background:transparent;border:0;color:inherit;font:500 14px var(--sans);padding:10px 13px;border-radius:99px;text-decoration:none;display:inline-flex;align-items:center;white-space:nowrap;transition:background .2s}
-.dk-b:hover,.dsel:hover{background:rgba(242,240,231,.13)}
-.dsel{appearance:none;padding-right:26px;max-width:170px;text-overflow:ellipsis;background-image:linear-gradient(45deg,transparent 50%,#F2F0E7 50%),linear-gradient(135deg,#F2F0E7 50%,transparent 50%);background-position:calc(100% - 14px) 55%,calc(100% - 9px) 55%;background-size:5px 5px;background-repeat:no-repeat}
-.dsel.on{background-color:rgba(242,240,231,.2);font-weight:650}
+.dk-b:hover,.dsel:hover{background:rgba(35,20,23,.07)}
+.dsel{appearance:none;padding-right:26px;max-width:170px;text-overflow:ellipsis;background-image:linear-gradient(45deg,transparent 50%,#231417 50%),linear-gradient(135deg,#231417 50%,transparent 50%);background-position:calc(100% - 14px) 55%,calc(100% - 9px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.dsel.on{background-color:var(--ink);color:#F2F0E7;font-weight:600;background-image:linear-gradient(45deg,transparent 50%,#F2F0E7 50%),linear-gradient(135deg,#F2F0E7 50%,transparent 50%)}
 .dsel option{color:#231417;background:#fff}
-.dk-go{background:var(--accent);width:40px;height:40px;justify-content:center;padding:0;margin-left:4px}
+.dk-go{background:var(--accent);color:#FBF7F0;width:40px;height:40px;justify-content:center;padding:0;margin-left:4px}
 .dk-go:hover{background:var(--accent-2)}
 .dk-sx{display:none}
 .dock .ac{position:absolute;left:0;right:0;top:auto;bottom:calc(100% + 12px);color:var(--ink);border-radius:14px;box-shadow:0 20px 44px -14px rgba(35,20,23,.6)}

@@ -26,3 +26,6 @@ A dark, pill-shaped dock floats at the bottom centre of the screen on every page
 
 ## Where it shows
 `renderDock()` and the `.dock` styles in `site/index.html`.
+
+## Update (F005, 14 Nov 2026)
+The client found the dark dock counter-intuitive. It is now light (paper tone, slightly translucent) with a soft glow and a fine edge so it still separates from posters behind it; an active filter turns ink. The client called this a first version to refine later. Risk to watch: a light dock over a light poster has less separation than the dark one; the glow and edge carry it.
