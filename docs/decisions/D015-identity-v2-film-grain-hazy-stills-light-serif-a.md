@@ -1,6 +1,6 @@
 # D015 · Identity v2: film grain, hazy stills, light serif and typewriter, lines only on actions
 
-**Status:** Accepted (direction; details will evolve)
+**Status:** Superseded by D022 (client review F002)
 **Date:** 14 Nov 2026
 
 ## Context

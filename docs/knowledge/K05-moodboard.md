@@ -21,3 +21,7 @@
 - Pins 3, 4 → instant-photo frame as the main image container (D015).
 - Pin 6 → hairline rules, margin labels, light serif with italics, no boxes (D015).
 - Gallery videos → thumbnail wall with hover reveal on the homepage (D016).
+
+## Update after F002 (14 Nov 2026)
+- The client singled out pin 6 as the model for fonts and overall design. Grain, polaroid frames and generated stills (D015) were dropped.
+- Pins 3 and 4 (instant photos) no longer drive the design. Pin 6 → D022. The gallery videos → D021.

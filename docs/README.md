@@ -45,9 +45,12 @@ Client and team reviews are logged in `feedback/`. The `contribution-matrix.md` 
 | D012 | Search with autocomplete across films, people, seasons, venues | Accepted |
 | D013 | Card payment delegated to Stripe's hosted form | Accepted |
 | D014 | Identity v1: bold Didone, geometric posters, circled word, seat mark | Superseded by D015 |
-| D015 | Identity v2: film grain, hazy stills, light serif + typewriter, lines only on actions | Accepted (direction) |
-| D016 | Homepage opens on the photo gallery, finder second | **Provisional: must be tested** |
-| D017 | Palette mood: Faded print or Dusk | **Open** |
+| D015 | Identity v2: film grain, hazy stills, light serif + typewriter, lines only on actions | Superseded by D022 |
+| D016 | Homepage opens on the photo gallery, finder second | Superseded by D021 |
+| D017 | Palette mood: Faded print or Dusk | Closed by D022 |
 | D018 | Sticky header | Accepted |
 | D019 | Accessibility and consent baseline | Accepted |
 | D020 | This documentation system | Accepted |
+| D021 | Home page is a filterable poster gallery, with a list view | Accepted as goal; **untested** |
+| D022 | Identity v3: the grid sheet | Accepted (direction) |
+| D023 | Real film posters in the internal mockup | Internal review only; **rights not cleared** |

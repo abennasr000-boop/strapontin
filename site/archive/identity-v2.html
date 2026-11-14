@@ -1,0 +1,203 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Strapontin Identity</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap">
+<style>
+/* Layout concept: the brand sheet printed on the brand's own paper. Margin labels typed on the left, hairline rules, live components. */
+:root{
+  --paper:#F0E8DC; --paper-2:#F8F4EC; --paper-3:#E6DCCD; --wall:#E6DCCD;
+  --ink:#3F1921; --ink-2:#6A4A4E; --line:rgba(63,25,33,.2); --rule:rgba(63,25,33,.6);
+  --orange:#D6411F; --orange-ink:#B5340F;
+  --rasp:#7D222F; --green:#8E6D06; --green-ink:#6B5204; --blue:#BCCAD1;
+  --still:saturate(.78) sepia(.2) contrast(.96);
+  --display:"Cormorant Garamond","Cormorant","Garamond","Times New Roman",serif;
+  --body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"Courier Prime","Courier New",Courier,monospace;
+  --r:3px; --ease:cubic-bezier(.2,.8,.2,1);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .1 0 0 0 0 .13 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme:light;
+}
+:root[data-mood="dusk"]{
+  --paper:#E2E7E7; --paper-2:#F4F3EE; --paper-3:#CBD7DC; --wall:#A9BFCB;
+  --ink:#35151D; --ink-2:#574650; --line:rgba(53,21,29,.22); --rule:rgba(53,21,29,.62);
+  --blue:#90ADBF;
+  --still:saturate(.7) hue-rotate(-10deg) brightness(.94) contrast(.98);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.6 var(--body);-webkit-font-smoothing:antialiased;transition:background .5s}
+body::after{content:"";position:fixed;inset:0;z-index:45;pointer-events:none;background:var(--grain);opacity:.28;mix-blend-mode:multiply}
+.wrap{max-width:1160px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media(min-width:700px){.wrap{padding-left:max(36px,env(safe-area-inset-left,0px));padding-right:max(36px,env(safe-area-inset-right,0px))}}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(42px,7vw,92px);letter-spacing:-.02em}
+h3{font-size:28px;font-weight:500}
+em{font-style:italic}
+p{margin:0;max-width:66ch}
+a{color:inherit}
+.mono{font:400 13px/1.45 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+header.top{padding-block:44px 44px}
+header.top p.lead{font-size:19px;margin-top:22px;max-width:60ch}
+section{border-top:1px solid var(--rule);padding-block:38px 52px;display:grid;grid-template-columns:190px minmax(0,1fr);gap:22px 44px}
+section>.lab b{display:block;font:italic 400 27px/1.1 var(--display);margin-top:4px}
+@media(max-width:820px){section{grid-template-columns:1fr}}
+.stack{display:grid;gap:22px;min-width:0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:34px}
+.cols>div{display:grid;gap:12px;align-content:start;min-width:0}
+.why{border-left:1px solid var(--rule);padding-left:16px;font-size:15.5px;color:var(--ink-2)}
+.why b{font:700 12.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--orange-ink);display:block}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th{text-align:left;font:400 12.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);padding:8px 14px 8px 0;border-bottom:1px solid var(--rule)}
+td{padding:12px 14px 12px 0;border-bottom:1px dashed var(--rule);vertical-align:top}
+.tw{overflow-x:auto}.tw table{min-width:620px}
+.sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.sw div{padding:14px;min-height:150px;display:grid;align-content:space-between;gap:14px;position:relative}
+.sw b{font:500 24px/1.1 var(--display)}
+.sw span{font:400 12.5px/1.5 var(--mono)}
+.logo{display:inline-flex;align-items:center;gap:.25em;font:italic 500 72px/1 var(--display)}
+.logo svg{width:.78em;height:.9em;fill:none;stroke:var(--ink);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.logo .flap{transition:transform .5s var(--ease);transform-origin:9.3px 20px}
+.logo:hover .flap{transform:rotate(38deg)}
+.spec{display:grid;gap:4px;padding-block:18px;border-bottom:1px dashed var(--rule)}
+/* ticket */
+.tk{display:inline-flex;align-items:stretch;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r);text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s var(--ease);flex:none;position:relative;box-shadow:0 1px 0 rgba(63,25,33,.12)}
+.tk-main{padding:7px 12px 7px;display:grid;align-content:center;min-width:92px}
+.tk-time{font:700 19px/1.2 var(--mono)}
+.tk-sub{font-size:12.5px;line-height:1.3;color:var(--ink-2);white-space:nowrap}
+.tk-stub{padding:7px 12px;border-left:1px dashed var(--rule);display:grid;align-content:center;justify-items:center;transition:transform .3s var(--ease),background .2s,color .2s;transform-origin:0 100%;background:var(--paper-2)}
+.tk-price{font:400 13.5px var(--mono);white-space:nowrap}
+.tk-cta{font:700 12.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--orange-ink);white-space:nowrap}
+a.tk:hover{transform:translateY(-3px);box-shadow:0 12px 20px -12px rgba(63,25,33,.6)}
+a.tk:hover .tk-stub{background:var(--orange-ink);color:#FBF6EE;transform:rotate(5deg) translate(2px,-1px)}
+a.tk:hover .tk-cta{color:#FBF6EE}
+.tk.past{opacity:.5;border-style:dashed;box-shadow:none}
+.tk.past .tk-time{text-decoration:line-through}
+.tk-kind{position:absolute;top:-9px;left:10px;font:700 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;background:var(--paper);color:var(--rasp);padding:2px 5px}
+.tks{display:flex;gap:10px;flex-wrap:wrap;padding-top:6px}
+
+/* hazy still + polaroid */
+.still{display:block;position:relative;overflow:hidden;aspect-ratio:4/5;background:#2a1a1e;border-radius:1px;max-width:100%}
+.still svg{display:block;width:100%;height:100%;filter:var(--still);transition:filter .6s,transform 1.2s var(--ease)}
+.still.bw svg{filter:grayscale(1) contrast(1.05)}
+.still::after{content:"";position:absolute;inset:0;background:var(--grain),radial-gradient(ellipse at 50% 42%,transparent 50%,rgba(40,15,20,.42));background-size:120px 120px,auto;mix-blend-mode:multiply;pointer-events:none}
+.still::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,rgba(214,65,31,.2),transparent 26%);mix-blend-mode:screen;pointer-events:none}
+.pola{background:#F7F3EA;padding:8px 8px 0;box-shadow:0 1px 1px rgba(63,25,33,.18),0 16px 30px -18px rgba(63,25,33,.55);display:block;text-decoration:none;position:relative;transition:transform .5s var(--ease),box-shadow .5s;max-width:100%;margin:0}
+.pola .still{aspect-ratio:1}
+.pola .fac{display:block;position:relative}
+.pola .fac svg{display:block;width:100%;height:auto;filter:saturate(.8) contrast(.95)}
+.pola .fac::after{content:"";position:absolute;inset:0;background:var(--grain),radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(40,15,20,.3));background-size:120px 120px,auto;mix-blend-mode:multiply}
+.pola figcaption,.pola .cap{display:block;font:400 12.5px/1.3 var(--mono);letter-spacing:.03em;padding:9px 2px 11px;text-align:left;color:var(--ink)}
+
+
+.tag{display:inline-flex;font:400 12.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 6px 3px;border-radius:2px;background:var(--paper-3)}
+.btn{display:inline-flex;background:var(--orange-ink);color:#FBF6EE;border-radius:var(--r);padding:12px 22px;font:700 14px var(--mono);letter-spacing:.06em;text-transform:uppercase;width:max-content}
+.seg{display:inline-flex;gap:6px;flex-wrap:wrap}.seg span{border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;font:400 13.5px var(--mono)}.seg span.on{background:var(--ink);color:var(--paper-2)}
+ol.rules{margin:0;padding:0;list-style:none;counter-reset:r}
+ol.rules li{counter-increment:r;display:grid;grid-template-columns:50px 1fr;gap:6px 14px;padding:16px 0;border-bottom:1px dashed var(--rule)}
+ol.rules li::before{content:counter(r);font:italic 400 40px/1 var(--display)}
+ol.rules b{font-size:17.5px}ol.rules span{display:block;color:var(--ink-2);font-size:15.5px}
+.dd{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+.dd ul{margin:8px 0 0;padding-left:18px}.dd li{margin-bottom:6px}
+.moodsw{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:68;background:var(--ink);color:var(--paper-2);display:flex;align-items:center;gap:2px;padding:5px 6px 5px 12px;font:400 12.5px var(--mono);border-radius:99px}
+.moodsw span{margin-right:6px;opacity:.8}
+.moodsw button{border:0;background:none;color:inherit;padding:6px 11px;border-radius:99px;font:inherit;cursor:pointer}
+.moodsw button[aria-pressed=true]{background:var(--paper-2);color:var(--ink);font-weight:700}
+footer{border-top:1px solid var(--rule);padding-block:26px 80px}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4"/></filter></defs></svg>
+<div class="wrap">
+<header class="top">
+  <p class="mono">Brand identity · version 2 · 14 November 2026 · working document</p>
+  <h1>Strapontin, <em>the seat there is always room for.</em></h1>
+  <p class="lead">Version 1 was clear but loud: bold Didone type, geometric posters, hard outlines. The client review asked for the opposite temperature with the same clarity. Version 2 is quieter and warmer: film grain, hazy stills in instant-photo frames, a light literary serif and typewriter labels. Only what you can act on is drawn with a line.</p>
+</header>
+
+<section><div class="lab"><span class="mono">01</span><b>The feeling</b></div><div class="stack">
+  <p>The brand should feel like a programme found in a Left Bank café, with photos slipped inside: bohemian, light, a little dreamy, promising a discovery. It must never cost the reader certainty about price, time or language.</p>
+  <div class="tw"><table><thead><tr><th>We want</th><th>How it is expressed</th><th>What keeps it trustworthy</th></tr></thead><tbody>
+  <tr><td><b>Nostalgia for film</b></td><td>Grain over the whole page, soft out-of-focus stills, light leaks, heritage films in black and white.</td><td>Grain never sits on text controls at a strength that lowers contrast; text stays 4.5:1 or better.</td></tr>
+  <tr><td><b>Discovery</b></td><td>A wall of small instant photos; touching one "develops" it and tells you what it is and when it plays.</td><td>Every reveal ends on a real showtime with venue and price.</td></tr>
+  <tr><td><b>Lightness</b></td><td>No boxes around content, hairline rules, generous margins, a light serif.</td><td>Tickets, buttons and filters keep a drawn outline so actions are never ambiguous.</td></tr>
+  <tr><td><b>Parisian, literary</b></td><td>Garamond-family italics, typewriter labels like a screenplay, French first.</td><td>English one tap away; codes like VOSTFR are explained.</td></tr>
+  </tbody></table></div>
+</div></section>
+
+<section><div class="lab"><span class="mono">02</span><b>Who it is for</b></div><div class="stack">
+  <div class="tw"><table><thead><tr><th>Segment</th><th>What the identity must give them</th><th>Where it shows</th></tr></thead><tbody>
+  <tr><td><b>Parisian art-house regulars</b></td><td>Proof that this belongs to their culture and is on the venues' side.</td><td>Literary type, programmers' picks, heritage seasons, venue portraits.</td></tr>
+  <tr><td><b>Young adults and students</b></td><td>An object worth showing a friend, and a fast answer for tonight at a known price.</td><td>Instant-photo gallery, finder, price on every ticket, bookmark on every still.</td></tr>
+  <tr><td><b>International residents and visitors</b></td><td>The Paris they came for, readable without French.</td><td>FR/EN switch, "English-friendly" filter, explained version codes.</td></tr>
+  </tbody></table></div>
+</div></section>
+
+<section><div class="lab"><span class="mono">03</span><b>Logo</b></div><div class="stack">
+  <span class="logo"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M7 3.2c-.3 6 .2 13-.1 19.6M9.7 3c.3 5-.2 11 .1 15.4M7 3.2c.8-.9 2-.9 2.7-.2"/><path class="flap" d="M9.9 18.5c3-3.4 6-6.4 9-9.4c1.4-.9 2.6.3 1.8 1.7c-2.8 3.2-6 6.4-9.3 9.7"/><circle cx="9.3" cy="20" r="1.1"/><path d="M8.5 21.2c-.2 1.8 0 3.5-.1 5.2M5.3 26.6c2-.2 4.1-.1 6.1 0"/></svg>Strapontin</span>
+  <p>A pen sketch of a fold-down seat seen from the side: the upright fixed to the wall, the seat pad tipped up on its hinge, the foot on the floor. The pad swings down when the logo is hovered. The wordmark is Cormorant Garamond italic, written as a name, never in capitals.</p>
+  <p class="why"><b>Why it changed</b>The v1 mark (a solid bar and a half-disc) did not read as a seat and resembled an existing platform's logo. A thin, slightly imperfect drawing matches the hand-made feeling and cannot be confused with a tech brand. <br>Status: first sketch. It needs a proper drawing pass and a legibility test at 20 px.</p>
+</div></section>
+
+<section><div class="lab"><span class="mono">04</span><b>Colour</b></div><div class="stack">
+  <p>The six mood-board colours stay. What changes is the dose: paper and ink carry the page, colour arrives mostly through the images. Two moods are under study; use the switch at the bottom left to compare them on this page and on the prototype.</p>
+  <div class="sw">
+    <div style="background:var(--paper);outline:1px solid var(--line)"><b>Paper</b><span>Faded #F0E8DC<br>Dusk #E2E7E7</span></div>
+    <div style="background:var(--wall)"><b>Gallery wall</b><span>Faded #E6DCCD<br>Dusk #A9BFCB</span></div>
+    <div style="background:var(--ink);color:#EFE6D9"><b>Vintage Wine</b><span>#3F1921<br>Ink, rules, footer</span></div>
+    <div style="background:#B5340F;color:#FBF6EE"><b>Orangeade</b><span>#D6411F · text-safe #B5340F<br>Booking only</span></div>
+    <div style="background:var(--paper-2);outline:1px solid var(--line)"><b style="color:#7D222F">Raspberry</b><span>#7D222F<br>Text accent: events, carnet</span></div>
+    <div style="background:var(--paper-2);outline:1px solid var(--line)"><b style="color:#6B5204">Golden Green</b><span>#8E6D06 · text #6B5204<br>Laurels, labels</span></div>
+    <div style="background:var(--blue)"><b>Blue Heaven</b><span>#90ADBF (washed in Faded)<br>Language tags, dusk wall</span></div>
+  </div>
+  <div class="dd"><div><span class="mono">Faded print</span><ul><li>Warm, washed cream; reads as old paper and daylight.</li><li>Closest to the beige grid-sheet pin.</li><li>Risk: can look sepia and flat if the stills are also warm.</li></ul></div><div><span class="mono">Dusk</span><ul><li>Cool grey-blue paper, Blue Heaven wall; reads as "l'heure bleue", the hour people go out.</li><li>More distinctive and dreamier.</li><li>Risk: cooler and less "paper"; orange accents must stay off the blue wall for contrast.</li></ul></div></div>
+  <p class="why"><b>Fixed in both moods</b>Orangeade means "book" and nothing else. Raspberry and Golden Green are text colours, not fills. No red urgency, no green success state. Body text is Vintage Wine at 11:1 or more on paper.</p>
+</div></section>
+
+<section><div class="lab"><span class="mono">05</span><b>Typography</b></div><div class="stack">
+  <div><div class="spec"><span class="mono">Titles · Cormorant Garamond 400 / 500, italic for emphasis</span><span style="font:400 clamp(38px,6vw,68px)/1.05 var(--display)">Que voir <em>ce soir</em> à Paris ?</span></div>
+  <div class="spec"><span class="mono">Labels and data · Courier Prime 400 / 700</span><span style="font:700 22px var(--mono)">20h45 → 22h53 · 9,50 € · VOSTFR · 5e</span></div>
+  <div class="spec"><span class="mono">Reading text · Hanken Grotesk 400 / 600</span><span style="font-size:18px;max-width:60ch">Un passeur de bac sur une rivière de Laponie voit sa routine bouleversée par l'arrivée d'une jeune femme qui ne parle aucune langue connue.</span></div></div>
+  <div class="tw"><table><thead><tr><th>Face</th><th>Job</th><th>Reason</th></tr></thead><tbody>
+  <tr><td><b>Cormorant Garamond</b></td><td>Titles, film names, quotes, dates.</td><td>The Garamond line is the face of French literary publishing. Light weights and frequent italics give the delicate, written-by-someone feeling v1's heavy Didone lacked.</td></tr>
+  <tr><td><b>Courier Prime</b></td><td>Times, prices, labels, navigation, photo captions. 12.5 px minimum.</td><td>A screenplay typewriter face: it ties the interface to how films are written, and fixed-width digits make timetables easy to compare.</td></tr>
+  <tr><td><b>Hanken Grotesk</b></td><td>Paragraphs and helper text only.</td><td>A neutral sans keeps long text and small sizes readable in both languages, so the two expressive faces never have to carry dense reading.</td></tr>
+  </tbody></table></div>
+</div></section>
+
+<section><div class="lab"><span class="mono">06</span><b>Images and shapes</b></div><div class="stack">
+  <div class="cols">
+    <div><span class="mono">The hazy still</span><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><span class="still "><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="#AFC0C8"/><g filter="url(#haze)"><rect y="52" width="100" height="48" fill="#5E7482"/><rect y="46" width="100" height="9" fill="#3C3F4A"/><circle cx="70" cy="26" r="9" fill="#F3E6D0"/><ellipse cx="38" cy="66" rx="13" ry="3" fill="#2A1E26"/><rect x="36" y="56" width="3" height="9" fill="#2A1E26"/></g></svg></span><span class="still "><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="#4A2A2A"/><g filter="url(#haze)"><rect x="50" y="12" width="34" height="52" fill="#F1DDB8"/><rect x="66" y="12" width="2.5" height="52" fill="#4A2A2A"/><rect x="50" y="36" width="34" height="2.5" fill="#4A2A2A"/><polygon points="50,64 84,64 62,100 8,100" fill="#C98A5A" opacity=".55"/><ellipse cx="28" cy="52" rx="7" ry="8" fill="#1F1216"/><rect x="18" y="60" width="20" height="40" rx="8" fill="#1F1216"/></g></svg></span><span class="still "><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="#2B1B2E"/><g filter="url(#haze)"><circle cx="20" cy="30" r="9" fill="#D6411F" opacity=".8"/><circle cx="46" cy="22" r="6" fill="#90ADBF" opacity=".8"/><circle cx="72" cy="36" r="11" fill="#E8B56A" opacity=".75"/><circle cx="86" cy="18" r="5" fill="#D6411F" opacity=".7"/><circle cx="34" cy="50" r="5" fill="#E8B56A" opacity=".6"/><rect y="72" width="100" height="28" fill="#17101A"/><ellipse cx="58" cy="60" rx="5" ry="6" fill="#0F0A10"/><rect x="51" y="65" width="14" height="35" rx="5" fill="#0F0A10"/></g></svg></span></div><p>Out-of-focus, grainy, vignetted, with a light leak. Heritage films are black and white. These are generated placeholders; real stills take the same treatment.</p><p class="why"><b>Why</b>A blurred still suggests a memory of a film instead of advertising it, which is the nostalgic register asked for. It also works when a venue has no artwork.</p></div>
+    <div><span class="mono">The instant photo</span><figure class="pola" style="max-width:220px;transform:rotate(-1.4deg)"><span class="still "><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="#AFC0C8"/><g filter="url(#haze)"><rect y="52" width="100" height="48" fill="#5E7482"/><rect y="46" width="100" height="9" fill="#3C3F4A"/><circle cx="70" cy="26" r="9" fill="#F3E6D0"/><ellipse cx="38" cy="66" rx="13" ry="3" fill="#2A1E26"/><rect x="36" y="56" width="3" height="9" fill="#2A1E26"/></g></svg></span><figcaption>La Rivière du Nord · 2026</figcaption></figure><p>Off-white frame, typed caption, a degree or two of rotation, a soft shadow. Used for the gallery wall, the featured film and every venue portrait.</p><p class="why"><b>Why</b>The polaroid is the centre of the mood board. It says "someone was there", which suits venues and discovery.</p></div>
+    <div><span class="mono">Things you can act on</span><a class="tk" href="#" onclick="return false"><span class="tk-main"><span class="tk-time">20h45</span><span class="tk-sub">Le Lucernaire Bleu · 5e</span></span><span class="tk-stub"><span class="tk-price">9,50 €</span><span class="tk-cta">Réserver</span></span></a><span class="btn">Continuer</span><span class="seg"><span class="on">Ce soir</span><span>Demain</span></span><p>A fine ink line, square corners, paper fill. The ticket keeps its perforation and its stub still lifts on hover. No hard offset shadows, no pills.</p><p class="why"><b>Why</b>The client kept the clarity of outlined actions but asked for the line to match the mood. Reserving the line for actions makes "what can I press" answerable at a glance.</p></div>
+  </div>
+  <div class="dd"><div><span class="mono">Removed from v1</span><ul><li>The circled headline word: it hurt readability and added nothing.</li><li>Geometric poster patterns and cropped giant initials.</li><li>Boxes around content, thick outlines, hard shadows, pill buttons.</li></ul></div><div><span class="mono">Kept from v1</span><ul><li>The illustrated venue façades, now inside polaroids with grain.</li><li>Ticket tear, bookmark pop, e-ticket printing.</li><li>All functional fixes from the audit.</li></ul></div></div>
+</div></section>
+
+<section><div class="lab"><span class="mono">07</span><b>Design rules</b></div><div class="stack">
+  <ol class="rules">
+  <li><div><b>Atmosphere never hides a fact.</b><span>Price, end time, language and venue are in plain type on every showtime. Grain and blur belong to images and paper, not to information.</span></div></li>
+  <li><div><b>A line means you can act.</b><span>Outlines are reserved for tickets, buttons, filters and fields.</span></div></li>
+  <li><div><b>Every discovery ends on a showtime.</b><span>Any image that invites exploring leads to a time, a place and a price within one interaction.</span></div></li>
+  <li><div><b>No urgency, no crowd signals.</b><span>Legitimacy comes from critics, laurels, labels and named programmers.</span></div></li>
+  <li><div><b>Personal, not social.</b><span>Bookmark, follow, a list that works without an account. Default quantity is one.</span></div></li>
+  <li><div><b>Nothing out of date is bookable.</b><span>Dates come from today; started screenings are struck through.</span></div></li>
+  <li><div><b>French first, English one tap away.</b></div></li>
+  <li><div><b>Accessible by default.</b><span>Skip link, visible focus, 4.5:1 text, 12.5 px minimum labels, reduced-motion support, equal cookie buttons.</span></div></li>
+  </ol>
+</div></section>
+
+<section><div class="lab"><span class="mono">08</span><b>Open questions</b></div><div class="stack">
+  <div class="tw"><table><thead><tr><th>Question</th><th>Status</th></tr></thead><tbody>
+  <tr><td><b>Palette mood:</b> Faded print or Dusk?</td><td>Waiting for the client's choice after comparing both live.</td></tr>
+  <tr><td><b>Gallery-first homepage:</b> does opening on the photo wall serve the goals, or only the look?</td><td>Accepted provisionally. It must be tested against the task ("what can I see tonight") and the engagement metric before it is confirmed. See decision D016 in the project repository.</td></tr>
+  <tr><td><b>Logo drawing</b></td><td>First sketch; needs refinement and a small-size test.</td></tr>
+  <tr><td><b>Real imagery</b></td><td>Stills are generated placeholders. Rights and sourcing for real stills and venue photos are not addressed yet.</td></tr>
+  </tbody></table></div>
+</div></section>
+<footer><p class="mono">Strapontin · identity v2 · fonts: Cormorant Garamond, Courier Prime, Hanken Grotesk (Google Fonts, open licence)</p></footer>
+</div>
+<div class="moodsw" role="group" aria-label="Palette study"><span>Palette</span><button data-v="faded" aria-pressed="true">Faded print</button><button data-v="dusk" aria-pressed="false">Dusk</button></div>
+<script>
+const set=v=>{document.documentElement.dataset.mood=v;document.querySelectorAll('.moodsw button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));try{localStorage.setItem('strp_mood',JSON.stringify(v))}catch(e){}};
+let m='faded';try{m=JSON.parse(localStorage.getItem('strp_mood'))||'faded'}catch(e){}set(m);
+document.querySelector('.moodsw').addEventListener('click',e=>{const b=e.target.closest('button');if(b)set(b.dataset.v)});
+</script>

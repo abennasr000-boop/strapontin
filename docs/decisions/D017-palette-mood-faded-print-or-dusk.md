@@ -1,6 +1,6 @@
 # D017 · Palette mood: Faded print or Dusk
 
-**Status:** Open
+**Status:** Closed by D022: neither mood, the reference sheet palette was adopted
 **Date:** 14 Nov 2026
 
 ## Context

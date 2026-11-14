@@ -1,6 +1,6 @@
 # D016 · Homepage opens on the photo gallery, finder second
 
-**Status:** Provisional: must be tested before it is confirmed
+**Status:** Superseded by D021 (client review F002); its test plan still applies
 **Date:** 14 Nov 2026
 
 ## Context

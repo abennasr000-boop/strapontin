@@ -2,422 +2,353 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Strapontin</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Instrument+Serif:ital@0;1&family=Archivo:wdth,wght@62..125,100..900&display=swap">
 <style>
-/* Layout concept: a printed programme sheet with instant photos laid on it. Soft paper, grain, hairline rules, typed labels. Only things you can act on get a drawn outline. Two palette moods under study (data-mood). */
+/* Layout concept: a grid sheet. Sage paper, hairline cells, wide serif capitals, one italic word, small extended sans labels. The home page is a gallery of posters with filters on top. Mobile first. Single committed look. */
 :root{
-  --paper:#F0E8DC; --paper-2:#F8F4EC; --paper-3:#E6DCCD; --wall:#E6DCCD;
-  --ink:#3F1921; --ink-2:#6A4A4E; --line:rgba(63,25,33,.2); --rule:rgba(63,25,33,.6);
-  --orange:#D6411F; --orange-ink:#B5340F;
-  --rasp:#7D222F; --green:#8E6D06; --green-ink:#6B5204; --blue:#BCCAD1;
-  --still:saturate(.78) sepia(.2) contrast(.96);
-  --display:"Cormorant Garamond","Cormorant","Garamond","Times New Roman",serif;
-  --body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
-  --mono:"Courier Prime","Courier New",Courier,monospace;
-  --r:3px; --ease:cubic-bezier(.2,.8,.2,1);
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .1 0 0 0 0 .13 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --paper:#D8D9CC; --paper-2:#E5E6DB; --paper-3:#CBCDBE;
+  --ink:#231417; --ink-2:#574B49; --line:rgba(35,20,23,.3);
+  --accent:#A82F0C; --accent-2:#C23A12; --blue:#90ADBF; --wine:#3F1921; --green:#5E4A05;
+  --display:"Playfair Display","Didot","Bodoni 72",Georgia,serif;
+  --italic:"Instrument Serif","Playfair Display",Georgia,serif;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1); --hh:58px;
   color-scheme:light;
-}
-:root[data-mood="dusk"]{
-  --paper:#E2E7E7; --paper-2:#F4F3EE; --paper-3:#CBD7DC; --wall:#A9BFCB;
-  --ink:#35151D; --ink-2:#574650; --line:rgba(53,21,29,.22); --rule:rgba(53,21,29,.62);
-  --blue:#90ADBF;
-  --still:saturate(.7) hue-rotate(-10deg) brightness(.94) contrast(.98);
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;scroll-padding-top:120px}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased;transition:background .5s,color .5s}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 70px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15.5px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
-body::after{content:"";position:fixed;inset:0;z-index:45;pointer-events:none;background:var(--grain);opacity:.28;mix-blend-mode:multiply}
 a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
-:focus-visible{outline:2px solid var(--orange-ink);outline-offset:3px}
-h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.005em}
-h1 em,h2 em,h3 em{font-weight:400}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.08;margin:0;text-transform:uppercase;letter-spacing:.025em;text-wrap:balance}
+h1 em,h2 em,h3 em,.it{font:italic 400 1.12em/1 var(--italic);text-transform:none;letter-spacing:0}
 p{margin:0}
-.wrap{max-width:1240px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-@media(min-width:700px){.wrap{padding-left:max(36px,env(safe-area-inset-left,0px));padding-right:max(36px,env(safe-area-inset-right,0px))}}
-.mono{font:400 13px/1.45 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
-.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper-2);padding:10px 16px;z-index:100}
+.wrap{max-width:1320px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media(min-width:760px){.wrap{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
+.lab{font:500 11.5px/1.4 var(--sans);font-stretch:118%;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:10px 16px;z-index:100}
 .skip:focus{left:16px}
 
 /* header */
 #chrome{display:contents}
-.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--paper);border-bottom:1px solid var(--line);transition:box-shadow .3s,background .5s}
-.hd::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.4;mix-blend-mode:multiply;pointer-events:none}
-.hd.scrolled{box-shadow:0 10px 30px -18px rgba(63,25,33,.5)}
-.hd-row{display:flex;align-items:center;gap:16px;padding-block:10px;position:relative;z-index:1}
-.logo{display:flex;align-items:center;gap:8px;font:italic 500 31px/1 var(--display);text-decoration:none;flex:none}
-.logo svg{width:24px;height:28px;fill:none;stroke:var(--ink);stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+.hd-row{display:flex;align-items:center;gap:18px;min-height:57px}
+.logo{display:flex;align-items:center;gap:10px;font:600 17px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;flex:none}
+.logo span{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--ink);border-radius:7px}
+.logo svg{width:17px;height:20px;fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
 .logo .flap{transition:transform .5s var(--ease);transform-origin:9.3px 20px}
 .logo:hover .flap{transform:rotate(38deg)}
-.city{flex:none;font:400 13px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
-.search{position:relative;flex:1;min-width:0}
-.search input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:9px 8px 9px 30px}
-.search input:focus{outline:0;border-bottom:2px solid var(--ink);padding-bottom:8px}
-.search input::placeholder{color:var(--ink-2);font-style:italic}
-.search>svg{position:absolute;left:4px;top:50%;translate:0 -50%;width:17px;height:17px;pointer-events:none}
-.ac{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--paper-2);border:1px solid var(--rule);box-shadow:0 18px 40px -18px rgba(63,25,33,.5);padding:8px;max-height:min(70vh,460px);overflow:auto;animation:pop .2s var(--ease)}
-.ac h4{margin:8px 10px 4px;font:400 12.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
-.ac a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:8px 10px;text-decoration:none;font:500 20px/1.2 var(--display)}
-.ac a small{color:var(--ink-2);font:400 13.5px var(--body);text-align:right}
+.nav{display:flex;gap:22px;flex:none}
+.nav a{text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a[aria-current=page]{border-bottom-color:var(--ink);color:var(--ink)}
+.search{position:relative;flex:1;min-width:0;max-width:420px;margin-left:auto}
+.search input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:8px 6px 8px 28px;font-size:15px}
+.search input:focus{outline:0;border-bottom-color:var(--ink)}
+.search input::placeholder{color:var(--ink-2)}
+.search>svg{position:absolute;left:2px;top:50%;translate:0 -50%;width:16px;height:16px;pointer-events:none}
+.ac{position:absolute;left:0;right:0;top:calc(100% + 1px);background:var(--paper-2);border:1px solid var(--ink);padding:6px;max-height:min(70vh,440px);overflow:auto;z-index:5}
+.ac h4{margin:8px 8px 2px}
+.ac a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:8px;text-decoration:none;font-weight:500}
+.ac a small{color:var(--ink-2);font-weight:400;text-align:right}
 .ac a[aria-selected=true],.ac a:hover{background:var(--paper-3)}
-.ac mark{background:none;color:var(--orange-ink)}
-.ac .none{padding:14px 10px;color:var(--ink-2)}
-.hbtn{flex:none;display:inline-flex;align-items:center;gap:7px;background:none;border:0;border-bottom:1px solid transparent;padding:8px 2px;font-weight:500;font-size:15px}
-.hbtn:hover{border-bottom-color:var(--ink)}
-.hbtn .n{font:700 12.5px var(--mono);color:var(--orange-ink)}
-.lang{display:flex;gap:2px;flex:none}
-.lang button{border:0;background:none;padding:6px 5px;font:400 13px var(--mono);color:var(--ink-2)}
-.lang button[aria-pressed=true]{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:5px}
-.nav{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;padding-bottom:9px;position:relative;z-index:1}
-.nav::-webkit-scrollbar{display:none}
-.nav a{flex:none;text-decoration:none;font:400 13px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 0;border-bottom:1px solid transparent;transition:border-color .2s}
-.nav a:hover{border-bottom-color:var(--ink)}
-.nav a:first-child{color:var(--orange-ink);font-weight:700}
-.assure{border-bottom:1px solid var(--line);background:var(--paper-3);transition:background .5s}
-.assure ul{list-style:none;margin:0;padding-block:8px;display:flex;flex-wrap:wrap;gap:4px 30px;font:400 13px var(--mono);letter-spacing:.02em}
-.assure li{display:flex;gap:8px;align-items:center}
-.assure li::before{content:"✓";color:var(--orange-ink);font-weight:700}
-@media(max-width:760px){.assure ul{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:22px}.assure li{flex:none}.city,.hbtn .lbl{display:none}.logo{font-size:27px}.hd-row{gap:10px 14px;flex-wrap:wrap}.search{order:5;flex-basis:100%}.lang{margin-left:auto}}
+.ac mark{background:none;color:var(--accent);font-weight:700}
+.ac .none{padding:12px 8px;color:var(--ink-2)}
+.tools{display:flex;align-items:center;gap:14px;flex:none}
+.tbtn{background:none;border:0;padding:6px 0;display:inline-flex;align-items:center;gap:6px}
+.tbtn b{color:var(--accent)}
+.lang{display:flex;gap:8px}
+.lang button{border:0;background:none;padding:6px 0;color:var(--ink-2)}
+.lang button[aria-pressed=true]{color:var(--ink);border-bottom:1px solid var(--ink)}
+.sbtn{display:none;background:none;border:0;padding:6px 2px}
+.tabbar{display:none}
+@media(max-width:820px){.hd-row{flex-wrap:wrap;gap:0 14px}.logo{margin-right:auto}.hd .nav,.hd .tbtn{display:none}.sbtn{display:inline-flex}.search{display:none;order:5;flex-basis:100%;max-width:none;margin:0 0 8px}.hd.so .search{display:block}
+.tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--paper);border-top:1px solid var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar a,.tabbar button{display:grid;place-items:center;min-height:54px;padding:6px 2px;text-decoration:none;background:none;border:0;text-align:center;color:var(--ink-2)}
+.tabbar [aria-current=page]{color:var(--ink);font-weight:700;box-shadow:inset 0 2px 0 var(--ink)}
+.tabbar b{color:var(--accent)}
+body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}.cookie{bottom:calc(55px + env(safe-area-inset-bottom,0px))}.toast{bottom:calc(74px + env(safe-area-inset-bottom,0px))}footer .wrap{padding-bottom:40px}}
 
-/* actions: the only outlined things */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--orange-ink);color:#FBF6EE;border:1px solid var(--orange-ink);border-radius:var(--r);padding:12px 22px;font:700 14px var(--mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 18px -12px rgba(63,25,33,.7);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 14px 22px -12px rgba(63,25,33,.7);background:var(--orange)}
-.btn:active{transform:translateY(0)}
-.btn[disabled]{opacity:.4;pointer-events:none}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--rule);box-shadow:none}
-.btn.ghost:hover{background:var(--paper-2)}
-.btn.sm{padding:9px 15px;font-size:13px}
-.tag{display:inline-flex;align-items:center;font:400 12.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 6px 3px;border-radius:2px;background:var(--paper-3);white-space:nowrap}
-.tag.vo{background:var(--blue)}
-.tag.en{background:var(--ink);color:var(--paper-2)}
-.tag.label{background:none;color:var(--green-ink);padding-inline:0;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:4px}
-.tag.kind{background:none;color:var(--rasp);font-weight:700;padding-inline:0}
-.tags{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
-.laurel{display:inline-flex;gap:8px;align-items:center;font:400 13px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--green-ink)}
-.laurel::before,.laurel::after{content:"";width:8px;height:17px;border:1px solid var(--green);border-right:0;border-radius:99px 0 0 99px}
-.laurel::after{transform:scaleX(-1)}
-.seg{display:inline-flex;flex-wrap:wrap;gap:6px}
-.seg button{background:transparent;border:1px solid var(--rule);border-radius:var(--r);padding:8px 13px;font:400 13.5px var(--mono);letter-spacing:.03em;transition:background .2s,color .2s}
-.seg button:hover{background:var(--paper-2)}
-.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
-select.sel{background:transparent;border:1px solid var(--rule);border-radius:var(--r);padding:8px 32px 8px 13px;font:400 13.5px var(--mono);appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%;background-size:5px 5px;background-repeat:no-repeat;max-width:100%}
-.check{display:inline-flex;gap:8px;align-items:center;font:400 13.5px var(--mono)}
-.check input{width:17px;height:17px;accent-color:var(--orange-ink)}
+/* actions */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--paper-2);border:1px solid var(--ink);border-radius:2px;padding:13px 20px;font:600 12px var(--sans);font-stretch:118%;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s,transform .2s var(--ease)}
+.btn:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.btn.go{background:var(--accent);border-color:var(--accent);color:#FBF7F0}
+.btn.go:hover{background:var(--accent-2)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.btn.sm{padding:9px 14px;font-size:11.5px}
+.btn[disabled]{opacity:.35;pointer-events:none}
+.tag{display:inline-flex;align-items:center;font:600 11px/1 var(--sans);font-stretch:112%;letter-spacing:.07em;text-transform:uppercase;padding:4px 6px;border:1px solid var(--line);border-radius:2px;white-space:nowrap}
+.tag.vo{background:var(--blue);border-color:transparent}
+.tag.en{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.tag.kind{border-color:var(--wine);color:var(--wine)}
+.tags{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.award{font:italic 400 18px/1.25 var(--italic);color:var(--green)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.chips::-webkit-scrollbar{display:none}
+.chips button,.fsel{flex:none;background:transparent;border:1px solid var(--line);border-radius:99px;padding:8px 14px;font:500 13.5px var(--sans);white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+.chips button:hover{border-color:var(--ink)}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.fsel{appearance:none;padding-right:30px;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 16px) 55%,calc(100% - 11px) 55%;background-size:5px 5px;background-repeat:no-repeat;max-width:100%}
+.fsel.on{border-color:var(--ink);background-color:var(--paper-2)}
+.check{display:inline-flex;gap:8px;align-items:center;font-size:14px}
+.check input{width:17px;height:17px;accent-color:var(--accent)}
 
 /* ticket */
-.tk{display:inline-flex;align-items:stretch;background:var(--paper-2);border:1px solid var(--rule);border-radius:var(--r);text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s var(--ease);flex:none;position:relative;box-shadow:0 1px 0 rgba(63,25,33,.12)}
-.tk-main{padding:7px 12px 7px;display:grid;align-content:center;min-width:92px}
-.tk-time{font:700 19px/1.2 var(--mono)}
+.tk{display:inline-flex;align-items:stretch;background:var(--paper-2);border:1px solid var(--ink);border-radius:2px;text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s;flex:none;position:relative}
+.tk-main{padding:7px 12px;display:grid;align-content:center;min-width:88px}
+.tk-time{font:700 18px/1.2 var(--sans);font-variant-numeric:tabular-nums}
 .tk-sub{font-size:12.5px;line-height:1.3;color:var(--ink-2);white-space:nowrap}
-.tk-stub{padding:7px 12px;border-left:1px dashed var(--rule);display:grid;align-content:center;justify-items:center;transition:transform .3s var(--ease),background .2s,color .2s;transform-origin:0 100%;background:var(--paper-2)}
-.tk-price{font:400 13.5px var(--mono);white-space:nowrap}
-.tk-cta{font:700 12.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--orange-ink);white-space:nowrap}
-a.tk:hover{transform:translateY(-3px);box-shadow:0 12px 20px -12px rgba(63,25,33,.6)}
-a.tk:hover .tk-stub{background:var(--orange-ink);color:#FBF6EE;transform:rotate(5deg) translate(2px,-1px)}
-a.tk:hover .tk-cta{color:#FBF6EE}
-.tk.past{opacity:.5;border-style:dashed;box-shadow:none}
+.tk-stub{padding:7px 12px;border-left:1px dashed var(--ink);display:grid;align-content:center;justify-items:center;transition:transform .3s var(--ease),background .2s,color .2s;transform-origin:0 100%;background:var(--paper-2)}
+.tk-price{font:500 13px var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tk-cta{font:700 10.5px var(--sans);font-stretch:118%;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+a.tk:hover{transform:translateY(-2px);box-shadow:0 10px 16px -12px rgba(35,20,23,.7)}
+a.tk:hover .tk-stub{background:var(--accent);color:#FBF7F0;transform:rotate(5deg) translate(2px,-1px)}
+a.tk:hover .tk-cta{color:#FBF7F0}
+.tk.past{opacity:.45;border-style:dashed}
 .tk.past .tk-time{text-decoration:line-through}
-.tk-kind{position:absolute;top:-9px;left:10px;font:700 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;background:var(--paper);color:var(--rasp);padding:2px 5px}
+.tk-kind{position:absolute;top:-8px;left:9px;font:700 10px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;background:var(--paper);color:var(--wine);padding:2px 5px}
 .tks{display:flex;gap:10px;flex-wrap:wrap;padding-top:6px}
 
-/* hazy still + polaroid */
-.still{display:block;position:relative;overflow:hidden;aspect-ratio:4/5;background:#2a1a1e;border-radius:1px;max-width:100%}
-.still svg{display:block;width:100%;height:100%;filter:var(--still);transition:filter .6s,transform 1.2s var(--ease)}
-.still.bw svg{filter:grayscale(1) contrast(1.05)}
-.still::after{content:"";position:absolute;inset:0;background:var(--grain),radial-gradient(ellipse at 50% 42%,transparent 50%,rgba(40,15,20,.42));background-size:120px 120px,auto;mix-blend-mode:multiply;pointer-events:none}
-.still::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,rgba(214,65,31,.2),transparent 26%);mix-blend-mode:screen;pointer-events:none}
-.pola{background:#F7F3EA;padding:8px 8px 0;box-shadow:0 1px 1px rgba(63,25,33,.18),0 16px 30px -18px rgba(63,25,33,.55);display:block;text-decoration:none;position:relative;transition:transform .5s var(--ease),box-shadow .5s;max-width:100%;margin:0}
-.pola .still{aspect-ratio:1}
-.pola .fac{display:block;position:relative}
-.pola .fac svg{display:block;width:100%;height:auto;filter:saturate(.8) contrast(.95)}
-.pola .fac::after{content:"";position:absolute;inset:0;background:var(--grain),radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(40,15,20,.3));background-size:120px 120px,auto;mix-blend-mode:multiply}
-.pola figcaption,.pola .cap{display:block;font:400 12.5px/1.3 var(--mono);letter-spacing:.03em;padding:9px 2px 11px;text-align:left;color:var(--ink)}
+/* poster */
+.ph{display:block;aspect-ratio:2/3;background:var(--a,#3F1921);position:relative;overflow:hidden;container-type:inline-size;max-width:100%}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ph-t{position:absolute;inset:0;display:grid;align-content:end;gap:4cqw;padding:9cqw;color:var(--b,#E5E6DB)}
+.ph-t b{font:600 max(10px,10.5cqw)/1.05 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.ph-t i{font:italic 400 max(10px,9cqw)/1.1 var(--italic)}
+@keyframes fadein{from{opacity:0}}
 
-/* sections */
-main{display:block;min-height:60vh}
-.view{animation:rise .6s var(--ease)}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
-@keyframes develop{from{opacity:0;filter:blur(8px) brightness(1.5)}to{opacity:1;filter:none}}
-section.sec{padding-block:56px;border-top:1px solid var(--line)}
-.sec-h{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:30px}
-.sec-h h2{font-size:clamp(34px,4vw,50px);margin-top:4px}
-.sec-h h2 em{font-style:italic}
-.sec-h p:not(.mono){color:var(--ink-2);max-width:48ch;font-size:15px}
-.more{font:400 13px var(--mono);letter-spacing:.04em;text-transform:uppercase}
-
-/* gallery wall */
-.wall{background:var(--wall);border-bottom:1px solid var(--line);transition:background .5s}
-.wall-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px 56px;padding-block:44px 52px;align-items:start}
-.wall .mono{color:var(--ink)}
-.wall h1{font-size:clamp(38px,5vw,68px);font-weight:400;margin:12px 0 16px;letter-spacing:-.015em}
-.wall h1 em{font-style:italic}
-.wall .lead{max-width:44ch;margin-bottom:20px}
-.thumbs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px 14px;margin-top:34px;max-width:470px}
-.th{padding:0;border:0;background:#F7F3EA;padding:4px 4px 12px;box-shadow:0 8px 16px -12px rgba(63,25,33,.6);transition:transform .4s var(--ease),box-shadow .4s,opacity .3s;opacity:.82}
-.th .still{aspect-ratio:1}
-.th:nth-child(3n+1){transform:rotate(-2deg) translateY(4px)}
-.th:nth-child(3n+2){transform:rotate(1.4deg)}
-.th:nth-child(4n){transform:rotate(-.8deg) translateY(-5px)}
-.th:hover,.th[aria-pressed=true]{transform:translateY(-6px) rotate(0) scale(1.06);opacity:1;box-shadow:0 16px 22px -14px rgba(63,25,33,.7)}
-.th[aria-pressed=true]{outline:1px solid var(--ink);outline-offset:3px}
-.pk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:26px;align-items:end}
-.pk .pola{transform:rotate(-1.2deg)}
-.pk .pola .still svg{animation:develop .9s var(--ease)}
-.pk-txt{display:grid;gap:8px;padding-bottom:6px;animation:rise .5s var(--ease)}
-.pk-txt h2{font-size:clamp(28px,2.8vw,40px)}
-.pk-txt h2 a{text-decoration:none}
-.pk-txt h2 a:hover{text-decoration:underline}
-.pk-txt .syn{font-size:15px;color:var(--ink-2)}
-.pk-txt .meta{color:var(--ink)}
-.pk-txt .meta b{color:var(--ink);font-weight:700}
-@media(max-width:980px){.wall-in{grid-template-columns:1fr;padding-block:30px 36px}.thumbs{display:flex;max-width:none;overflow-x:auto;gap:12px;padding:10px 4px 14px;margin-top:22px;scrollbar-width:none}.th{flex:0 0 74px}}
-@media(max-width:560px){.pk{grid-template-columns:1fr}.pk .pola{max-width:260px}}
-
-/* finder */
-.hero{padding-block:48px 52px}
-.hero .q{font-size:clamp(36px,5vw,64px);font-weight:400;margin:8px 0 22px}
-.hero .q em{font-style:italic}
-.finder{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;padding:14px 0;border-block:1px solid var(--rule)}
-.finder .grp{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
-.count{margin:16px 0 4px;display:flex;justify-content:space-between;gap:6px 12px;flex-wrap:wrap}
-.row{display:grid;grid-template-columns:60px minmax(180px,270px) 1fr;gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
-.row .still{width:60px}
-.row h3{font-size:25px}
-.row h3 a{text-decoration:none}
-.row h3 a:hover{text-decoration:underline}
-.row .by{color:var(--ink-2);font-size:14.5px;margin:1px 0 7px}
-.row .tks{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;min-width:0}
-.row .allp{align-self:center;flex:none;font:400 13px var(--mono);white-space:nowrap;padding-right:6px}
-@media(max-width:820px){.row{grid-template-columns:52px 1fr}.row .still{width:52px}.row .tks{grid-column:1/-1}}
-.empty{padding:36px 0;display:grid;gap:14px;justify-items:start}
-.empty h3{font-size:30px;font-style:italic;font-weight:400}
-.legend{margin-top:16px;font-size:14px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
-
-/* feature */
-.feat{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0}
-.feat-a{display:grid;grid-template-columns:minmax(150px,280px) 1fr;gap:34px;align-items:center;padding-right:44px}
-.feat-a .still{box-shadow:0 20px 34px -22px rgba(63,25,33,.6)}
-.feat-a h3{font-size:clamp(34px,3.8vw,54px);margin:8px 0 8px}
-.feat-a blockquote,.quote{margin:16px 0;font:italic 400 23px/1.3 var(--display)}
-.feat-a cite,.quote cite{display:block;font:400 12.5px var(--mono);font-style:normal;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-top:8px}
-.feat-b{border-left:1px solid var(--line);padding-left:44px;display:grid;gap:12px;align-content:center}
-.feat-b h3{font-size:36px}
-@media(max-width:980px){.feat{grid-template-columns:1fr;gap:34px}.feat-a{padding-right:0}.feat-b{border-left:0;border-top:1px solid var(--line);padding:30px 0 0}}
-@media(max-width:560px){.feat-a{grid-template-columns:1fr}.feat-a .still{width:170px}}
-
-/* cards */
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:44px 30px}
-@media(max-width:980px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 16px}}
-.card{position:relative;display:grid;gap:10px;align-content:start}
-.card .still{transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
-.card:hover .still{transform:translateY(-4px);box-shadow:0 22px 30px -22px rgba(63,25,33,.7)}
-.card:hover .still svg{transform:scale(1.06);filter:none}
-.card h3{font-size:25px}
-.card h3 a{text-decoration:none}
-.card h3 a::after{content:"";position:absolute;inset:0}
-.card .by{font-size:14.5px;color:var(--ink-2)}
-.card .meta{font:400 13px/1.5 var(--mono);color:var(--ink);border-top:1px dashed var(--rule);padding-top:8px}
-.card .meta b{color:var(--orange-ink)}
-.bm{position:absolute;z-index:2;top:8px;right:8px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(247,243,234,.9);display:grid;place-items:center;transition:transform .2s var(--ease),background .2s}
+/* home: filters + gallery */
+main{display:block;min-height:70vh}
+.view{animation:rise .45s var(--ease)}
+@keyframes rise{from{transform:translateY(8px)}}
+.top{display:flex;align-items:end;justify-content:space-between;gap:10px 24px;flex-wrap:wrap;padding-block:20px 14px}
+.top>div:first-child{display:grid;gap:6px}
+.top h1{font-size:clamp(25px,4.2vw,50px)}
+.top .lab{padding-bottom:5px}
+.fb{position:sticky;top:calc(var(--hh) + env(safe-area-inset-top,0px));z-index:40;background:var(--paper);border-block:1px solid var(--line)}
+.fb-in{display:flex;align-items:center;gap:8px 10px;padding-block:9px;flex-wrap:wrap}
+.fb .sep{width:1px;height:22px;background:var(--line);flex:none}
+.vt{display:flex;border:1px solid var(--ink);border-radius:99px;overflow:hidden;flex:none}
+.vt button{border:0;background:none;padding:8px 14px;font:500 13.5px var(--sans)}
+.vt button[aria-pressed=true]{background:var(--ink);color:var(--paper-2)}
+@media(max-width:760px){.fb .chips{flex-basis:100%}.fb .sep{display:none}.fb .fsel{flex:1 1 0;min-width:0;padding-left:12px;font-size:13px}}
+.meta{display:flex;justify-content:space-between;gap:4px 20px;flex-wrap:wrap;padding-top:12px}
+.gal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-left:1px solid var(--line);margin-top:14px;border-top:1px solid var(--line)}
+@media(min-width:620px){.gal{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:900px){.gal{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:1180px){.gal{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.cell{position:relative;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 12px 14px;display:grid;gap:9px;align-content:start;min-width:0;animation:rise .5s var(--ease) backwards}
+@media(min-width:760px){.cell{padding:18px 18px 20px}}
+.cell .ph{transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.cell:hover .ph{transform:translateY(-4px);box-shadow:0 18px 24px -18px rgba(35,20,23,.75)}
+.cell h3{font-size:clamp(13.5px,1.25vw,16px);line-height:1.2;overflow-wrap:anywhere}
+.cell h3 button{all:unset;cursor:pointer}
+.cell h3 button::after{content:"";position:absolute;inset:0}
+.cell h3 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cell .by{font:italic 400 16px/1.15 var(--italic);color:var(--ink-2);margin-top:-5px}
+.cell .nx{font-size:13.5px;line-height:1.35;border-top:1px solid var(--line);padding-top:8px}
+.cell .nx b{font-weight:700;font-variant-numeric:tabular-nums}
+.cell .nx span{white-space:nowrap}
+.cell .mo{font-size:12.5px;color:var(--ink-2)}
+.bm{position:absolute;z-index:2;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(229,230,219,.92);display:grid;place-items:center;transition:transform .2s var(--ease),background .2s}
+@media(min-width:760px){.bm{top:24px;right:24px}}
 .bm:hover{transform:scale(1.1)}
-.bm svg{width:15px;height:15px;fill:none;stroke:var(--ink);stroke-width:1.5}
-.bm[aria-pressed=true]{background:var(--orange-ink)}
-.bm[aria-pressed=true] svg{fill:#FBF6EE;stroke:#FBF6EE}
+.bm svg{width:14px;height:14px;fill:none;stroke:var(--ink);stroke-width:1.6}
+.bm[aria-pressed=true]{background:var(--accent)}
+.bm[aria-pressed=true] svg{fill:#FBF7F0;stroke:#FBF7F0}
 .bm.popped{animation:bmpop .45s var(--ease)}
 @keyframes bmpop{40%{transform:scale(1.35) rotate(-10deg)}}
-.bm.inline{position:static;flex:none;border:1px solid var(--rule);background:transparent}
-.bm.inline[aria-pressed=true]{background:var(--orange-ink);border-color:var(--orange-ink)}
-.stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
-.stage .card{grid-template-columns:minmax(96px,170px) 1fr;gap:24px;align-items:center;padding:6px 40px 6px 0}
-.stage .card+.card{border-left:1px solid var(--line);padding:6px 0 6px 40px}
-.stage .card h3{font-size:34px}
-.stage .card .txt{display:grid;gap:6px}
-@media(max-width:760px){.stage{grid-template-columns:1fr;gap:28px}.stage .card,.stage .card+.card{padding:0;border:0}}
+.bm.inline{position:static;flex:none;border:1px solid var(--ink);background:transparent}
+.bm.inline[aria-pressed=true]{background:var(--accent);border-color:var(--accent)}
+.after{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-block:26px 10px}
+.empty{padding:44px 0;display:grid;gap:14px;justify-items:start}
+.empty h3{font-size:22px}
+.row{display:grid;grid-template-columns:54px minmax(170px,260px) 1fr;gap:18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.row .ph{width:54px}
+.row h3{font-size:15.5px;line-height:1.2}
+.row h3 a{text-decoration:none}
+.row h3 a:hover{text-decoration:underline}
+.row .by{font:italic 400 16px/1.2 var(--italic);color:var(--ink-2);margin:2px 0 6px}
+.row .tks{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;min-width:0}
+.row .allp{align-self:center;flex:none;font-size:13px;white-space:nowrap;padding-right:6px}
+@media(max-width:820px){.row{grid-template-columns:46px 1fr}.row .ph{width:46px}.row .tks{grid-column:1/-1}}
 
-/* specials */
-.spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+/* pages */
+.ptitle{padding-block:30px 22px;display:grid;gap:8px}
+.ptitle h1{font-size:clamp(30px,5.4vw,64px)}
+.ptitle p:not(.lab){color:var(--ink-2);max-width:56ch}
+section.sec{padding-block:34px 44px;border-top:1px solid var(--line)}
+.sec-h{margin-bottom:22px;display:grid;gap:6px}
+.sec-h h2{font-size:clamp(22px,3vw,34px)}
+.spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
 @media(max-width:860px){.spec{grid-template-columns:1fr}}
-.sp{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
-.sp .d{font-family:var(--display);text-align:center;line-height:1}
-.sp .d b{display:block;font-size:44px;font-weight:400;font-style:italic}
-.sp .d span{font:400 12.5px var(--mono);text-transform:uppercase;letter-spacing:.05em}
-.sp h3{font-size:25px;margin:3px 0 2px}
-.sp p{font-size:14.5px;color:var(--ink-2)}
-@media(max-width:520px){.sp{grid-template-columns:58px 1fr}.sp .tk{grid-column:1/-1;justify-self:start}}
-
-/* cycles, picks, venues */
-.cyc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
-.cy{padding:4px 34px;display:grid;gap:10px;align-content:start;border-left:1px solid var(--line);background:none!important}
-.cy:first-child{padding-left:0;border-left:0}
-@media(max-width:860px){.cyc{grid-template-columns:1fr}.cy,.cy:first-child{padding:24px 0;border-left:0;border-top:1px solid var(--line)}.cy:first-child{border-top:0;padding-top:0}}
-.cy h3{font-size:32px;font-style:italic;font-weight:400}
+.sp{display:grid;grid-template-columns:62px 1fr auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.sp .d{text-align:center;line-height:1}
+.sp .d b{display:block;font:600 34px/1.05 var(--display)}
+.sp h3{font-size:15.5px;margin:6px 0 3px;line-height:1.2}
+.sp h3 a{text-decoration:none}
+.sp p{font-size:14px;color:var(--ink-2)}
+@media(max-width:520px){.sp{grid-template-columns:52px 1fr}.sp .tk{grid-column:1/-1;justify-self:start}}
+.cyc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-left:1px solid var(--line);border-top:1px solid var(--line)}
+@media(max-width:860px){.cyc{grid-template-columns:1fr}}
+.cy{padding:20px;display:grid;gap:10px;align-content:start;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cy h3{font-size:20px}
 .cy h3 a{text-decoration:none}
-.cy h3 a:hover{text-decoration:underline}
-.cy ul{margin:0;padding:0;list-style:none;font-size:15px}
-.cy li{padding:6px 0;border-top:1px dashed var(--rule)}
-.cy .foot{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;align-items:center}
-.picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.cy ul{margin:0;padding:0;list-style:none;font-size:14.5px}
+.cy li{padding:6px 0;border-top:1px solid var(--line)}
+.cy .foot{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.quote{font:italic 400 22px/1.25 var(--italic);margin:0}
+.picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px}
 @media(max-width:860px){.picks{grid-template-columns:1fr}}
-.pick .quote{margin:0 0 12px;font-size:25px}
+.pick{display:grid;gap:8px;align-content:start}
 .pick a{font-weight:600}
-.venues{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:54px 44px}
-@media(max-width:860px){.venues{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 24px}}
-@media(max-width:520px){.venues{grid-template-columns:1fr}}
-.ven{display:grid;gap:16px;align-content:start}
-.ven .pola{max-width:300px}
-.ven:nth-child(odd) .pola{rotate:-1.4deg}.ven:nth-child(even) .pola{rotate:1.1deg}
-.ven:hover .pola{transform:rotate(1.2deg) translateY(-4px)}
-.ven p:not(.mono){font-size:15px;color:var(--ink-2)}
-.fbtn{display:inline-flex;gap:7px;align-items:center;background:none;border:1px solid var(--rule);border-radius:var(--r);padding:7px 12px;font:400 13px var(--mono);letter-spacing:.03em;transition:background .2s,color .2s}
-.fbtn:hover{background:var(--paper-2)}
+.venues{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-left:1px solid var(--line);border-top:1px solid var(--line)}
+@media(max-width:900px){.venues{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.venues{grid-template-columns:1fr}}
+.ven{display:grid;gap:12px;align-content:start;padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.fac{display:block;overflow:hidden}
+.fac svg{display:block;width:100%;height:auto;filter:saturate(.75);transition:transform .7s var(--ease)}
+.ven:hover .fac svg{transform:scale(1.04)}
+.ven h3{font-size:17px}
+.ven h3 a{text-decoration:none}
+.ven h3 a::after{content:"";position:absolute;inset:0}
+.ven p:not(.lab){font-size:14px;color:var(--ink-2)}
+.ven .fbtn{position:relative;z-index:1;justify-self:start}
+.fbtn{display:inline-flex;gap:6px;align-items:center;background:none;border:1px solid var(--line);border-radius:99px;padding:7px 13px;font:500 13px var(--sans);transition:background .2s,color .2s,border-color .2s}
+.fbtn:hover{border-color:var(--ink)}
 .fbtn[aria-pressed=true]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
-.carnet{background:var(--paper-3);padding:40px;display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:center;transition:background .5s}
-.carnet .mono{color:var(--rasp)!important}
-.carnet h2{font-size:clamp(32px,4vw,50px);font-weight:400}
-.carnet h2 em{font-style:italic;color:var(--rasp)}
-.carnet p{margin-top:12px;max-width:52ch}
-.carnet ul{list-style:none;margin:0;padding:0;font:400 14px/1.5 var(--mono)}
-.carnet li{padding:10px 0;border-top:1px dashed var(--rule);display:flex;justify-content:space-between;gap:12px}
-@media(max-width:760px){.carnet{grid-template-columns:1fr;padding:24px}}
-
-/* detail pages */
-.crumb{padding-block:20px 0;font:400 13px var(--mono);letter-spacing:.03em}
-.detail{display:grid;grid-template-columns:minmax(160px,320px) 1fr;gap:52px;padding-block:26px 50px;align-items:start}
-.detail>.still{box-shadow:0 24px 36px -24px rgba(63,25,33,.6)}
-@media(max-width:760px){.detail{grid-template-columns:1fr;gap:24px}.detail>.still{width:190px}.detail .pola{max-width:300px}}
-.detail h1{font-size:clamp(44px,6.4vw,88px);font-weight:400;margin:8px 0 12px;letter-spacing:-.02em}
-.detail .lead{font-size:18px;max-width:58ch;margin:18px 0}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0;border-block:1px solid var(--rule);margin:18px 0}
-.facts div{padding:12px 14px 12px 0}
-.facts dt{font:400 12.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.carnet{border:1px solid var(--ink);padding:28px;display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center}
+.carnet h2{font-size:clamp(22px,3vw,34px)}
+.carnet p{margin-top:10px;max-width:52ch;color:var(--ink-2)}
+.carnet ul{list-style:none;margin:0;padding:0;font-size:14.5px}
+.carnet li{padding:9px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+@media(max-width:760px){.carnet{grid-template-columns:1fr;padding:20px}}
+.crumb{padding-block:16px 0}
+.detail{display:grid;grid-template-columns:minmax(150px,270px) 1fr;gap:44px;padding-block:22px 40px;align-items:start}
+@media(max-width:760px){.detail{grid-template-columns:1fr;gap:20px}.detail>.ph{width:150px}.detail>.fac{max-width:280px}}
+.detail h1{font-size:clamp(28px,5vw,60px);margin:8px 0 10px}
+.detail .lead{font-size:17px;max-width:58ch;margin:16px 0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border-block:1px solid var(--line);margin:16px 0}
+.facts div{padding:11px 14px 11px 0}
 .facts dd{margin:2px 0 0;font-weight:600}
 dl{margin:0}
 .acts{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.crit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px;margin-top:8px}
-@media(max-width:760px){.crit{grid-template-columns:1fr}}
-.crit .quote{margin:0}
-.days{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
-.days button{flex:none;min-width:72px;background:transparent;border:1px solid var(--rule);border-radius:var(--r);padding:8px 10px;text-align:center;transition:background .2s,color .2s}
-.days button b{display:block;font:italic 400 28px/1.05 var(--display)}
-.days button span{font:400 12px var(--mono);text-transform:uppercase;letter-spacing:.05em}
+.days{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.days button{flex:none;min-width:64px;background:transparent;border:1px solid var(--line);border-radius:2px;padding:7px 8px;text-align:center;transition:background .2s,color .2s}
+.days button b{display:block;font:600 22px/1.1 var(--display)}
 .days button[aria-pressed=true]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
-.days button:hover:not([aria-pressed=true]){background:var(--paper-2)}
-.filters{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin:8px 0 12px}
-.vg{display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:24px;padding:24px 0;border-top:1px solid var(--line)}
+.days button[aria-pressed=true] .lab{color:var(--paper-2)}
+.filters{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:6px 0 12px}
+.vg{display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:22px;padding:20px 0;border-top:1px solid var(--line)}
 @media(max-width:760px){.vg{grid-template-columns:1fr;gap:10px}}
-.vg h3{font-size:28px}
-.vg p{font-size:14.5px;color:var(--ink-2)}
-.vg .pr{font:400 13px var(--mono);color:var(--ink);margin-top:6px}
-.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px 36px}
-.info h4{margin:0 0 4px;font:400 12.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
-.tar{width:100%;border-collapse:collapse;max-width:640px}
-.tar td{padding:12px 0;border-top:1px dashed var(--rule);vertical-align:top}
-.tar td:last-child{text-align:right;font:400 16px var(--mono);white-space:nowrap}
-.tar small{display:block;color:var(--ink-2);font-size:14px}
+.vg h3{font-size:17px}
+.vg h3 a{text-decoration:none}
+.vg p{font-size:14px;color:var(--ink-2)}
+.vg .pr{color:var(--ink);margin-top:6px;font-variant-numeric:tabular-nums}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px 34px}
+.info h4,.ac h4{margin-top:0;margin-bottom:4px;font:500 11.5px var(--sans);font-stretch:118%;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.tar{width:100%;border-collapse:collapse;max-width:620px}
+.tar td{padding:11px 0;border-top:1px solid var(--line);vertical-align:top}
+.tar td:last-child{text-align:right;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tar small{display:block;color:var(--ink-2);font-size:13.5px}
 
 /* booking */
-.steps{display:flex;gap:6px;list-style:none;margin:0;padding:24px 0 28px;overflow-x:auto;scrollbar-width:none;counter-reset:s}
+.steps{display:flex;gap:6px;list-style:none;margin:0;padding:20px 0 26px;overflow-x:auto;scrollbar-width:none;counter-reset:s}
 .steps li{flex:1 0 auto;counter-increment:s}
-.steps button{width:100%;background:none;border:0;border-top:1px solid var(--line);padding:9px 14px 0 0;text-align:left;font:400 13px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap;transition:border-color .4s}
+.steps button{width:100%;background:none;border:0;border-top:1px solid var(--line);padding:9px 14px 0 0;text-align:left;font:500 11.5px var(--sans);font-stretch:118%;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
 .steps button::before{content:counter(s) ". "}
 .steps li.done button{border-top:2px solid var(--ink);color:var(--ink)}
-.steps li.on button{border-top:2px solid var(--orange-ink);color:var(--ink);font-weight:700}
+.steps li.on button{border-top:2px solid var(--accent);color:var(--ink);font-weight:700}
 .steps button:disabled{cursor:default}
-.book{display:grid;grid-template-columns:1fr minmax(260px,360px);gap:56px;align-items:start;padding-bottom:60px}
+.book{display:grid;grid-template-columns:1fr minmax(260px,350px);gap:52px;align-items:start;padding-bottom:60px}
 @media(max-width:860px){.book{grid-template-columns:1fr;gap:26px}}
-.book h1{font-size:clamp(36px,4.6vw,58px);font-weight:400;margin-bottom:8px}
-.book .sub{color:var(--ink-2);margin-bottom:20px}
-.qrow{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:16px 0;border-top:1px dashed var(--rule)}
-.qrow b{font-size:17px}.qrow small{display:block;color:var(--ink-2);font-size:14px;max-width:44ch}
-.qrow .pp{font:400 15px var(--mono)}
+.book h1{font-size:clamp(24px,3.6vw,40px);margin-bottom:8px}
+.book .sub{color:var(--ink-2);margin-bottom:18px}
+.qrow{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:15px 0;border-top:1px solid var(--line)}
+.qrow b{font-size:16.5px}.qrow small{display:block;color:var(--ink-2);font-size:13.5px;max-width:44ch}
+.qrow .pp{font-variant-numeric:tabular-nums}
 .stepper{display:flex;align-items:center;gap:4px;flex:none}
-.stepper button{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:transparent;font-size:19px;line-height:1;transition:background .2s,transform .1s}
+.stepper button{width:38px;height:38px;border-radius:50%;border:1px solid var(--ink);background:transparent;font-size:18px;line-height:1;transition:background .2s,transform .1s}
 .stepper button:hover:not(:disabled){background:var(--paper-2)}
 .stepper button:active{transform:scale(.9)}
 .stepper button:disabled{opacity:.3;cursor:default}
-.stepper output{width:34px;text-align:center;font:700 19px var(--mono)}
-.bnav{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;align-items:center}
-.side{position:sticky;top:140px;background:var(--paper-2);box-shadow:0 1px 1px rgba(63,25,33,.15),0 20px 34px -24px rgba(63,25,33,.5);padding:22px;display:grid;gap:12px}
+.stepper output{width:32px;text-align:center;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums}
+.bnav{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px;align-items:center}
+.side{position:sticky;top:calc(var(--hh) + 20px);border:1px solid var(--ink);background:var(--paper-2);padding:20px;display:grid;gap:11px}
 @media(max-width:860px){.side{position:static}}
-.side .top{display:grid;grid-template-columns:62px 1fr;gap:14px;align-items:center}
-.side h3{font-size:26px}
-.side p{font-size:14.5px}
-.side .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--rule);padding-top:12px;font-weight:600}
-.side .tot output{font:700 25px var(--mono)}
-.side .pol{font-size:13.5px;color:var(--ink-2);border-top:1px dashed var(--rule);padding-top:10px}
-.lines{font-size:14.5px;display:grid;gap:4px}
+.side .st{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center}
+.side h3{font-size:16px;line-height:1.2}
+.side p{font-size:14px}
+.side .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--ink);padding-top:11px;font-weight:600}
+.side .tot output{font-weight:700;font-size:24px;font-variant-numeric:tabular-nums}
+.side .pol{font-size:13px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:10px}
+.lines{font-size:14px;display:grid;gap:4px}
 .lines div{display:flex;justify-content:space-between;gap:10px}
-.note{border-left:1px solid var(--rule);padding:4px 0 4px 16px;font-size:15px;margin-top:14px;color:var(--ink-2);max-width:60ch}
+.note{border-left:1px solid var(--ink);padding:3px 0 3px 14px;font-size:14.5px;margin-top:14px;color:var(--ink-2);max-width:60ch}
 .note b{color:var(--ink)}
-.scr{height:24px;border:1px solid var(--rule);border-bottom:0;border-radius:60% 60% 0 0/100% 100% 0 0;text-align:center;font:400 12px/24px var(--mono);letter-spacing:.3em;text-transform:uppercase;max-width:440px;margin:6px 0 18px}
-.map{display:grid;gap:6px;max-width:440px;overflow-x:auto;padding-bottom:4px}
-.map .r{display:grid;grid-template-columns:18px repeat(10,minmax(26px,1fr));gap:5px;align-items:center}
-.map .r>span{font:400 12px var(--mono)}
-.seat{aspect-ratio:1;border:1px solid var(--rule);border-radius:6px 6px 2px 2px;background:var(--paper-2);padding:0;font:400 10.5px var(--mono);transition:transform .15s var(--ease),background .15s}
+.scr{height:22px;border:1px solid var(--ink);border-bottom:0;border-radius:60% 60% 0 0/100% 100% 0 0;text-align:center;max-width:430px;margin:6px 0 16px;line-height:22px}
+.map{display:grid;gap:6px;max-width:430px;overflow-x:auto;padding-bottom:4px}
+.map .r{display:grid;grid-template-columns:16px repeat(10,minmax(26px,1fr));gap:5px;align-items:center}
+.seat{aspect-ratio:1;border:1px solid var(--ink);border-radius:5px 5px 2px 2px;background:var(--paper-2);padding:0;font-size:10.5px;transition:transform .15s var(--ease),background .15s}
 .seat:hover:not(:disabled){transform:translateY(-2px)}
-.seat[aria-pressed=true]{background:var(--orange-ink);color:#FBF6EE;border-color:var(--orange-ink)}
+.seat[aria-pressed=true]{background:var(--accent);color:#FBF7F0;border-color:var(--accent)}
 .seat:disabled{background:var(--paper-3);border-color:transparent;color:transparent;cursor:not-allowed}
 .seat:nth-child(6){margin-right:10px}
-.pay{display:grid;gap:0}
-.pay label{display:flex;gap:12px;align-items:flex-start;border-top:1px dashed var(--rule);padding:16px 4px;cursor:pointer;transition:background .2s}
+.legend{margin-top:14px;font-size:13.5px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.pay label{display:flex;gap:12px;align-items:flex-start;border-top:1px solid var(--line);padding:15px 4px;cursor:pointer}
 .pay label:has(input:checked){background:var(--paper-2)}
-.pay input{margin-top:4px;accent-color:var(--orange-ink);width:17px;height:17px}
-.pay small{display:block;color:var(--ink-2);font-size:14px}
-.eticket{max-width:400px;background:var(--paper-2);box-shadow:0 1px 1px rgba(63,25,33,.2),0 26px 40px -26px rgba(63,25,33,.6);animation:print 1s var(--ease);transform-origin:top}
+.pay input{margin-top:4px;accent-color:var(--accent);width:17px;height:17px}
+.pay small{display:block;color:var(--ink-2);font-size:13.5px}
+.eticket{max-width:390px;background:var(--paper-2);border:1px solid var(--ink);animation:print 1s var(--ease);transform-origin:top}
 @keyframes print{from{clip-path:inset(0 0 100% 0);transform:translateY(-14px)}to{clip-path:inset(0 0 -20% 0);transform:none}}
-.eticket .a{padding:24px;display:grid;gap:10px}
-.eticket h2{font-size:38px;font-style:italic;font-weight:400}
-.eticket .b{border-top:1px dashed var(--rule);padding:20px 24px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;position:relative}
-.eticket .b::before,.eticket .b::after{content:"";position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--paper)}
-.eticket .b::before{left:-9px}.eticket .b::after{right:-9px}
-.qr{width:104px;height:104px;display:grid;grid-template-columns:repeat(13,1fr);border:6px solid #FBF7F0;background:#FBF7F0}
+.eticket .a{padding:22px;display:grid;gap:9px}
+.eticket h2{font-size:24px}
+.eticket .b{border-top:1px dashed var(--ink);padding:18px 22px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.qr{width:100px;height:100px;display:grid;grid-template-columns:repeat(13,1fr);border:6px solid #F4F3EC;background:#F4F3EC}
 .qr i{background:var(--ink)}.qr i.o{background:none}
 
-/* drawer, toast, cookie, footer */
-.scrim{position:fixed;inset:0;background:rgba(63,25,33,.4);z-index:70;animation:fade .25s}
-@keyframes fade{from{opacity:0}}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--paper);z-index:71;box-shadow:-20px 0 40px -24px rgba(63,25,33,.6);padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) 24px 24px;overflow:auto;animation:slide .4s var(--ease);display:grid;gap:24px;align-content:start}
+/* overlays */
+.scrim{position:fixed;inset:0;background:rgba(35,20,23,.45);z-index:70;animation:fadein .25s}
+.panel{position:fixed;z-index:71;background:var(--paper);overflow:auto;display:grid;gap:18px;align-content:start}
+.panel header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.panel h2{font-size:24px}
+.x{width:36px;height:36px;border-radius:50%;border:1px solid var(--ink);background:transparent;font-size:17px;line-height:1;flex:none}
+.x:hover{background:var(--ink);color:var(--paper-2)}
+.drawer{top:0;right:0;bottom:0;width:min(430px,100%);border-left:1px solid var(--ink);padding:calc(22px + env(safe-area-inset-top,0px)) max(22px,env(safe-area-inset-right,0px)) 22px 22px;animation:slide .4s var(--ease)}
 @keyframes slide{from{transform:translateX(100%)}}
-.drawer header{display:flex;justify-content:space-between;align-items:center}
-.drawer h2{font-size:42px;font-weight:400}
-.drawer h2 em{font-style:italic}
-.drawer h3{font:400 12.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
-.drawer .it{display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px dashed var(--rule)}
-.drawer .it a{font:500 22px var(--display);text-decoration:none}
-.drawer .it small{display:block;font-size:13.5px;color:var(--ink-2)}
-.x{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:transparent;font-size:17px;line-height:1}
-.x:hover{background:var(--paper-2)}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));translate:-50% 0;background:var(--ink);color:var(--paper-2);padding:11px 18px;border-radius:var(--r);z-index:90;font:400 13.5px var(--mono);animation:toast 2.6s var(--ease) forwards;max-width:calc(100% - 32px);text-align:center}
+@keyframes up{from{transform:translateY(100%)}}
+.drawer .it{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.drawer .it a{font-weight:600;text-decoration:none}
+.drawer .it small{display:block;font-size:13px;color:var(--ink-2)}
+.sheet{left:0;right:0;bottom:0;max-height:88vh;border-top:1px solid var(--ink);border-radius:14px 14px 0 0;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(22px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:up .4s var(--ease)}
+.sheet .sh-top{display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:start}
+.sheet h2{font-size:21px;line-height:1.12}
+.sheet .by{font:italic 400 19px/1.2 var(--italic);color:var(--ink-2);margin:4px 0 8px}
+.sheet .syn{font-size:14.5px;color:var(--ink-2)}
+.sheet .x{position:absolute;top:12px;right:12px;background:var(--paper)}
+.sheet .tks{padding-top:2px}
+@media(min-width:760px){.sheet{left:auto;top:0;width:min(470px,100%);max-height:none;border-radius:0;border-top:0;border-left:1px solid var(--ink);padding:26px;animation:slide .4s var(--ease)}.sheet .sh-top{grid-template-columns:150px 1fr}.sheet h2{font-size:25px;padding-right:40px}}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));translate:-50% 0;background:var(--ink);color:var(--paper-2);padding:11px 18px;border-radius:99px;z-index:90;font-size:14px;animation:toast 2.6s var(--ease) forwards;max-width:calc(100% - 32px);text-align:center}
 @keyframes toast{0%{opacity:0;transform:translateY(16px)}8%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(8px)}}
-.cookie{position:fixed;left:0;right:0;bottom:0;z-index:65;background:var(--paper-2);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom,0px)}
-.cookie .wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:14px}
-.cookie p{font-size:14.5px;max-width:70ch;flex:1 1 320px}
+.cookie{position:fixed;left:0;right:0;bottom:0;z-index:65;background:var(--paper-2);border-top:1px solid var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
+.cookie .wrap{display:flex;gap:12px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:12px}
+.cookie p{font-size:14px;max-width:70ch;flex:1 1 300px}
 .cookie .two{display:flex;gap:10px}
-.cookie .two button{min-width:120px;background:transparent;border:1px solid var(--rule);border-radius:var(--r);padding:10px 18px;font:700 13px var(--mono);letter-spacing:.05em;text-transform:uppercase}
-.cookie .two button:hover{background:var(--ink);color:var(--paper-2)}
-.moodsw{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:68;background:var(--ink);color:var(--paper-2);display:flex;align-items:center;gap:2px;padding:5px 6px 5px 12px;font:400 12.5px var(--mono);letter-spacing:.03em;border-radius:99px;box-shadow:0 10px 20px -10px rgba(0,0,0,.5)}
-.moodsw span{margin-right:6px;opacity:.8}
-.moodsw button{border:0;background:none;color:inherit;padding:6px 11px;border-radius:99px;font:inherit}
-.moodsw button[aria-pressed=true]{background:var(--paper-2);color:var(--ink);font-weight:700}
-footer{background:var(--ink);color:#EFE6D9;margin-top:40px;transition:background .5s}
-footer .wrap{padding-block:48px 100px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+.cookie .two .btn{min-width:112px}
+footer{border-top:1px solid var(--ink);margin-top:50px}
+footer .wrap{padding-block:34px 90px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
 @media(max-width:760px){footer .wrap{grid-template-columns:1fr}}
-footer .logo{color:#EFE6D9;font-size:40px;margin-bottom:12px}
-footer .logo svg{stroke:#EFE6D9}
-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
-footer p{max-width:44ch;font-size:15px;opacity:.9}
-.proto{font:400 12.5px var(--mono);opacity:.75;margin-top:16px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:14px}
+footer p{max-width:44ch;font-size:14px;color:var(--ink-2);margin-top:12px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
 </style>
 
 <a class="skip" href="#main" id="skip">Aller au contenu</a>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4"/></filter></defs></svg>
 <div id="chrome"></div>
 <main id="main" tabindex="-1"></main>
 <footer id="foot"></footer>
@@ -425,29 +356,29 @@ footer p{max-width:44ch;font-size:15px;opacity:.9}
 
 <script>
 /* ---------- state ---------- */
-const S={lang:'fr',when:null,arr:'all',ver:'all',list:[],follow:[],cookie:null,fday:0,fver:'all',fmom:'all',facc:false,vday:0,bk:null,route:{n:'home'},drawer:false,q:''};
+const S={lang:'fr',when:null,arr:'all',ver:'all',kind:'all',view:'gal',list:[],follow:[],cookie:null,fday:0,fver:'all',fmom:'all',facc:false,vday:0,bk:null,route:{n:'home'},drawer:false,sheet:null,q:'',img:{}};
 const store={get(k,d){try{const v=localStorage.getItem('strp_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('strp_'+k,JSON.stringify(v))}catch(e){}}};
-S.lang=store.get('lang','fr');S.mood=store.get('mood','faded');document.documentElement.dataset.mood=S.mood;S.peek='la-riviere-du-nord';S.list=store.get('list',[]);S.follow=store.get('follow',[]);S.cookie=store.get('cookie',null);
+S.lang=store.get('lang','fr');S.list=store.get('list3',[]);S.follow=store.get('follow',[]);S.cookie=store.get('cookie',null);S.img=store.get('img',{});
 const tr=(fr,en)=>S.lang==='fr'?fr:en;
 const L=x=>x&&typeof x==='object'&&!Array.isArray(x)?x[S.lang]:x;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>s.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase();
 const $=(s,r=document)=>r.querySelector(s);
 
-/* ---------- data (fictional programme, generated from today's date so it is never stale) ---------- */
+/* ---------- data: real films, fictional venues, showtimes and prices (mockup) ---------- */
 const V=[
  {id:'lucernaire-bleu',name:'Le Lucernaire Bleu',type:'cinema',arr:'5e',q:'Quartier latin',addr:'12 rue des Écoles, 75005 Paris',metro:'M10 Cardinal Lemoine · 3 min',rooms:['Salle Varda','Salle Rohmer'],seats:168,free:true,acc:true,labels:['Art et Essai','Recherche et Découverte','Patrimoine et Répertoire'],p:{full:9.5,red:7,child:4.5,carnet:6.5},
   bar:{fr:'Le Petit Bleu : café et vins nature, ouvert dès 11h.',en:'Le Petit Bleu: coffee and natural wine, open from 11am.'},
-  desc:{fr:"Ouvert en 1952 par un ancien projectionniste de la Cinémathèque, le Lucernaire Bleu a vu passer toute la Nouvelle Vague. Ses deux salles boisées accueillent un ciné-club chaque mardi.",en:"Opened in 1952 by a former Cinémathèque projectionist, the Lucernaire Bleu saw the whole New Wave come through. Its two wood-panelled screens host a film club every Tuesday."},fac:['#90ADBF','#3F1921',3]},
+  desc:{fr:"Ouvert en 1952 par un ancien projectionniste, le Lucernaire Bleu a vu passer toute la Nouvelle Vague. Ses deux salles boisées accueillent un ciné-club chaque mardi.",en:"Opened in 1952 by a former projectionist, the Lucernaire Bleu saw the whole New Wave come through. Its two wood-panelled screens host a film club every Tuesday."},fac:['#90ADBF','#3F1921',3]},
  {id:'studio-des-abbesses',name:'Studio des Abbesses',type:'cinema',arr:'18e',q:'Montmartre',addr:'7 rue Durantin, 75018 Paris',metro:'M12 Abbesses · 2 min',rooms:['Salle unique'],seats:92,free:true,acc:false,labels:['Art et Essai','Jeune Public'],p:{full:8.5,red:6.5,child:4,carnet:6},
   bar:{fr:'Pas de bar, mais le Café Durantin est à 30 mètres.',en:'No bar, but Café Durantin is 30 metres away.'},
-  desc:{fr:"Une salle unique de 92 fauteuils rouges, installée dans un ancien atelier de photographe. Programmée par une association de quartier depuis 1987.",en:"A single screen with 92 red seats in a former photographer's studio. Programmed by a neighbourhood association since 1987."},fac:['#EEE1D1','#7D222F',1]},
+  desc:{fr:"Une salle unique de 92 fauteuils rouges, installée dans un ancien atelier de photographe. Programmée par une association de quartier depuis 1987.",en:"A single screen with 92 red seats in a former photographer's studio. Programmed by a neighbourhood association since 1987."},fac:['#D8D9CC','#7D222F',1]},
  {id:'le-cinematographe',name:'Le Cinématographe',type:'cinema',arr:'6e',q:'Odéon',addr:'21 rue Monsieur-le-Prince, 75006 Paris',metro:'M4 · M10 Odéon · 4 min',rooms:['Salle 1','Salle 2'],seats:210,free:true,acc:true,labels:['Art et Essai','Recherche et Découverte'],p:{full:10,red:7.5,child:5,carnet:7},
   bar:{fr:'Comptoir dans le hall : thés, cafés, gâteaux maison.',en:'Counter in the lobby: tea, coffee, homemade cakes.'},
-  desc:{fr:"Deux salles en sous-sol, un hall tapissé d'affiches d'époque, et des avant-premières en présence des équipes presque chaque semaine.",en:"Two basement screens, a lobby papered with vintage posters, and previews with cast and crew almost every week."},fac:['#8E6D06','#EEE1D1',2]},
+  desc:{fr:"Deux salles en sous-sol, un hall tapissé d'affiches d'époque, et des débats presque chaque semaine.",en:"Two basement screens, a lobby papered with vintage posters, and debates almost every week."},fac:['#8E6D06','#E5E6DB',2]},
  {id:'eden-menilmontant',name:"L'Éden Ménilmontant",type:'cinema',arr:'20e',q:'Ménilmontant',addr:'88 rue de Ménilmontant, 75020 Paris',metro:'M2 Ménilmontant · 6 min',rooms:['Grande salle','Petite salle'],seats:240,free:true,acc:true,labels:['Art et Essai','Jeune Public'],p:{full:8,red:6,child:4,carnet:5.5},
   bar:{fr:"La Buvette de l'Éden : bières locales et planches, jusqu'à minuit.",en:"La Buvette de l'Éden: local beers and sharing boards, until midnight."},
-  desc:{fr:"Ancien cinéma de quartier rouvert par ses habitants en 2014. Séances en VF sous-titrée anglais chaque semaine.",en:"A former neighbourhood cinema reopened by local residents in 2014. Weekly screenings of French films with English subtitles."},fac:['#D6411F','#3F1921',4]},
+  desc:{fr:"Ancien cinéma de quartier rouvert par ses habitants en 2014. Séances en VF sous-titrée anglais chaque semaine.",en:"A former neighbourhood cinema reopened by local residents in 2014. Weekly screenings of French films with English subtitles."},fac:['#C8502F','#3F1921',4]},
  {id:'theatre-de-la-lanterne',name:'Théâtre de la Lanterne',type:'theatre',arr:'11e',q:'Oberkampf',addr:'5 cité Griset, 75011 Paris',metro:'M3 Parmentier · 5 min',rooms:['Salle'],seats:80,free:false,acc:true,labels:['Création contemporaine','Jeune Public'],p:{full:22,red:15,child:10},
   bar:{fr:'Le foyer ouvre une heure avant le lever de rideau.',en:'The foyer opens one hour before curtain-up.'},
   desc:{fr:"Ancienne fabrique de lanternes devenue théâtre de poche en 1979, la Lanterne défend les écritures d'aujourd'hui et accueille trois compagnies en résidence.",en:"A former lantern factory turned pocket theatre in 1979. La Lanterne champions new writing and hosts three resident companies."},fac:['#3F1921','#8E6D06',1]},
@@ -455,74 +386,66 @@ const V=[
   bar:{fr:'Bar de cour en été, vin chaud en hiver.',en:'Courtyard bar in summer, mulled wine in winter.'},
   desc:{fr:"Au fond d'un passage pavé, quatre-vingts places et une scène à hauteur de regard. On y vient pour les premières pièces.",en:"At the end of a cobbled passage: eighty seats and a stage at eye level. People come here for first plays."},fac:['#90ADBF','#7D222F',2]}
 ];
+const F=(id,t,by,cast,from,y,dur,ol,aw,syn,wk,c)=>({id,t,by,cast,type:'cinema',from,y,dur,ol,aw,syn,wk,c});
 const W=[
- {id:'la-riviere-du-nord',t:'La Rivière du Nord',by:'Mikko Härkönen',cast:'Aino Laine, Jussi Ranta',type:'cinema',genre:{fr:'Drame',en:'Drama'},from:{fr:'Finlande',en:'Finland'},y:2026,dur:128,ol:'fi',laurel:{fr:"Berlinale 2026 · Ours d'argent, Grand Prix du jury",en:'Berlinale 2026 · Silver Bear, Grand Jury Prize'},
-  syn:{fr:"Un passeur de bac sur une rivière de Laponie voit sa routine bouleversée par l'arrivée d'une jeune femme qui ne parle aucune langue connue.",en:"A ferryman on a river in Lapland sees his routine upended by the arrival of a young woman who speaks no known language."},
-  crit:[['Une méditation glacée et bouleversante.','Télérama'],["Le Kaurismäki d'une nouvelle génération.",'Les Inrocks'],['Une maîtrise du plan-séquence impressionnante.','Cahiers du cinéma']],c:['#90ADBF','#3F1921','#EEE1D1'],p:4},
- {id:'les-heures-claires',t:'Les Heures claires',by:'Claire Vautrin',cast:'Jeanne Balmont, Samir Kessab',type:'cinema',genre:{fr:'Comédie dramatique',en:'Comedy drama'},from:{fr:'France',en:'France'},y:2026,dur:112,ol:'fr',
-  syn:{fr:"Un été, trois sœurs vident la maison de leur mère. Chaque objet retrouvé rouvre une conversation qu'elles croyaient close.",en:"One summer, three sisters clear out their mother's house. Every object they find reopens a conversation they thought was closed."},
-  crit:[['Un film qui écoute ses personnages.','Le Monde'],['Drôle, précis, jamais sentimental.','Libération']],c:['#EEE1D1','#D6411F','#3F1921'],p:0},
- {id:'un-jour-a-seoul',t:'Un jour à Séoul',by:'Park Ji-won',cast:'Kim Min-seo, Lee Do-hyun',type:'cinema',genre:{fr:'Chronique',en:'Chronicle'},from:{fr:'Corée du Sud',en:'South Korea'},y:2025,dur:94,ol:'ko',
-  syn:{fr:"Deux anciens camarades se croisent par hasard et passent la journée à marcher, manger et se rater de peu.",en:"Two former classmates meet by chance and spend the day walking, eating and narrowly missing each other."},
-  crit:[['Une légèreté trompeuse, un film qui reste.','Positif']],c:['#7D222F','#8E6D06','#EEE1D1'],p:1},
- {id:'le-chant-des-glaneuses',t:'Le Chant des glaneuses',by:'Léa Morin',cast:'Documentaire',type:'cinema',genre:{fr:'Documentaire',en:'Documentary'},from:{fr:'France',en:'France'},y:2025,dur:84,ol:'fr',
-  syn:{fr:"Vingt-cinq ans après Varda, une jeune cinéaste retourne dans les champs et sur les marchés filmer celles qui ramassent.",en:"Twenty-five years after Varda, a young filmmaker returns to the fields and markets to film the women who glean."},
-  crit:[['Un hommage qui ose répondre à son modèle.','Télérama']],c:['#8E6D06','#3F1921','#EEE1D1'],p:2},
- {id:'tokyo-pluie-fine',t:'Tokyo, pluie fine',by:'Hiroshi Tanabe',cast:'Aoi Nakamura, Ken Fujita',type:'cinema',genre:{fr:'Drame',en:'Drama'},from:{fr:'Japon',en:'Japan'},y:2026,dur:118,ol:'ja',
-  syn:{fr:"Une réparatrice de parapluies et un chauffeur de taxi de nuit partagent le même appartement sans jamais s'y croiser.",en:"An umbrella repairer and a night taxi driver share the same flat without ever being home at the same time."},
-  crit:[['Délicat comme une estampe.','La Croix']],c:['#3F1921','#90ADBF','#EEE1D1'],p:6},
- {id:'le-souffle',t:'Le Souffle',by:'Inès Carrel',cast:'Nora Dessaint, Paul Meurisse',type:'cinema',genre:{fr:'Thriller intime',en:'Intimate thriller'},from:{fr:'France / Belgique',en:'France / Belgium'},y:2026,dur:98,ol:'fr',
-  syn:{fr:"Une souffleuse de verre accepte une commande trop belle pour être honnête.",en:"A glassblower accepts a commission that is too good to be honest."},
-  crit:[['Tendu, élégant, sans un plan de trop.','Première']],c:['#D6411F','#3F1921','#EEE1D1'],p:3},
- {id:'small-hours',t:'Small Hours',by:"Aoife Brennan",cast:'Saoirse Daly, Tom Hegarty',type:'cinema',genre:{fr:'Comédie douce-amère',en:'Bittersweet comedy'},from:{fr:'Irlande',en:'Ireland'},y:2026,dur:101,ol:'en',laurel:{fr:'Festival de Dinard 2026 · Hitchcock du public',en:'Dinard Festival 2026 · Audience Hitchcock Award'},
-  syn:{fr:"À Cork, une boulangère de nuit et un animateur radio insomniaque se parlent à l'antenne sans savoir qu'ils sont voisins.",en:"In Cork, a night baker and an insomniac radio host talk on air without knowing they are neighbours."},
-  crit:[['Un charme fou, un accent irrésistible.','Le Parisien']],c:['#90ADBF','#7D222F','#3F1921'],p:5},
- {id:'cleo-de-5-a-7',t:'Cléo de 5 à 7',by:'Agnès Varda',cast:'Corinne Marchand, Antoine Bourseiller',type:'cinema',genre:{fr:'Patrimoine · copie restaurée',en:'Heritage · restored print'},from:{fr:'France',en:'France'},y:1962,dur:90,ol:'fr',
-  syn:{fr:"Cléo, chanteuse, attend les résultats d'une analyse médicale. Deux heures dans Paris, en temps réel.",en:"Cléo, a singer, waits for the results of a medical test. Two hours in Paris, in real time."},
-  crit:[['Soixante ans après, toujours le film le plus moderne de la semaine.','Strapontin']],c:['#EEE1D1','#3F1921','#7D222F'],p:2},
- {id:'les-quatre-cents-coups',t:'Les Quatre Cents Coups',by:'François Truffaut',cast:'Jean-Pierre Léaud',type:'cinema',hide:true,genre:{fr:'Patrimoine · copie restaurée 4K',en:'Heritage · 4K restoration'},from:{fr:'France',en:'France'},y:1959,dur:99,ol:'fr',
-  syn:{fr:"Antoine Doinel, treize ans, entre école buissonnière et mer au bout du travelling.",en:"Antoine Doinel, thirteen, between truancy and the sea at the end of the tracking shot."},
-  crit:[['Le film par lequel tout a commencé.','Strapontin']],c:['#3F1921','#EEE1D1','#D6411F'],p:6},
- {id:'les-veilleurs',t:'Les Veilleurs',by:'Margaux Leroy',role:{fr:'Texte et mise en scène',en:'Written and directed by'},cast:'Compagnie des Heures creuses',type:'theatre',genre:{fr:'Théâtre · création',en:'Theatre · new work'},from:{fr:'France',en:'France'},y:2026,dur:95,ol:'fr',
-  syn:{fr:"Quatre gardiens de nuit d'un musée fermé pour travaux inventent les visiteurs qui ne viennent plus.",en:"Four night guards in a museum closed for renovation invent the visitors who no longer come."},
-  crit:[['On rit beaucoup, puis on se tait.','La Terrasse']],c:['#7D222F','#EEE1D1','#8E6D06'],p:3},
- {id:'la-traversee',t:'La Traversée',by:'Youssef Amrani',role:{fr:'Texte et mise en scène',en:'Written and directed by'},cast:'Collectif Passe-muraille',type:'theatre',genre:{fr:'Théâtre · récit',en:'Theatre · storytelling'},from:{fr:'France',en:'France'},y:2026,dur:110,ol:'fr',
-  syn:{fr:"Un père et sa fille refont, trente ans après, le trajet Marseille–Oran en ferry. Seul en scène à deux voix.",en:"Thirty years on, a father and daughter retrace the Marseille–Oran ferry crossing. A solo show for two voices."},
-  crit:[['Une heure cinquante suspendue.','Sceneweb']],c:['#90ADBF','#3F1921','#D6411F'],p:5}
+ F('anatomie-d-une-chute',"Anatomie d'une chute",'Justine Triet','Sandra Hüller, Swann Arlaud',{fr:'France',en:'France'},2023,151,'fr',{fr:"Palme d'or, Cannes 2023",en:"Palme d'Or, Cannes 2023"},{fr:"Un homme est retrouvé mort au pied de son chalet. Sa femme est jugée, et leur fils malvoyant est le seul témoin.",en:"A man is found dead below his chalet. His wife stands trial, and their visually impaired son is the only witness."},'Anatomy_of_a_Fall',['#3F1921','#E5E6DB']),
+ F('perfect-days','Perfect Days','Wim Wenders','Kōji Yakusho',{fr:'Japon / Allemagne',en:'Japan / Germany'},2023,124,'ja',{fr:"Prix d'interprétation masculine, Cannes 2023",en:'Best Actor, Cannes 2023'},{fr:"Hirayama nettoie les toilettes publiques de Tokyo, écoute des cassettes et photographie les arbres. Une vie simple, regardée de près.",en:"Hirayama cleans Tokyo's public toilets, listens to cassettes and photographs trees. A simple life, looked at closely."},'Perfect_Days',['#90ADBF','#231417']),
+ F('la-zone-d-interet',"La Zone d'intérêt",'Jonathan Glazer','Christian Friedel, Sandra Hüller',{fr:'Royaume-Uni / Pologne',en:'UK / Poland'},2023,105,'de',{fr:'Grand Prix, Cannes 2023',en:'Grand Prix, Cannes 2023'},{fr:"La vie domestique d'un commandant et de sa famille, dans la maison avec jardin qui jouxte le camp d'Auschwitz.",en:"The domestic life of a commandant and his family, in the house and garden beside the Auschwitz camp."},'The_Zone_of_Interest_(film)',['#231417','#D8D9CC']),
+ F('past-lives','Past Lives','Celine Song','Greta Lee, Teo Yoo, John Magaro',{fr:'États-Unis / Corée du Sud',en:'USA / South Korea'},2023,106,'ko',{fr:'Compétition officielle, Berlinale 2023',en:'Competition, Berlinale 2023'},{fr:"Deux amis d'enfance séparés à douze ans se retrouvent à New York, vingt-quatre ans plus tard, le temps d'une semaine.",en:"Two childhood friends separated at twelve meet again in New York, twenty-four years later, for one week."},'Past_Lives_(film)',['#8E6D06','#E5E6DB']),
+ F('aftersun','Aftersun','Charlotte Wells','Paul Mescal, Frankie Corio',{fr:'Royaume-Uni',en:'UK'},2022,101,'en',{fr:'Semaine de la Critique, Cannes 2022',en:"Critics' Week, Cannes 2022"},{fr:"Sophie repense aux vacances passées avec son père en Turquie, vingt ans plus tôt, et à ce qu'elle n'avait pas vu.",en:"Sophie looks back on a holiday with her father in Turkey twenty years earlier, and on what she did not see."},'Aftersun',['#C8502F','#231417']),
+ F('drive-my-car','Drive My Car','Ryūsuke Hamaguchi','Hidetoshi Nishijima, Tōko Miura',{fr:'Japon',en:'Japan'},2021,179,'ja',{fr:'Prix du scénario, Cannes 2021',en:'Best Screenplay, Cannes 2021'},{fr:"Un metteur en scène endeuillé monte Oncle Vania à Hiroshima. Une jeune femme taciturne conduit sa voiture.",en:"A grieving director stages Uncle Vanya in Hiroshima. A taciturn young woman drives his car."},'Drive_My_Car_(film)',['#7D222F','#E5E6DB']),
+ F('portrait-de-la-jeune-fille-en-feu','Portrait de la jeune fille en feu','Céline Sciamma','Noémie Merlant, Adèle Haenel',{fr:'France',en:'France'},2019,122,'fr',{fr:'Prix du scénario, Cannes 2019',en:'Best Screenplay, Cannes 2019'},{fr:"1770. Une peintre doit faire le portrait de mariage d'une jeune femme qui refuse de poser.",en:"1770. A painter must make the wedding portrait of a young woman who refuses to pose."},'Portrait_of_a_Lady_on_Fire',['#3F1921','#C8502F']),
+ F('parasite','Parasite','Bong Joon-ho','Song Kang-ho, Cho Yeo-jeong',{fr:'Corée du Sud',en:'South Korea'},2019,132,'ko',{fr:"Palme d'or, Cannes 2019",en:"Palme d'Or, Cannes 2019"},{fr:"Une famille sans emploi s'installe peu à peu dans la maison d'une famille riche.",en:"An unemployed family gradually works its way into a wealthy family's home."},'Parasite_(2019_film)',['#231417','#90ADBF']),
+ F('in-the-mood-for-love','In the Mood for Love','Wong Kar-wai','Maggie Cheung, Tony Leung',{fr:'Hong Kong',en:'Hong Kong'},2000,98,'yue',{fr:"Prix d'interprétation masculine, Cannes 2000",en:'Best Actor, Cannes 2000'},{fr:"Hong Kong, 1962. Deux voisins découvrent que leurs conjoints ont une liaison.",en:"Hong Kong, 1962. Two neighbours discover that their spouses are having an affair."},'In_the_Mood_for_Love',['#7D222F','#D8D9CC']),
+ F('cleo-de-5-a-7','Cléo de 5 à 7','Agnès Varda','Corinne Marchand',{fr:'France',en:'France'},1962,90,'fr',{fr:'Sélection officielle, Cannes 1962',en:'Official Selection, Cannes 1962'},{fr:"Cléo, chanteuse, attend les résultats d'une analyse médicale. Deux heures dans Paris, presque en temps réel.",en:"Cléo, a singer, waits for the results of a medical test. Two hours in Paris, almost in real time."},'Cléo_from_5_to_7',['#E5E6DB','#231417']),
+ F('les-quatre-cents-coups','Les Quatre Cents Coups','François Truffaut','Jean-Pierre Léaud',{fr:'France',en:'France'},1959,99,'fr',{fr:'Prix de la mise en scène, Cannes 1959',en:'Best Director, Cannes 1959'},{fr:"Antoine Doinel, treize ans, entre l'école buissonnière et la mer au bout du travelling.",en:"Antoine Doinel, thirteen, between truancy and the sea at the end of the tracking shot."},'The_400_Blows',['#231417','#E5E6DB']),
+ F('la-chimere','La Chimère','Alice Rohrwacher',"Josh O'Connor, Carol Duarte",{fr:'Italie',en:'Italy'},2023,130,'it',{fr:'Compétition officielle, Cannes 2023',en:'Competition, Cannes 2023'},{fr:"Dans l'Italie des années 80, un Anglais qui sent les tombes étrusques sous ses pieds rejoint une bande de pilleurs.",en:"In 1980s Italy, an Englishman who can sense Etruscan tombs under his feet joins a gang of grave robbers."},'La_chimera',['#8E6D06','#231417']),
+ F('close','Close','Lukas Dhont','Eden Dambrine, Gustav De Waele',{fr:'Belgique',en:'Belgium'},2022,104,'fr',{fr:'Grand Prix, Cannes 2022',en:'Grand Prix, Cannes 2022'},{fr:"Léo et Rémi, treize ans, sont inséparables. Le regard des autres, à la rentrée, change tout.",en:"Léo and Rémi, thirteen, are inseparable. The way others look at them at the start of term changes everything."},'Close_(2022_film)',['#C8502F','#E5E6DB']),
+ F('all-we-imagine-as-light','All We Imagine as Light','Payal Kapadia','Kani Kusruti, Divya Prabha',{fr:'Inde / France',en:'India / France'},2024,118,'ml',{fr:'Grand Prix, Cannes 2024',en:'Grand Prix, Cannes 2024'},{fr:"À Mumbai, deux infirmières colocataires et une amie quittent la ville le temps d'un voyage au bord de la mer.",en:"In Mumbai, two nurses who share a flat and a friend leave the city for a trip to the coast."},'All_We_Imagine_as_Light',['#90ADBF','#3F1921']),
+ F('sans-toit-ni-loi','Sans toit ni loi','Agnès Varda','Sandrine Bonnaire',{fr:'France',en:'France'},1985,105,'fr',{fr:"Lion d'or, Venise 1985",en:'Golden Lion, Venice 1985'},{fr:"Une jeune vagabonde est retrouvée morte de froid. Ceux qui l'ont croisée racontent ses dernières semaines.",en:"A young drifter is found frozen to death. Those who crossed her path recount her last weeks."},'Vagabond_(1985_film)',['#574B49','#E5E6DB']),
+ {id:'les-veilleurs',t:'Les Veilleurs',by:'Margaux Leroy',role:{fr:'Texte et mise en scène',en:'Written and directed by'},cast:'Compagnie des Heures creuses',type:'theatre',from:{fr:'Création',en:'New work'},y:2026,dur:95,ol:'fr',syn:{fr:"Quatre gardiens de nuit d'un musée fermé pour travaux inventent les visiteurs qui ne viennent plus.",en:"Four night guards in a museum closed for renovation invent the visitors who no longer come."},c:['#7D222F','#E5E6DB']},
+ {id:'la-traversee',t:'La Traversée',by:'Youssef Amrani',role:{fr:'Texte et mise en scène',en:'Written and directed by'},cast:'Collectif Passe-muraille',type:'theatre',from:{fr:'Création',en:'New work'},y:2026,dur:110,ol:'fr',syn:{fr:"Un père et sa fille refont, trente ans après, le trajet Marseille–Oran en ferry. Seul en scène à deux voix.",en:"Thirty years on, a father and daughter retrace the Marseille–Oran ferry crossing. A solo show for two voices."},c:['#90ADBF','#231417']}
 ];
 const T=h=>{const[a,b]=h.split(':');return a*60+ +b};
 const PROG=[
- ['la-riviere-du-nord','studio-des-abbesses',['11:00','14:00','18:30','20:55'],'VOSTFR'],['la-riviere-du-nord','lucernaire-bleu',['13:45','20:45'],'VOSTFR'],['la-riviere-du-nord','le-cinematographe',['16:15','19:00','21:40'],'VOSTFR'],
- ['les-heures-claires','lucernaire-bleu',['14:00','16:15','20:30'],'VF'],['les-heures-claires','eden-menilmontant',['18:15','20:40'],['VF','VFSTA']],['les-heures-claires','le-cinematographe',['13:30','18:00'],'VF'],
- ['un-jour-a-seoul','lucernaire-bleu',['11:00','18:30'],'VOSTFR'],['un-jour-a-seoul','eden-menilmontant',['16:00','22:10'],'VOSTFR'],
- ['le-chant-des-glaneuses','lucernaire-bleu',['16:30'],'VF'],['le-chant-des-glaneuses','studio-des-abbesses',['16:45'],'VF'],
- ['tokyo-pluie-fine','le-cinematographe',['11:15','20:15'],'VOSTFR'],['tokyo-pluie-fine','lucernaire-bleu',['22:00'],'VOSTFR'],['tokyo-pluie-fine','eden-menilmontant',['13:45','20:00'],'VOSTFR'],
- ['le-souffle','eden-menilmontant',['11:00','18:00'],['VF','VFSTA']],['le-souffle','studio-des-abbesses',['22:15'],'VF'],
- ['small-hours','le-cinematographe',['15:45','21:00'],'VOSTFR'],['small-hours','eden-menilmontant',['16:15','21:45'],'VOSTFR'],
- ['cleo-de-5-a-7','lucernaire-bleu',['11:30','18:45'],'VF'],['cleo-de-5-a-7','le-cinematographe',['14:00'],'VF'],
- ['les-quatre-cents-coups','lucernaire-bleu',['14:15'],'VF'],
+ ['anatomie-d-une-chute','lucernaire-bleu',['14:00','20:30'],'VF'],['anatomie-d-une-chute','eden-menilmontant',['18:15'],'VFSTA'],['anatomie-d-une-chute','le-cinematographe',['16:30'],'VF'],
+ ['perfect-days','studio-des-abbesses',['11:00','18:30'],'VOSTFR'],['perfect-days','le-cinematographe',['13:45','21:10'],'VOSTFR'],
+ ['la-zone-d-interet','le-cinematographe',['19:00'],'VOSTFR'],['la-zone-d-interet','lucernaire-bleu',['22:00'],'VOSTFR'],
+ ['past-lives','eden-menilmontant',['16:00','20:40'],'VOSTFR'],['past-lives','studio-des-abbesses',['14:00'],'VOSTFR'],
+ ['aftersun','eden-menilmontant',['22:15'],'VOSTFR'],['aftersun','le-cinematographe',['11:15'],'VOSTFR'],
+ ['drive-my-car','lucernaire-bleu',['10:45'],'VOSTFR'],['drive-my-car','eden-menilmontant',['13:30'],'VOSTFR'],
+ ['portrait-de-la-jeune-fille-en-feu','eden-menilmontant',['11:00','18:00'],['VF','VFSTA']],['portrait-de-la-jeune-fille-en-feu','studio-des-abbesses',['21:00'],'VF'],
+ ['parasite','le-cinematographe',['21:30'],'VOSTFR'],['parasite','eden-menilmontant',['15:45'],'VOSTFR'],
+ ['in-the-mood-for-love','lucernaire-bleu',['18:45'],'VOSTFR'],['in-the-mood-for-love','studio-des-abbesses',['16:30'],'VOSTFR'],
+ ['cleo-de-5-a-7','lucernaire-bleu',['11:30','16:45'],'VF'],['cleo-de-5-a-7','le-cinematographe',['14:00'],'VF'],
+ ['les-quatre-cents-coups','lucernaire-bleu',['14:15'],'VF'],['les-quatre-cents-coups','le-cinematographe',['17:00'],'VF'],
+ ['la-chimere','le-cinematographe',['15:30'],'VOSTFR'],['la-chimere','eden-menilmontant',['20:15'],'VOSTFR'],
+ ['close','lucernaire-bleu',['16:15'],'VF'],['close','eden-menilmontant',['13:45'],'VF'],
+ ['all-we-imagine-as-light','le-cinematographe',['18:30'],'VOSTFR'],['all-we-imagine-as-light','lucernaire-bleu',['20:45'],'VOSTFR'],
+ ['sans-toit-ni-loi','lucernaire-bleu',['12:30'],'VF'],
  ['les-veilleurs','theatre-de-la-lanterne',['20:30'],'VF'],['la-traversee','theatre-du-passage',['19:00','21:15'],'VF']
 ];
-const KIND={ap:{fr:'Avant-première',en:'Preview'},re:{fr:'Rencontre',en:'Q&A'},cd:{fr:'Ciné-débat',en:'Film & debate'},cc:{fr:'Ciné-concert',en:'Live score'}};
+const KIND={re:{fr:'Rencontre',en:'Q&A'},cd:{fr:'Ciné-débat',en:'Film & debate'},cl:{fr:'Ciné-club',en:'Film club'}};
 const SPEC=[
- [1,'tokyo-pluie-fine','le-cinematographe','20:00','ap','VOSTFR',{fr:'En présence de Hiroshi Tanabe',en:'With director Hiroshi Tanabe'}],
- [2,'cleo-de-5-a-7','lucernaire-bleu','18:30','cd','VF',{fr:'Débat : filmer le temps réel',en:'Debate: filming in real time'}],
- [3,'les-heures-claires','eden-menilmontant','20:15','re','VFSTA',{fr:'Rencontre avec Claire Vautrin',en:'Q&A with Claire Vautrin'}],
- [4,'le-chant-des-glaneuses','studio-des-abbesses','19:00','cc','VF',{fr:'Accompagné au violoncelle par Élise Borde',en:'Live cello score by Élise Borde'}],
+ [1,'cleo-de-5-a-7','lucernaire-bleu','18:30','cd','VF',{fr:'Débat : filmer le temps réel',en:'Debate: filming in real time'}],
+ [2,'anatomie-d-une-chute','eden-menilmontant','20:15','cd','VFSTA',{fr:'Ciné-débat : le procès au cinéma',en:'Debate: the trial on screen'}],
+ [3,'les-quatre-cents-coups','studio-des-abbesses','19:00','cl','VF',{fr:'Présenté par le ciné-club du quartier',en:'Introduced by the neighbourhood film club'}],
+ [4,'in-the-mood-for-love','lucernaire-bleu','20:30','cl','VOSTFR',{fr:'Ciné-club : présentation et discussion',en:'Film club: introduction and discussion'}],
  [5,'les-veilleurs','theatre-de-la-lanterne','20:30','re','VF',{fr:"Bord de plateau avec l'équipe",en:'Post-show talk with the company'}],
- [6,'small-hours','le-cinematographe','19:30','cd','VOSTFR',{fr:'Débat en anglais avec le ciné-club Lost in Paris',en:'Debate in English with the Lost in Paris film club'}]
+ [6,'aftersun','le-cinematographe','19:30','cd','VOSTFR',{fr:'Débat en anglais avec le ciné-club Lost in Paris',en:'Debate in English with the Lost in Paris film club'}]
 ];
 const CYC=[
- {id:'retrospective-agnes-varda',t:{fr:'Rétrospective Agnès Varda',en:'Agnès Varda retrospective'},d:{fr:"De Cléo aux glaneuses : quarante ans d'un regard libre.",en:'From Cléo to the gleaners: forty years of a free gaze.'},w:['cleo-de-5-a-7','le-chant-des-glaneuses'],bg:'var(--paper-2)'},
- {id:'cycle-nouvelle-vague',t:{fr:'Cycle Nouvelle Vague',en:'New Wave season'},d:{fr:'Truffaut, Varda, Rohmer en copies restaurées 4K.',en:'Truffaut, Varda, Rohmer in restored 4K prints.'},w:['les-quatre-cents-coups','cleo-de-5-a-7'],bg:'var(--blue)'},
- {id:'regards-d-asie',t:{fr:"Regards d'Asie",en:'Views from Asia'},d:{fr:"Séoul, Tokyo : un automne de cinéma intime.",en:'Seoul, Tokyo: an autumn of intimate cinema.'},w:['un-jour-a-seoul','tokyo-pluie-fine'],bg:'var(--paper-3)'}
+ {id:'retrospective-agnes-varda',t:{fr:'Rétrospective Agnès Varda',en:'Agnès Varda retrospective'},d:{fr:"De Cléo à Mona : un regard libre.",en:'From Cléo to Mona: a free gaze.'},w:['cleo-de-5-a-7','sans-toit-ni-loi']},
+ {id:'cycle-nouvelle-vague',t:{fr:'Cycle Nouvelle Vague',en:'New Wave season'},d:{fr:'Truffaut et Varda en copies restaurées.',en:'Truffaut and Varda in restored prints.'},w:['les-quatre-cents-coups','cleo-de-5-a-7']},
+ {id:'regards-d-asie',t:{fr:"Regards d'Asie",en:'Views from Asia'},d:{fr:"Tokyo, Séoul, Hong Kong, Mumbai.",en:'Tokyo, Seoul, Hong Kong, Mumbai.'},w:['drive-my-car','parasite','in-the-mood-for-love','perfect-days','all-we-imagine-as-light']}
 ];
 const PICKS=[
- [{fr:"Le plus beau plan de l'année est dans ce film : une barque, une brume, un silence. Allez-y en fin de journée.",en:"The most beautiful shot of the year is in this film: a boat, some mist, a silence. Go at the end of the day."},'la-riviere-du-nord','Mathilde Roux','le-cinematographe'],
+ [{fr:"On en sort en regardant les arbres autrement. Allez-y en fin de journée.",en:"You leave looking at trees differently. Go at the end of the day."},'perfect-days','Mathilde Roux','le-cinematographe'],
  [{fr:"Quatre comédiens qui nous ont fait rire et pleurer en répétition. Nous les accueillons toute la saison.",en:"Four actors who made us laugh and cry in rehearsal. We are hosting them all season."},'les-veilleurs','Antoine Garnier','theatre-de-la-lanterne'],
- [{fr:"Pour ceux qui aiment Hong Sang-soo, et pour ceux qui ne le connaissent pas encore.",en:"For those who love Hong Sang-soo, and for those who haven't met him yet."},'un-jour-a-seoul','Sophie Lemaire','lucernaire-bleu']
+ [{fr:"À voir sur grand écran au moins une fois dans sa vie. C'est le moment.",en:"To be seen on a big screen at least once in your life. Now is the time."},'in-the-mood-for-love','Sophie Lemaire','lucernaire-bleu']
 ];
 const wi=id=>W.findIndex(w=>w.id===id), vi=id=>V.findIndex(v=>v.id===id);
+const ORDER=W.map((_,i)=>i).sort(()=>Math.random()-.5);
 
 /* ---------- dates & screenings ---------- */
 const BASE=new Date();BASE.setHours(0,0,0,0);
@@ -536,9 +459,9 @@ const fmtP=p=>S.lang==='fr'?p.toFixed(2).replace('.',',')+' €':'€'+p.toFixed
 const ALL=[];
 for(let d=0;d<7;d++){const dt=dayDate(d),dom=dt.getDate(),dow=dt.getDay();
  PROG.forEach(([w,v,times,ver],pi)=>{const a=wi(w),b=vi(v);if(V[b].type==='theatre'&&dow===1)return;
-  times.forEach((h,ti)=>{if(times.length>1&&(pi*7+dom*5+ti*3)%5===0)return;const t=T(h);
+  times.forEach((h,ti)=>{if((pi*7+dom*5+ti*3)%6===0)return;const t=T(h);
    ALL.push({id:[a,b,d,t].join('x'),w:a,v:b,d,t,ver:Array.isArray(ver)?ver[ti]:ver,room:V[b].rooms[(a+ti)%V[b].rooms.length]})})})}
-SPEC.forEach(([d,w,v,h,kind,ver,note])=>{const a=wi(w),b=vi(v),t=T(h);const i=ALL.findIndex(s=>s.w===a&&s.v===b&&s.d===d&&Math.abs(s.t-t)<120);if(i>-1)ALL.splice(i,1);
+SPEC.forEach(([d,w,v,h,kind,ver,note])=>{const a=wi(w),b=vi(v),t=T(h);const i=ALL.findIndex(s=>s.w===a&&s.v===b&&s.d===d&&Math.abs(s.t-t)<150);if(i>-1)ALL.splice(i,1);
  ALL.push({id:[a,b,d,t].join('x'),w:a,v:b,d,t,ver,room:V[b].rooms[0],kind,note})});
 ALL.sort((x,y)=>x.d-y.d||x.t-y.t);
 const up=s=>s.d>0||s.t>nowMin();
@@ -546,142 +469,108 @@ const endT=s=>s.t+(V[s.v].type==='cinema'&&!s.kind?15:0)+W[s.w].dur;
 const enFriendly=s=>W[s.w].ol==='en'||s.ver==='VFSTA';
 const verOk=(s,f)=>f==='all'||(f==='vo'&&s.ver==='VOSTFR')||(f==='vf'&&s.ver!=='VOSTFR')||(f==='en'&&enFriendly(s));
 const weekendDays=()=>{const out=[];for(let d=0;d<7;d++){const k=dayDate(d).getDay();if(k===6||k===0){out.push(d);if(k===0)break}}return out};
-const whenDays={today:()=>[0],tonight:()=>[0],tomorrow:()=>[1],weekend:weekendDays};
-const finderSet=()=>ALL.filter(s=>whenDays[S.when]().includes(s.d)&&up(s)&&(S.when!=='tonight'||s.t>=1080)&&(S.arr==='all'||V[s.v].arr===S.arr)&&verOk(s,S.ver));
+const whenDays={today:()=>[0],tonight:()=>[0],tomorrow:()=>[1],weekend:weekendDays,week:()=>[0,1,2,3,4,5,6]};
+const finderSet=()=>ALL.filter(s=>whenDays[S.when]().includes(s.d)&&up(s)&&(S.when!=='tonight'||s.t>=1080)&&(S.arr==='all'||V[s.v].arr===S.arr)&&verOk(s,S.ver)&&(S.kind==='all'||W[s.w].type===S.kind));
 S.when=ALL.some(s=>s.d===0&&s.t>=1080&&up(s))?'tonight':'tomorrow';
 
-/* ---------- small components ---------- */
+/* ---------- components ---------- */
 const VERT={VF:{fr:'Version française',en:'In French, no subtitles'},VOSTFR:{fr:'Version originale sous-titrée français',en:'Original language, French subtitles'},VFSTA:{fr:'Version française sous-titrée anglais',en:'French with English subtitles'}};
 const verTag=(ver,w)=>`<span class="tag ${ver==='VOSTFR'?'vo':''}" title="${esc(L(VERT[ver]))}">${ver==='VFSTA'?'VF · ST EN':ver}</span>${(ver==='VFSTA'||(w&&w.ol==='en'))?`<span class="tag en">English-friendly</span>`:''}`;
-const workVers=w=>[...new Set(ALL.filter(s=>W[s.w]===w).map(s=>s.ver==='VFSTA'?'VF':s.ver))];
 const dur=m=>Math.floor(m/60)+'h'+String(m%60).padStart(2,'0');
-const initials=t=>t.replace(/^(Le |La |Les |L'|Un |Une )/i,'').slice(0,2);
-const SCN={
-'la-riviere-du-nord':['#AFC0C8','<rect y="52" width="100" height="48" fill="#5E7482"/><rect y="46" width="100" height="9" fill="#3C3F4A"/><circle cx="70" cy="26" r="9" fill="#F3E6D0"/><ellipse cx="38" cy="66" rx="13" ry="3" fill="#2A1E26"/><rect x="36" y="56" width="3" height="9" fill="#2A1E26"/>'],
-'les-heures-claires':['#4A2A2A','<rect x="50" y="12" width="34" height="52" fill="#F1DDB8"/><rect x="66" y="12" width="2.5" height="52" fill="#4A2A2A"/><rect x="50" y="36" width="34" height="2.5" fill="#4A2A2A"/><polygon points="50,64 84,64 62,100 8,100" fill="#C98A5A" opacity=".55"/><ellipse cx="28" cy="52" rx="7" ry="8" fill="#1F1216"/><rect x="18" y="60" width="20" height="40" rx="8" fill="#1F1216"/>'],
-'un-jour-a-seoul':['#2B1B2E','<circle cx="20" cy="30" r="9" fill="#D6411F" opacity=".8"/><circle cx="46" cy="22" r="6" fill="#90ADBF" opacity=".8"/><circle cx="72" cy="36" r="11" fill="#E8B56A" opacity=".75"/><circle cx="86" cy="18" r="5" fill="#D6411F" opacity=".7"/><circle cx="34" cy="50" r="5" fill="#E8B56A" opacity=".6"/><rect y="72" width="100" height="28" fill="#17101A"/><ellipse cx="58" cy="60" rx="5" ry="6" fill="#0F0A10"/><rect x="51" y="65" width="14" height="35" rx="5" fill="#0F0A10"/>'],
-'le-chant-des-glaneuses':['#D9D2B4','<rect y="55" width="100" height="45" fill="#8E6D06"/><rect y="50" width="100" height="8" fill="#6B6A2A"/><ellipse cx="30" cy="62" rx="8" ry="6" fill="#3F1921"/><ellipse cx="62" cy="66" rx="9" ry="7" fill="#7D222F"/><circle cx="80" cy="20" r="8" fill="#F7EFE4"/>'],
-'tokyo-pluie-fine':['#33414F','<rect x="10" width="16" height="70" fill="#1E2630"/><rect x="60" width="26" height="80" fill="#1E2630"/><rect x="30" y="20" width="6" height="26" fill="#D6411F"/><rect x="66" y="30" width="10" height="5" fill="#F3D9A0"/><rect x="66" y="42" width="10" height="5" fill="#90ADBF"/><rect y="80" width="100" height="20" fill="#12161C"/><ellipse cx="46" cy="72" rx="12" ry="5" fill="#0D0F14"/><rect x="45" y="72" width="2" height="16" fill="#0D0F14"/>','<g stroke="#DCE6EC" stroke-width=".35" opacity=".4"><path d="M10 0l-4 30M30 10l-4 30M52 0l-4 34M74 20l-4 30M90 4l-4 30M20 50l-4 30M64 56l-4 30M84 60l-4 30"/></g>'],
-'le-souffle':['#1C1012','<circle cx="46" cy="48" r="20" fill="#D6411F"/><circle cx="46" cy="48" r="10" fill="#F6C777"/><rect x="46" y="46" width="54" height="3" fill="#7A6A60"/><ellipse cx="88" cy="52" rx="8" ry="15" fill="#0A0607"/>'],
-'small-hours':['#1F2A3C','<rect y="62" width="100" height="38" fill="#141A26"/><rect x="18" y="22" width="30" height="40" fill="#2C3950"/><rect x="26" y="30" width="12" height="14" fill="#F2C879"/><rect x="60" y="34" width="26" height="28" fill="#263247"/><circle cx="80" cy="14" r="5" fill="#E8EEF2"/>'],
-'cleo-de-5-a-7':['#B9B9B4','<ellipse cx="50" cy="46" rx="20" ry="26" fill="#EDEBE4"/><path d="M28 40c0-26 44-26 44 0c-6-10-38-10-44 0z" fill="#1A1A1A"/><rect x="28" y="74" width="44" height="30" rx="12" fill="#2A2A2A"/><ellipse cx="42" cy="46" rx="3" ry="2" fill="#333"/><ellipse cx="58" cy="46" rx="3" ry="2" fill="#333"/>'],
-'les-quatre-cents-coups':['#C9C9C4','<rect y="50" width="100" height="14" fill="#8C8C88"/><rect y="64" width="100" height="36" fill="#DAD8D0"/><ellipse cx="50" cy="60" rx="3" ry="4" fill="#1A1A1A"/><rect x="47" y="63" width="6" height="14" rx="2" fill="#1A1A1A"/>'],
-'les-veilleurs':['#1A0E12','<polygon points="50,0 20,100 80,100" fill="#E9C98A" opacity=".5"/><ellipse cx="42" cy="62" rx="4" ry="5" fill="#0C0608"/><rect x="37" y="66" width="10" height="26" rx="4" fill="#0C0608"/><ellipse cx="60" cy="58" rx="4" ry="5" fill="#0C0608"/><rect x="55" y="62" width="10" height="30" rx="4" fill="#0C0608"/><rect y="90" width="100" height="10" fill="#3F1921"/>'],
-'la-traversee':['#E9C9A0','<rect y="48" width="100" height="52" fill="#3E6076"/><circle cx="30" cy="44" r="10" fill="#D6411F"/><rect y="78" width="100" height="3" fill="#EDE6DA"/><rect y="81" width="100" height="19" fill="#22303A"/><rect x="20" y="66" width="2" height="14" fill="#EDE6DA"/><rect x="70" y="66" width="2" height="14" fill="#EDE6DA"/>']};
-const poster=(w,tag='span')=>{const c=SCN[w.id];return `<${tag} class="still${w.y<1970?' bw':''}" role="img" aria-label="${esc(tr('Image du film : ','Still: ')+w.t)}"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="${c[0]}"/><g filter="url(#haze)">${c[1]}</g>${c[2]||''}</svg></${tag}>`};
-function facade(v){const[sky,wall,n]=v.fac,ink='#3F1921',cream='#F7EFE4',dw=120/n;let doors='';
- for(let i=0;i<n;i++){const x=40+i*dw+dw*.15,w=dw*.7;doors+=`<path d="M${x} 200V${150+w/2}a${w/2} ${w/2} 0 0 1 ${w} 0V200z" fill="${wall===ink?cream:ink}"/>`}
- let lights='';for(let i=0;i<13;i++)lights+=`<circle cx="${22+i*13}" cy="116" r="2.2" fill="#D6411F"/>`;
- return `<svg viewBox="0 0 200 200" role="img" aria-label="${esc(v.name)}"><rect width="200" height="200" fill="${sky}"/><rect x="24" y="34" width="152" height="166" fill="${wall}"/><rect x="24" y="34" width="152" height="8" fill="${ink}" opacity=".25"/>${[0,1,2].map(i=>`<rect x="${44+i*42}" y="50" width="26" height="${n%2?26:20}" rx="${n%2?13:2}" fill="${sky}" stroke="${ink}" stroke-width="1.5"/>`).join('')}<rect x="12" y="84" width="176" height="38" fill="${cream}" stroke="${ink}" stroke-width="2"/><text x="100" y="105" text-anchor="middle" font-family="Bodoni Moda,Didot,serif" font-weight="700" font-size="${v.name.length>19?11:13}" fill="${ink}">${esc(v.name.toUpperCase())}</text>${lights}${doors}<rect y="196" width="200" height="4" fill="${ink}"/></svg>`}
-const pola=(v,link=true)=>`<${link?`a href="#salle-${v.id}"`:'figure style="margin:0"'} class="pola"><span class="fac">${facade(v)}</span><span class="cap">${esc(v.name)} · ${v.arr}</span></${link?'a':'figure'}>`;
+const poster=w=>`<span class="ph" data-p="${w.id}" style="--a:${w.c[0]};--b:${w.c[1]}">${S.img[w.id]?`<img src="${esc(S.img[w.id])}" alt="${esc(tr('Affiche : ','Poster: ')+w.t)}" loading="lazy">`:`<span class="ph-t"><b>${esc(w.t)}</b><i>${esc(w.by)}</i></span>`}</span>`;
+function facade(v){const[sky,wall,n]=v.fac,ink='#231417',cream='#E5E6DB',dw=120/n;let doors='';
+ for(let i=0;i<n;i++){const x=40+i*dw+dw*.15,w=dw*.7;doors+=`<path d="M${x} 200V${150+w/2}a${w/2} ${w/2} 0 0 1 ${w} 0V200z" fill="${wall===ink||wall==='#3F1921'?cream:ink}"/>`}
+ let lights='';for(let i=0;i<13;i++)lights+=`<circle cx="${22+i*13}" cy="116" r="2" fill="#C8502F"/>`;
+ return `<svg viewBox="0 0 200 200" role="img" aria-label="${esc(v.name)}"><rect width="200" height="200" fill="${sky}"/><rect x="24" y="34" width="152" height="166" fill="${wall}"/>${[0,1,2].map(i=>`<rect x="${44+i*42}" y="50" width="26" height="${n%2?26:20}" rx="${n%2?13:2}" fill="${sky}" stroke="${ink}" stroke-width="1.2"/>`).join('')}<rect x="12" y="84" width="176" height="38" fill="${cream}" stroke="${ink}" stroke-width="1.5"/><text x="100" y="105" text-anchor="middle" font-family="Playfair Display,Didot,serif" font-weight="600" letter-spacing=".5" font-size="${v.name.length>19?10:12}" fill="${ink}">${esc(v.name.toUpperCase())}</text>${lights}${doors}<rect y="196" width="200" height="4" fill="${ink}"/></svg>`}
 function chip(s,o={}){const v=V[s.v],sub=o.venue?`${esc(v.name)} · ${v.arr}`:`${tr('fin','ends')} ≈ ${fmtT(endT(s))}`;
- const time=(o.day?dayShort(s.d)+' ':'')+fmtT(s.t),kind=s.kind&&!o.nokind?`<span class="tk-kind">${L(KIND[s.kind])}</span>`:'';
+ const time=(o.day&&s.d>0?dayShort(s.d)+' ':'')+fmtT(s.t),kind=s.kind&&!o.nokind?`<span class="tk-kind">${L(KIND[s.kind])}</span>`:'';
  if(!up(s))return `<span class="tk past">${kind}<span class="tk-main"><span class="tk-time">${time}</span><span class="tk-sub">${tr('Séance passée','Already started')}</span></span></span>`;
  return `<a class="tk" href="#reserver-${s.id}" aria-label="${esc(tr('Réserver','Book')+' '+W[s.w].t+', '+fmtDay(s.d)+' '+fmtT(s.t)+', '+v.name+', '+fmtP(v.p.full))}">${kind}<span class="tk-main"><span class="tk-time">${time}</span><span class="tk-sub">${sub}${o.venue&&s.ver!=='VF'?' · '+(s.ver==='VFSTA'?'ST EN':'VO'):''}</span></span><span class="tk-stub"><span class="tk-price">${fmtP(v.p.full)}</span><span class="tk-cta">${tr('Réserver','Book')}</span></span></a>`}
 const BM='<svg viewBox="0 0 16 16"><path d="M3.5 1.5h9v13L8 11l-4.5 3.5z"/></svg>';
 const bm=(id,cls='')=>{const on=S.list.includes(id);return `<button class="bm ${cls}" data-act="save" data-id="${id}" aria-pressed="${on}" aria-label="${on?tr('Retirer de ma liste','Remove from my list'):tr('Ajouter à ma liste','Add to my list')}">${BM}</button>`};
 const fbtn=(id,what)=>{const on=S.follow.includes(id);return `<button class="fbtn" data-act="follow" data-id="${id}" aria-pressed="${on}">${on?'✓ '+tr('Suivi','Following'):'+ '+tr('Suivre ','Follow ')+what}</button>`};
-function metaLine(w){const ss=ALL.filter(s=>W[s.w]===w&&up(s));if(!ss.length)return tr('Pas de séance cette semaine','No screenings this week');
- const n=new Set(ss.map(s=>s.v)).size,nx=ss[0],min=Math.min(...ss.map(s=>V[s.v].p.full));
- return `${n} ${n>1?tr('salles','venues'):tr('salle','venue')} · ${tr('prochaine séance','next')} <b>${nx.d===0?'':dayShort(nx.d)+' '}${fmtT(nx.t)}</b> · ${tr('dès','from')} ${fmtP(min)}`}
-function card(w){return `<article class="card">${bm(w.id)}${poster(w)}<div class="txt"><h3><a href="#film-${w.id}">${esc(w.t)}</a></h3><p class="by">${w.role?L(w.role)+' ':''}${esc(w.by)} · ${L(w.from)}</p></div><div class="tags">${workVers(w).map(x=>verTag(x,w)).join('')}<span class="tag">${dur(w.dur)}</span></div><p class="meta">${metaLine(w)}</p></article>`}
 function rows(list,o={}){const by=new Map();list.forEach(s=>{if(!by.has(s.w))by.set(s.w,[]);by.get(s.w).push(s)});
- return [...by].map(([k,ss])=>{const w=W[k],max=o.max||5;return `<div class="row"><a href="#film-${w.id}" tabindex="-1" aria-hidden="true">${poster(w)}</a><div><h3><a href="#film-${w.id}">${esc(w.t)}</a></h3><p class="by">${esc(w.by)} · ${dur(w.dur)}</p><div class="tags">${[...new Set(ss.map(s=>s.ver))].map(x=>verTag(x,w)).join('')}</div></div><div class="tks">${ss.slice(0,max).map(s=>chip(s,o)).join('')}${ss.length>max?`<a class="allp" href="#film-${w.id}">+${ss.length-max} ${tr('séances','more')} →</a>`:''}</div></div>`}).join('')}
+ return [...by].map(([k,ss])=>{const w=W[k],max=o.max||5;return `<div class="row"><a href="#film-${w.id}" tabindex="-1" aria-hidden="true">${poster(w)}</a><div><h3><a href="#film-${w.id}">${esc(w.t)}</a></h3><p class="by">${esc(w.by)} · ${dur(w.dur)}</p><div class="tags">${[...new Set(ss.map(s=>s.ver))].map(x=>verTag(x,w)).join('')}</div></div><div class="tks">${ss.slice(0,max).map(s=>chip(s,o)).join('')}${ss.length>max?`<a class="allp" href="#film-${w.id}">+${ss.length-max} →</a>`:''}</div></div>`}).join('')}
+const LOGO='<span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M7 3.2c-.3 6 .2 13-.1 19.6M9.7 3c.3 5-.2 11 .1 15.4M7 3.2c.8-.9 2-.9 2.7-.2"/><path class="flap" d="M9.9 18.5c3-3.4 6-6.4 9-9.4c1.4-.9 2.6.3 1.8 1.7c-2.8 3.2-6 6.4-9.3 9.7"/><circle cx="9.3" cy="20" r="1.1"/><path d="M8.5 21.2c-.2 1.8 0 3.5-.1 5.2M5.3 26.6c2-.2 4.1-.1 6.1 0"/></svg></span>';
 
 /* ---------- chrome ---------- */
-function renderChrome(){
+function renderChrome(){const r=S.route.n,cur=k=>k===r||(k==='home'&&['film','book'].includes(r))?' aria-current="page"':'';
  $('#skip').textContent=tr('Aller au contenu','Skip to content');
  $('#chrome').innerHTML=`<header class="hd" id="hd"><div class="wrap hd-row">
-  <a class="logo" href="#home" aria-label="Strapontin, ${tr('accueil','home')}"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M7 3.2c-.3 6 .2 13-.1 19.6M9.7 3c.3 5-.2 11 .1 15.4M7 3.2c.8-.9 2-.9 2.7-.2"/><path class="flap" d="M9.9 18.5c3-3.4 6-6.4 9-9.4c1.4-.9 2.6.3 1.8 1.7c-2.8 3.2-6 6.4-9.3 9.7"/><circle cx="9.3" cy="20" r="1.1"/><path d="M8.5 21.2c-.2 1.8 0 3.5-.1 5.2M5.3 26.6c2-.2 4.1-.1 6.1 0"/></svg>Strapontin</a>
-  <span class="city" title="${tr('Autres villes bientôt','More cities soon')}">Paris</span>
-  <div class="search" role="search"><svg viewBox="0 0 20 20" fill="none" stroke="#3F1921" stroke-width="2"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg>
-   <input id="q" type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-label="${tr('Rechercher','Search')}" placeholder="${tr('Un film, une pièce, une salle, un·e cinéaste…','A film, a play, a venue, a director…')}"><div id="acbox"></div></div>
-  <div class="lang" role="group" aria-label="${tr('Langue','Language')}"><button data-act="lang" data-v="fr" aria-pressed="${S.lang==='fr'}">FR</button><button data-act="lang" data-v="en" aria-pressed="${S.lang==='en'}">EN</button></div>
-  <button class="hbtn" data-act="drawer" aria-haspopup="dialog">${BM.replace('<svg','<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"')}<span class="lbl">${tr('Ma liste','My list')}</span><span class="n" id="listn">${S.list.length+S.follow.length}</span></button>
- </div><nav class="wrap nav" aria-label="${tr('Navigation principale','Main navigation')}">${[['seances',tr('Séances','Showtimes')],['cinema',tr('Cinéma','Cinema')],['theatre',tr('Théâtre','Theatre')],['speciales',tr('Séances spéciales','Special screenings')],['cycles',tr('Cycles & rétrospectives','Seasons')],['salles',tr('Les salles','Venues')],['carnets',tr('Carnets','Ticket books')]].map(([a,l])=>`<a href="#home" data-scroll="${a}">${l}</a>`).join('')}</nav></header>
- <div class="assure"><ul class="wrap"><li>${tr('Prix TTC, sans frais de réservation','All-in prices, no booking fees')}</li><li>${tr("Échange gratuit jusqu'à 2h avant la séance",'Free exchange up to 2 hours before')}</li><li>${tr('Pass Culture et tarifs réduits acceptés','Pass Culture and reduced fares accepted')}</li></ul></div>`;
- $('#foot').innerHTML=`<div class="wrap"><div><a class="logo" href="#home"><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M7 3.2c-.3 6 .2 13-.1 19.6M9.7 3c.3 5-.2 11 .1 15.4M7 3.2c.8-.9 2-.9 2.7-.2"/><path class="flap" d="M9.9 18.5c3-3.4 6-6.4 9-9.4c1.4-.9 2.6.3 1.8 1.7c-2.8 3.2-6 6.4-9.3 9.7"/><circle cx="9.3" cy="20" r="1.1"/><path d="M8.5 21.2c-.2 1.8 0 3.5-.1 5.2M5.3 26.6c2-.2 4.1-.1 6.1 0"/></svg>Strapontin</a><p>${tr("La billetterie des salles indépendantes de Paris : cinémas Art et Essai et théâtres de poche. Un strapontin, c'est la place qu'on trouve toujours.","Tickets for the independent venues of Paris: art-house cinemas and pocket theatres. A strapontin is the fold-down seat there is always room for.")}</p><p class="proto">${tr('Prototype · programme et salles fictifs · aucun paiement réel','Prototype · fictional programme and venues · no real payment')}</p></div>
- <ul><li>${tr('Mentions légales','Legal notice')}</li><li>${tr('Conditions générales de vente','Terms of sale')}</li><li>${tr('Politique de confidentialité','Privacy policy')}</li><li><button data-act="cookie-open" style="background:none;border:0;padding:0;text-decoration:underline;color:inherit">${tr('Gérer les cookies','Cookie settings')}</button></li></ul>
- <ul><li>${tr('Paiement sécurisé par Stripe','Payments secured by Stripe')}</li><li>${tr('Remboursement intégral si la séance est annulée','Full refund if a screening is cancelled')}</li><li>${tr('Service client : 7j/7, 10h–20h','Customer service: daily, 10am–8pm')}</li></ul></div>`;
+  <a class="logo" href="#home" aria-label="Strapontin, ${tr('accueil','home')}">${LOGO}Strapontin</a>
+  <nav class="nav lab" aria-label="${tr('Navigation principale','Main navigation')}"><a href="#home"${cur('home')}>${tr('À l’affiche','Now showing')}</a><a href="#agenda"${cur('agenda')}>${tr('Rendez-vous','Events')}</a><a href="#salles"${cur('salles')}>${tr('Salles','Venues')}</a></nav>
+  <div class="search" role="search"><svg viewBox="0 0 20 20" fill="none" stroke="#231417" stroke-width="1.8"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg>
+   <input id="q" type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-label="${tr('Rechercher','Search')}" placeholder="${tr('Film, cinéaste, salle, quartier…','Film, director, venue, area…')}"><div id="acbox"></div></div>
+  <div class="tools lab"><button class="sbtn" data-act="so" aria-label="${tr('Rechercher','Search')}" aria-expanded="${!!S.so}"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="#231417" stroke-width="1.8"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg></button><div class="lang" role="group" aria-label="${tr('Langue','Language')}"><button data-act="lang" data-v="fr" aria-pressed="${S.lang==='fr'}">FR</button><button data-act="lang" data-v="en" aria-pressed="${S.lang==='en'}">EN</button></div>
+  <button class="tbtn lab" data-act="drawer" aria-haspopup="dialog"><span class="t">${tr('Ma liste','My list')}</span><svg width="12" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3.5 1.5h9v13L8 11l-4.5 3.5z"/></svg><b id="listn" class="num">${S.list.length+S.follow.length}</b></button></div>
+ </div></header>
+ <nav class="tabbar lab" aria-label="${tr('Navigation','Navigation')}"><a href="#home"${cur('home')}>${tr('Affiche','Films')}</a><a href="#agenda"${cur('agenda')}>${tr('Agenda','Events')}</a><a href="#salles"${cur('salles')}>${tr('Salles','Venues')}</a><button data-act="drawer" class="lab"><span>${tr('Liste','List')} <b class="num listn">${S.list.length+S.follow.length}</b></span></button></nav>`;
+ if(S.so)$('#hd').classList.add('so');
+ $('#foot').innerHTML=`<div class="wrap"><div><a class="logo" href="#home">${LOGO}Strapontin</a><p>${tr("La billetterie des cinémas indépendants et des théâtres de poche de Paris.","Tickets for the independent cinemas and pocket theatres of Paris.")}</p><p class="lab" style="margin-top:14px">${tr('Maquette interne · salles, séances et prix fictifs · affiches chargées depuis Wikipédia pour revue, droits non acquis · aucun paiement réel','Internal mockup · fictional venues, showtimes and prices · posters loaded from Wikipedia for review, rights not cleared · no real payment')}</p></div>
+ <ul><li>${tr('Prix TTC, sans frais de réservation','All-in prices, no booking fees')}</li><li>${tr("Échange gratuit jusqu'à 2h avant la séance",'Free exchange up to 2 hours before')}</li><li>${tr('Remboursement si la séance est annulée','Refund if a screening is cancelled')}</li><li>${tr('Pass Culture et tarifs réduits acceptés','Pass Culture and reduced fares accepted')}</li></ul>
+ <ul><li>${tr('Mentions légales','Legal notice')}</li><li>${tr('Conditions générales de vente','Terms of sale')}</li><li>${tr('Confidentialité','Privacy')}</li><li><button data-act="cookie-open" style="background:none;border:0;padding:0;text-decoration:underline">${tr('Gérer les cookies','Cookie settings')}</button></li></ul></div>`;
  document.documentElement.lang=S.lang;
-}
+ const hd=$('#hd'),setH=()=>document.documentElement.style.setProperty('--hh',hd.offsetHeight+'px');setH();if(window.ResizeObserver)new ResizeObserver(setH).observe(hd)}
 
-/* ---------- views ---------- */
-const WHEN=()=>[['today',tr("Aujourd'hui",'Today'),tr("aujourd'hui",'today')],['tonight',tr('Ce soir','Tonight'),tr('ce soir','tonight')],['tomorrow',tr('Demain','Tomorrow'),tr('demain','tomorrow')],['weekend',tr('Ce week-end','This weekend'),tr('ce week-end','this weekend')]];
-function finderHTML(){const set=finderSet(),arrs=[...new Set(V.map(v=>v.arr))].sort((a,b)=>parseInt(a)-parseInt(b)),nv=new Set(set.map(s=>s.v)).size;
- const next={today:'tomorrow',tonight:'tomorrow',tomorrow:'weekend',weekend:'today'}[S.when];
- return `<div class="finder" role="group" aria-label="${tr('Filtrer les séances','Filter showtimes')}">
-  <div class="seg">${WHEN().map(([k,l])=>`<button data-act="when" data-v="${k}" aria-pressed="${S.when===k}">${l}</button>`).join('')}</div>
-  <div class="grp"><label class="mono" for="f-arr">${tr('Où','Where')}</label><select class="sel" id="f-arr" data-act="arr"><option value="all">${tr('Tout Paris','All of Paris')}</option>${arrs.map(a=>`<option value="${a}" ${S.arr===a?'selected':''}>${a} · ${V.filter(v=>v.arr===a).map(v=>v.q).join(', ')}</option>`).join('')}</select></div>
-  <div class="grp"><span class="mono">Version</span><div class="seg">${[['all',tr('Toutes','All')],['vo','VO'],['vf','VF'],['en','English-friendly']].map(([k,l])=>`<button data-act="ver" data-v="${k}" aria-pressed="${S.ver===k}">${l}</button>`).join('')}</div></div></div>
-  <div class="count"><p class="mono" aria-live="polite">${set.length} ${tr('séances','showtimes')} · ${nv} ${nv>1?tr('salles','venues'):tr('salle','venue')} · ${whenDays[S.when]().map(d=>fmtDay(d,{weekday:'long',day:'numeric',month:'short'})).join(' + ')}</p><p class="mono">${tr('Plein tarif affiché · réductions à l’étape suivante','Full price shown · reduced fares at the next step')}</p></div>
-  ${set.length?rows(set,{venue:true,day:S.when==='weekend',max:6}):`<div class="empty"><h3>${tr('Rien à cette heure avec ces filtres.','Nothing at this time with these filters.')}</h3><p>${tr('Les dernières séances sont peut-être déjà commencées.','The last screenings may already have started.')}</p><button class="btn sm" data-act="when" data-v="${next}">${tr('Voir ','See ')+WHEN().find(x=>x[0]===next)[2]} →</button></div>`}
-  <p class="legend"><span class="tag vo">VOSTFR</span>${L(VERT.VOSTFR)}<span class="tag">VF</span>${L(VERT.VF)}<span class="tag en">English-friendly</span>${tr('film en anglais ou sous-titré anglais','in English or with English subtitles')}</p>`}
-function peekHTML(){const w=W[wi(S.peek)],nx=ALL.find(s=>W[s.w]===w&&up(s));return `<figure class="pola">${poster(w)}<figcaption>${esc(w.t)} · ${esc(w.by)}, ${w.y}</figcaption></figure><div class="pk-txt"><p class="mono">${L(w.genre)} · ${L(w.from)}</p><h2><a href="#film-${w.id}">${esc(w.t)}</a></h2><p class="syn">${L(w.syn)}</p><p class="mono meta">${metaLine(w)}</p><div class="acts">${nx?chip(nx,{venue:true,day:true}):''}${bm(w.id,'inline')}</div></div>`}
-function home(){const films=W.filter(w=>w.type==='cinema'&&!w.hide),plays=W.filter(w=>w.type==='theatre'),f=W[0],f2=W[wi('les-veilleurs')];
- const wk=ALL.length,word=WHEN().find(x=>x[0]===S.when)[2];
- const specs=ALL.filter(s=>s.kind&&up(s));
- return `<div class="view">
- <section class="wall" id="galerie"><div class="wrap wall-in"><div><p class="mono">${fmtDay(0)} · Paris</p>
-  <h1>${tr('Les salles indépendantes de Paris, <em>un seul programme.</em>','The independent screens of Paris, <em>in one programme.</em>')}</h1>
-  <p class="lead">${wk} ${tr('séances cette semaine dans','showtimes this week across')} ${V.length} ${tr('cinémas et théâtres. Survolez une image pour découvrir un film, ou allez droit aux horaires.','cinemas and theatres. Hover a picture to discover a film, or go straight to the times.')}</p>
-  <a class="btn" href="#home" data-scroll="seances">${tr('Voir les séances','See showtimes')}</a>
-  <div class="thumbs" role="group" aria-label="${tr('Films et pièces à découvrir','Films and plays to discover')}">${W.filter(w=>!w.hide).map(w=>`<button class="th" data-act="peek" data-id="${w.id}" aria-pressed="${S.peek===w.id}" aria-label="${esc(w.t)}">${poster(w)}</button>`).join('')}</div></div>
-  <div class="pk" id="pk" aria-live="polite">${peekHTML()}</div></div></section>
- <section class="wrap hero" id="seances"><p class="mono">${tr('Séances','Showtimes')} · ${tr('prix TTC, sans frais','all-in prices, no fees')}</p>
-  <h2 class="q">${tr('Que voir','What’s on')} <em id="whenw">${word}</em>${tr(' à Paris ?',' in Paris?')}</h2>
-  <div id="finder">${finderHTML()}</div></section>
+/* ---------- home: gallery / list ---------- */
+const WHEN=()=>[['today',tr("Aujourd'hui",'Today'),tr("aujourd'hui",'today')],['tonight',tr('Ce soir','Tonight'),tr('ce soir','tonight')],['tomorrow',tr('Demain','Tomorrow'),tr('demain','tomorrow')],['weekend',tr('Ce week-end','Weekend'),tr('ce week-end','this weekend')],['week',tr('7 jours','7 days'),tr('cette semaine','this week')]];
+function homeBody(){const set=finderSet(),by=new Map();set.forEach(s=>{if(!by.has(s.w))by.set(s.w,[]);by.get(s.w).push(s)});
+ const ids=ORDER.filter(i=>by.has(i)),nv=new Set(set.map(s=>s.v)).size,multi=whenDays[S.when]().length>1||S.when==='tomorrow';
+ const next={today:'tomorrow',tonight:'tomorrow',tomorrow:'weekend',weekend:'week',week:'week'}[S.when];
+ const count=`<div class="meta lab"><p class="num" aria-live="polite">${ids.length} ${tr('titres','titles')} · ${set.length} ${tr('séances','showtimes')} · ${nv} ${nv>1?tr('salles','venues'):tr('salle','venue')}</p><p>${tr('Prix TTC sans frais · échange gratuit jusqu’à 2h avant','All-in prices · free exchange up to 2h before')}</p></div>`;
+ if(!set.length)return `${count}<div class="empty"><h3>${tr('Rien à cette heure avec ces filtres','Nothing at this time with these filters')}</h3><p>${tr('Les dernières séances ont peut-être déjà commencé.','The last screenings may already have started.')}</p><div class="acts">${next!==S.when?`<button class="btn sm" data-act="when" data-v="${next}">${tr('Voir ','See ')+WHEN().find(x=>x[0]===next)[2]}</button>`:''}<button class="btn sm ghost" data-act="reset">${tr('Effacer les filtres','Clear filters')}</button></div></div>`;
+ if(S.view==='list')return `${count}<div style="margin-top:10px">${rows(set,{venue:true,day:multi,max:6})}</div>`;
+ return `${count}<div class="gal">${ids.map((i,n)=>{const w=W[i],ss=by.get(i),nx=ss[0],v=V[nx.v],nvv=new Set(ss.map(s=>s.v)).size;
+  return `<article class="cell" style="animation-delay:${Math.min(n,10)*35}ms">${bm(w.id)}${poster(w)}<h3><button data-act="sheet" data-id="${w.id}">${esc(w.t)}</button></h3><p class="by">${esc(w.by)}, ${w.y}</p>
+  <p class="nx"><b>${multi&&nx.d>0?dayShort(nx.d)+' ':''}${fmtT(nx.t)}</b> · ${esc(v.name)}, ${v.arr} · <span>${fmtP(v.p.full)}</span></p>
+  <p class="mo">${ss.length>1?`+${ss.length-1} ${ss.length>2?tr('séances','showtimes'):tr('séance','showtime')} · ${nvv} ${nvv>1?tr('salles','venues'):tr('salle','venue')}`:tr('Séance unique','Only showtime')}</p></article>`}).join('')}</div>
+  <div class="after"><button class="btn ghost" data-act="view" data-v="list">${tr('Voir toutes les séances en liste','See all showtimes as a list')} →</button><button class="btn ghost" data-act="lucky">${tr('Un film au hasard','Surprise me')}</button></div>`}
+function home(){const arrs=[...new Set(V.map(v=>v.arr))].sort((a,b)=>parseInt(a)-parseInt(b)),word=WHEN().find(x=>x[0]===S.when)[2];
+ return `<div class="view"><div class="wrap top"><div><p class="lab">${fmtDay(0)} · Paris</p><h1>${tr('À l’affiche','Now showing')} <em id="whenw">${word}</em></h1></div><div class="vt" role="group" aria-label="${tr('Affichage','View')}"><button data-act="view" data-v="gal" aria-pressed="${S.view==='gal'}">${tr('Galerie','Gallery')}</button><button data-act="view" data-v="list" aria-pressed="${S.view==='list'}">${tr('Liste','List')}</button></div></div>
+ <div class="fb"><div class="wrap fb-in" role="group" aria-label="${tr('Filtrer','Filter')}">
+  <div class="chips">${WHEN().map(([k,l])=>`<button data-act="when" data-v="${k}" aria-pressed="${S.when===k}">${l}</button>`).join('')}</div><span class="sep"></span>
+  <select class="fsel ${S.arr!=='all'?'on':''}" id="f-arr" data-act="arr" aria-label="${tr('Quartier','Area')}"><option value="all">${tr('Tout Paris','All of Paris')}</option>${arrs.map(a=>`<option value="${a}" ${S.arr===a?'selected':''}>${a} · ${V.filter(v=>v.arr===a).map(v=>v.q).join(', ')}</option>`).join('')}</select>
+  <select class="fsel ${S.ver!=='all'?'on':''}" id="f-ver" data-act="ver" aria-label="Version">${[['all','VO + VF'],['vo',tr('VO sous-titrée','Original + FR subs')],['vf',tr('VF','In French')],['en','English-friendly']].map(([k,l])=>`<option value="${k}" ${S.ver===k?'selected':''}>${l}</option>`).join('')}</select>
+  <select class="fsel ${S.kind!=='all'?'on':''}" id="f-kind" data-act="kind" aria-label="${tr('Type','Type')}">${[['all',tr('Tous genres','All types')],['cinema',tr('Cinéma','Cinema')],['theatre',tr('Théâtre','Theatre')]].map(([k,l])=>`<option value="${k}" ${S.kind===k?'selected':''}>${l}</option>`).join('')}</select></div></div>
+ <div class="wrap" id="hb">${homeBody()}</div></div>`}
 
- <section class="sec"><div class="wrap"><div class="sec-h"><div><p class="mono">${tr('Le choix de la rédaction','Editors’ choice')}</p><h2>${tr('À la <em>une</em>','Front <em>row</em>')}</h2></div></div>
-  <div class="feat"><article class="feat-a">${poster(f)}<div><p class="mono">${tr('Cinéma','Cinema')} · ${esc(f.by)} · ${L(f.from)}, ${f.y}</p><h3>${esc(f.t)}</h3><span class="laurel">${L(f.laurel)}</span>
-   <blockquote>${tr("« Härkönen signe un film d'une beauté glacée, où chaque traversée de la rivière devient une conversation silencieuse. »","“Härkönen delivers a film of icy beauty, where every river crossing becomes a silent conversation.”")}<cite>${tr('La rédaction de Strapontin','The Strapontin editors')}</cite></blockquote>
-   <p class="mono" style="color:var(--ink);margin-bottom:14px">${metaLine(f)}</p><div class="acts"><a class="btn" href="#film-${f.id}">${tr('Voir les séances','See showtimes')}</a>${bm(f.id,'inline')}</div></div></article>
-  <article class="feat-b"><p class="mono">${tr('Théâtre · sur scène ce mois-ci','Theatre · on stage this month')}</p><h3>${esc(f2.t)}</h3><p>${L(f2.syn)}</p><p class="quote" style="font-size:18px;margin:0">« ${f2.crit[0][0]} »<cite style="color:var(--ink)">${f2.crit[0][1]}</cite></p><p class="mono">${metaLine(f2)}</p><div class="acts"><a class="btn ghost sm" href="#film-${f2.id}">${tr('Voir les représentations','See performances')}</a>${bm(f2.id,'inline')}</div></article></div></div></section>
-
- <section class="sec" id="cinema"><div class="wrap"><div class="sec-h"><div><p class="mono">${tr('Cinéma','Cinema')}</p><h2>${tr('À l’affiche <em>cette semaine</em>','Now <em>showing</em>')}</h2></div><p>${tr('Chaque fiche indique le nombre de salles, la prochaine séance et le premier prix.','Each card shows the number of venues, the next showtime and the lowest full price.')}</p></div><div class="grid">${films.map(card).join('')}</div></div></section>
-
- <section class="sec" id="theatre"><div class="wrap"><div class="sec-h"><div><p class="mono">${tr('Théâtre','Theatre')}</p><h2>${tr('Sur <em>scène</em>','On <em>stage</em>')}</h2></div></div><div class="stage">${plays.map(card).join('')}</div></div></section>
-
- <section class="sec" id="speciales"><div class="wrap"><div class="sec-h"><div><p class="mono">${tr('Avant-premières, rencontres, ciné-débats, ciné-concerts','Previews, Q&As, debates, live scores')}</p><h2>${tr('Séances <em>spéciales</em>','Special <em>screenings</em>')}</h2></div></div>
-  <div class="spec">${specs.map(s=>{const w=W[s.w],v=V[s.v];return `<div class="sp"><div class="d"><span>${fmtDay(s.d,{weekday:'short'})}</span><b>${dayDate(s.d).getDate()}</b><span>${fmtDay(s.d,{month:'short'})}</span></div><div><span class="tag kind">${L(KIND[s.kind])}</span><h3><a href="#film-${w.id}" style="text-decoration:none">${esc(w.t)}</a></h3><p>${L(s.note)} · <a href="#salle-${v.id}">${esc(v.name)}</a>, ${v.arr}</p></div>${chip(s,{nokind:true})}</div>`}).join('')}</div></div></section>
-
- <section class="sec" id="cycles"><div class="wrap"><div class="sec-h"><div><p class="mono">${tr('Patrimoine et répertoire','Heritage and repertory')}</p><h2>${tr('Cycles & <em>rétrospectives</em>','Seasons & <em>retrospectives</em>')}</h2></div><p>${tr('Suivez un cycle pour être prévenu·e quand une séance est ajoutée.','Follow a season to hear when a screening is added.')}</p></div>
-  <div class="cyc">${CYC.map(c=>`<article class="cy" style="background:${c.bg}"><h3><a href="#cycle-${c.id}">${L(c.t)}</a></h3><p>${L(c.d)}</p><ul>${c.w.map(id=>{const w=W[wi(id)];return `<li><a href="#film-${w.id}">${esc(w.t)}</a> (${w.y})</li>`}).join('')}</ul><div class="foot">${fbtn(c.id,tr('ce cycle','this season'))}<a class="more" href="#cycle-${c.id}" style="align-self:center">${tr('Séances','Showtimes')} →</a></div></article>`).join('')}</div></div></section>
-
- <section class="sec"><div class="wrap"><div class="sec-h"><div><p class="mono">${tr('Choisis par les programmateurs','Chosen by the programmers')}</p><h2>${tr('Les coups de cœur <em>des salles</em>','Venue <em>favourites</em>')}</h2></div></div>
-  <div class="picks">${PICKS.map(([q,w,who,v])=>`<div class="pick"><p class="quote">« ${L(q)} »</p><a href="#film-${w}">${esc(W[wi(w)].t)}</a><p class="mono" style="margin-top:6px">${who} · ${esc(V[vi(v)].name)}</p></div>`).join('')}</div></div></section>
-
- <section class="sec" id="salles"><div class="wrap"><div class="sec-h"><div><p class="mono">${tr('Une soirée à…','An evening at…')}</p><h2>${tr('Les <em>salles</em>','The <em>venues</em>')}</h2></div><p>${tr('Chaque salle a son histoire, son bar et ses habitudes.','Every venue has its own history, bar and habits.')}</p></div>
-  <div class="venues">${V.map(v=>`<article class="ven">${pola(v)}<div><p class="mono">${v.type==='cinema'?tr('Cinéma','Cinema'):tr('Théâtre','Theatre')} · ${tr('plein tarif','full price')} ${fmtP(v.p.full)}</p><h3 style="font-size:26px;margin:4px 0 6px"><a href="#salle-${v.id}" style="text-decoration:none">${esc(v.name)}</a></h3><p>${L(v.bar)}</p></div><div>${fbtn(v.id,tr('cette salle','this venue'))}</div></article>`).join('')}</div></div></section>
-
- <section class="sec" id="carnets"><div class="wrap"><div class="carnet"><div><p class="mono" style="color:var(--paper)">${tr('Pour celles et ceux qui reviennent','For those who come back')}</p><h2>${tr('Le carnet : cinq ou dix places, <em>toutes les salles</em>.','The carnet: five or ten tickets, <em>every venue</em>.')}</h2><p>${tr("Valable un an dans les quatre cinémas partenaires, seul·e ou à deux. Vous choisissez « Place carnet » au moment de réserver.","Valid for one year in all four partner cinemas, alone or as a pair. Just pick “Carnet ticket” when you book.")}</p></div>
-  <ul><li><span>${tr('Carnet 5 places','5-ticket carnet')}</span><span>${fmtP(32.5)}</span></li><li><span>${tr('Carnet 10 places','10-ticket carnet')}</span><span>${fmtP(60)}</span></li><li><span>${tr('Validité','Validity')}</span><span>${tr('12 mois','12 months')}</span></li><li><span>${tr('Frais','Fees')}</span><span>0 €</span></li></ul></div></div></section></div>`}
-
-function dayStrip(act,cur){return `<div class="days" role="group" aria-label="${tr('Choisir un jour','Choose a day')}">${[0,1,2,3,4,5,6].map(d=>`<button data-act="${act}" data-v="${d}" aria-pressed="${cur===d}"><span>${dayShort(d)}</span><b>${dayDate(d).getDate()}</b><span>${fmtDay(d,{month:'short'})}</span></button>`).join('')}</div>`}
+/* ---------- other pages ---------- */
+function agenda(){const specs=ALL.filter(s=>s.kind&&up(s));
+ return `<div class="view wrap"><div class="ptitle"><p class="lab">${tr('Séances spéciales, cycles, coups de cœur','Special screenings, seasons, favourites')}</p><h1>${tr('Les <em>rendez-vous</em>','What’s <em>on</em>')}</h1></div>
+ <section class="sec"><div class="sec-h"><p class="lab">${tr('Rencontres, ciné-débats, ciné-clubs','Q&As, debates, film clubs')}</p><h2>${tr('Séances <em>spéciales</em>','Special <em>screenings</em>')}</h2></div>
+  <div class="spec">${specs.map(s=>{const w=W[s.w],v=V[s.v];return `<div class="sp"><div class="d"><span class="lab">${fmtDay(s.d,{weekday:'short'})}</span><b>${dayDate(s.d).getDate()}</b><span class="lab">${fmtDay(s.d,{month:'short'})}</span></div><div><span class="tag kind">${L(KIND[s.kind])}</span><h3><a href="#film-${w.id}">${esc(w.t)}</a></h3><p>${L(s.note)} · <a href="#salle-${v.id}">${esc(v.name)}</a>, ${v.arr}</p></div>${chip(s,{nokind:true})}</div>`}).join('')}</div></section>
+ <section class="sec"><div class="sec-h"><p class="lab">${tr('Patrimoine et répertoire','Heritage and repertory')}</p><h2>${tr('Cycles & <em>rétrospectives</em>','Seasons & <em>retrospectives</em>')}</h2></div>
+  <div class="cyc">${CYC.map(c=>`<article class="cy"><h3><a href="#cycle-${c.id}">${L(c.t)}</a></h3><p>${L(c.d)}</p><ul>${c.w.map(id=>{const w=W[wi(id)];return `<li><a href="#film-${w.id}">${esc(w.t)}</a> · ${w.y}</li>`}).join('')}</ul><div class="foot">${fbtn(c.id,tr('ce cycle','this season'))}<a href="#cycle-${c.id}">${tr('Séances','Showtimes')} →</a></div></article>`).join('')}</div></section>
+ <section class="sec"><div class="sec-h"><p class="lab">${tr('Choisis par les programmateurs','Chosen by the programmers')}</p><h2>${tr('Coups de <em>cœur</em>','Venue <em>favourites</em>')}</h2></div>
+  <div class="picks">${PICKS.map(([q,w,who,v])=>`<div class="pick"><p class="quote">« ${L(q)} »</p><a href="#film-${w}">${esc(W[wi(w)].t)}</a><p class="lab">${who} · ${esc(V[vi(v)].name)}</p></div>`).join('')}</div></section></div>`}
+function salles(){return `<div class="view wrap"><div class="ptitle"><p class="lab">${V.length} ${tr('salles indépendantes · Paris','independent venues · Paris')}</p><h1>${tr('Les <em>salles</em>','The <em>venues</em>')}</h1></div>
+ <div class="venues">${V.map(v=>`<article class="ven"><span class="fac">${facade(v)}</span><p class="lab">${v.type==='cinema'?tr('Cinéma','Cinema'):tr('Théâtre','Theatre')} · ${v.arr} ${esc(v.q)} · ${fmtP(v.p.full)}</p><h3><a href="#salle-${v.id}">${esc(v.name)}</a></h3><p>${L(v.bar)}</p>${fbtn(v.id,'')}</article>`).join('')}</div>
+ <section class="sec" style="border:0"><div class="carnet"><div><p class="lab">${tr('Pour celles et ceux qui reviennent','For those who come back')}</p><h2>${tr('Le carnet, <em>toutes les salles</em>','The carnet, <em>every venue</em>')}</h2><p>${tr("Cinq ou dix places valables un an dans les quatre cinémas partenaires. Choisissez « Place carnet » au moment de réserver.","Five or ten tickets valid for one year in all four partner cinemas. Pick “Carnet ticket” when you book.")}</p></div>
+  <ul class="num"><li><span>${tr('Carnet 5 places','5-ticket carnet')}</span><span>${fmtP(32.5)}</span></li><li><span>${tr('Carnet 10 places','10-ticket carnet')}</span><span>${fmtP(60)}</span></li><li><span>${tr('Validité','Validity')}</span><span>${tr('12 mois','12 months')}</span></li><li><span>${tr('Frais','Fees')}</span><span>0 €</span></li></ul></div></section></div>`}
+function dayStrip(act,cur){return `<div class="days" role="group" aria-label="${tr('Choisir un jour','Choose a day')}">${[0,1,2,3,4,5,6].map(d=>`<button data-act="${act}" data-v="${d}" aria-pressed="${cur===d}"><span class="lab">${dayShort(d)}</span><b>${dayDate(d).getDate()}</b></button>`).join('')}</div>`}
 function filmSessions(w){const k=W.indexOf(w);let ss=ALL.filter(s=>s.w===k&&s.d===S.fday&&verOk(s,S.fver)&&(S.fmom==='all'||(S.fmom==='am'&&s.t<720)||(S.fmom==='pm'&&s.t>=720&&s.t<1080)||(S.fmom==='eve'&&s.t>=1080))&&(!S.facc||V[s.v].acc));
  const by=new Map();ss.forEach(s=>{if(!by.has(s.v))by.set(s.v,[]);by.get(s.v).push(s)});
- return `${dayStrip('fday',S.fday)}<div class="filters"><div class="seg">${[['all',tr('Toutes versions','All versions')],['vo','VO'],['vf','VF'],['en','English-friendly']].map(([a,l])=>`<button data-act="fver" data-v="${a}" aria-pressed="${S.fver===a}">${l}</button>`).join('')}</div>
-  <div class="seg">${[['all',tr('Toute la journée','All day')],['am',tr('Matin','Morning')],['pm',tr('Après-midi','Afternoon')],['eve',tr('Soirée','Evening')]].map(([a,l])=>`<button data-act="fmom" data-v="${a}" aria-pressed="${S.fmom===a}">${l}</button>`).join('')}</div>
+ return `${dayStrip('fday',S.fday)}<div class="filters"><div class="chips">${[['all',tr('Toutes versions','All versions')],['vo','VO'],['vf','VF'],['en','English-friendly']].map(([a,l])=>`<button data-act="fver" data-v="${a}" aria-pressed="${S.fver===a}">${l}</button>`).join('')}</div>
+  <div class="chips">${[['all',tr('Toute la journée','All day')],['am',tr('Matin','Morning')],['pm',tr('Après-midi','Afternoon')],['eve',tr('Soirée','Evening')]].map(([a,l])=>`<button data-act="fmom" data-v="${a}" aria-pressed="${S.fmom===a}">${l}</button>`).join('')}</div>
   <label class="check"><input type="checkbox" id="f-acc" data-act="facc" ${S.facc?'checked':''}>${tr('Accès fauteuil roulant','Wheelchair access')}</label></div>
-  <p class="mono" aria-live="polite">${fmtDay(S.fday)} · ${ss.length} ${tr('séances','showtimes')} · ${by.size} ${tr('salles','venues')} · ${tr('prix TTC, sans frais','all-in prices, no fees')}</p>
-  ${by.size?[...by].map(([i,list])=>{const v=V[i];return `<div class="vg"><div><h3><a href="#salle-${v.id}" style="text-decoration:none">${esc(v.name)}</a></h3><p>${v.arr} · ${esc(v.q)} · ${esc(v.metro)}</p><p>${v.free?tr('Placement libre','Free seating'):tr('Placement numéroté','Numbered seats')}${v.acc?' · '+tr('accès fauteuil','wheelchair access'):''}</p><p class="pr">${tr('Plein','Full')} ${fmtP(v.p.full)} · ${tr('Réduit','Reduced')} ${fmtP(v.p.red)}${v.p.carnet?' · Carnet '+fmtP(v.p.carnet):''}</p></div>
-   <div><div class="tks">${list.map(s=>chip(s)).join('')}</div><div class="tags" style="margin-top:12px">${[...new Set(list.map(s=>s.ver))].map(x=>verTag(x,w)).join('')}</div></div></div>`}).join(''):`<div class="empty"><h3>${tr('Aucune séance ce jour-là avec ces filtres.','No showtimes that day with these filters.')}</h3><button class="btn sm ghost" data-act="freset">${tr('Réinitialiser les filtres','Reset filters')}</button></div>`}`}
-function film(w){return `<div class="view wrap"><p class="crumb"><a href="#home">${tr('Accueil','Home')}</a> / ${w.type==='cinema'?tr('Cinéma','Cinema'):tr('Théâtre','Theatre')}</p>
- <div class="detail">${poster(w)}<div><p class="mono">${L(w.genre)}</p><h1>${esc(w.t)}</h1><p style="font-size:19px">${w.role?L(w.role):tr('Un film de','A film by')} <b>${esc(w.by)}</b> · ${tr('avec','with')} ${esc(w.cast)}</p>
-  ${w.laurel?`<p style="margin-top:14px"><span class="laurel">${L(w.laurel)}</span></p>`:''}
-  <dl class="facts"><div><dt>${tr('Durée','Running time')}</dt><dd>${dur(w.dur)}</dd></div><div><dt>${tr('Origine','Origin')}</dt><dd>${L(w.from)}, ${w.y}</dd></div><div><dt>Version</dt><dd>${[...new Set(ALL.filter(s=>W[s.w]===w).map(s=>s.ver==='VFSTA'?'VF · ST EN':s.ver))].join(', ')||'—'}</dd></div><div><dt>${tr('Public','Audience')}</dt><dd>${tr('Tous publics','All audiences')}</dd></div></dl>
-  <p class="lead">${L(w.syn)}</p><div class="acts"><a class="btn" href="#film-${w.id}" data-scroll="sessions">${tr('Choisir une séance','Choose a showtime')}</a><button class="fbtn" data-act="save" data-id="${w.id}" aria-pressed="${S.list.includes(w.id)}">${S.list.includes(w.id)?'✓ '+tr('Dans ma liste','In my list'):'+ '+tr('Ajouter à ma liste','Add to my list')}</button></div></div></div>
- <section class="sec" style="padding-block:34px"><p class="mono" style="margin-bottom:14px">${tr("Ce qu'en dit la critique",'What the critics say')}</p><div class="crit">${w.crit.map(([q,s])=>`<p class="quote">« ${q} »<cite>${s}</cite></p>`).join('')}</div></section>
- <section class="sec" id="sessions"><div class="sec-h"><div><p class="mono">${tr('Comparer les salles, les horaires et les prix','Compare venues, times and prices')}</p><h2>${w.type==='cinema'?tr('Séances','Showtimes'):tr('Représentations','Performances')}</h2></div></div><div id="fsess">${filmSessions(w)}</div></section></div>`}
-function venueProg(v){const k=V.indexOf(v),ss=ALL.filter(s=>s.v===k&&s.d===S.vday);return `${dayStrip('vday',S.vday)}${ss.length?rows(ss):`<div class="empty"><h3>${tr('Relâche ce jour-là.','Closed that day.')}</h3></div>`}`}
+  <p class="lab num" aria-live="polite">${fmtDay(S.fday)} · ${ss.length} ${tr('séances','showtimes')} · ${by.size} ${tr('salles','venues')}</p>
+  ${by.size?[...by].map(([i,list])=>{const v=V[i];return `<div class="vg"><div><h3><a href="#salle-${v.id}">${esc(v.name)}</a></h3><p>${v.arr} · ${esc(v.q)} · ${esc(v.metro)}</p><p>${v.free?tr('Placement libre','Free seating'):tr('Placement numéroté','Numbered seats')}${v.acc?' · '+tr('accès fauteuil','wheelchair access'):''}</p><p class="pr">${tr('Plein','Full')} ${fmtP(v.p.full)} · ${tr('Réduit','Reduced')} ${fmtP(v.p.red)}${v.p.carnet?' · Carnet '+fmtP(v.p.carnet):''}</p></div>
+   <div><div class="tks">${list.map(s=>chip(s)).join('')}</div><div class="tags" style="margin-top:12px">${[...new Set(list.map(s=>s.ver))].map(x=>verTag(x,w)).join('')}</div></div></div>`}).join(''):`<div class="empty"><h3>${tr('Aucune séance ce jour-là avec ces filtres','No showtimes that day with these filters')}</h3><button class="btn sm ghost" data-act="freset">${tr('Effacer les filtres','Clear filters')}</button></div>`}`}
+function film(w){return `<div class="view wrap"><p class="crumb lab"><a href="#home">${tr('À l’affiche','Now showing')}</a> / ${w.type==='cinema'?tr('Cinéma','Cinema'):tr('Théâtre','Theatre')}</p>
+ <div class="detail">${poster(w)}<div><p class="lab">${L(w.from)} · ${w.y}</p><h1>${esc(w.t)}</h1><p style="font-size:17px">${w.role?L(w.role):tr('Un film de','A film by')} <b>${esc(w.by)}</b> · ${tr('avec','with')} ${esc(w.cast)}</p>
+  ${w.aw?`<p class="award" style="margin-top:12px">${L(w.aw)}</p>`:''}
+  <dl class="facts"><div><dt class="lab">${tr('Durée','Running time')}</dt><dd>${dur(w.dur)}</dd></div><div><dt class="lab">${tr('Origine','Origin')}</dt><dd>${L(w.from)}</dd></div><div><dt class="lab">Version</dt><dd>${[...new Set(ALL.filter(s=>W[s.w]===w).map(s=>s.ver==='VFSTA'?'VF · ST EN':s.ver))].join(', ')||'—'}</dd></div></dl>
+  <p class="lead">${L(w.syn)}</p><div class="acts"><a class="btn go" href="#film-${w.id}" data-scroll="sessions">${tr('Choisir une séance','Choose a showtime')}</a><button class="fbtn" data-act="save" data-id="${w.id}" aria-pressed="${S.list.includes(w.id)}">${S.list.includes(w.id)?'✓ '+tr('Dans ma liste','In my list'):'+ '+tr('Ajouter à ma liste','Add to my list')}</button></div></div></div>
+ <section class="sec" id="sessions"><div class="sec-h"><p class="lab">${tr('Comparer les salles, les horaires et les prix','Compare venues, times and prices')}</p><h2>${w.type==='cinema'?tr('Séances','Showtimes'):tr('Représentations','Performances')}</h2></div><div id="fsess">${filmSessions(w)}</div></section></div>`}
+function venueProg(v){const k=V.indexOf(v),ss=ALL.filter(s=>s.v===k&&s.d===S.vday);return `${dayStrip('vday',S.vday)}${ss.length?rows(ss):`<div class="empty"><h3>${tr('Relâche ce jour-là','Closed that day')}</h3></div>`}`}
 function venue(v){const T2=[[tr('Plein tarif','Full price'),'',v.p.full],[tr('Tarif réduit','Reduced'),tr('Étudiant·e, −26 ans, demandeur·se d’emploi, 65 ans et +, sur justificatif','Students, under 26, jobseekers, 65 and over, with proof'),v.p.red],[tr('Enfant (−14 ans)','Child (under 14)'),'',v.p.child]];if(v.p.carnet)T2.push([tr('Place carnet','Carnet ticket'),tr('Carnet de 5 ou 10 places, valable un an','Book of 5 or 10 tickets, valid one year'),v.p.carnet]);
- return `<div class="view wrap"><p class="crumb"><a href="#home">${tr('Accueil','Home')}</a> / <a href="#home" data-scroll="salles">${tr('Les salles','Venues')}</a></p>
- <div class="detail"><div style="rotate:-1.5deg">${pola(v,false)}</div><div><p class="mono">${v.type==='cinema'?tr('Cinéma','Cinema'):tr('Théâtre','Theatre')} · ${v.arr} · ${esc(v.q)}</p><h1>${esc(v.name)}</h1><div class="tags">${v.labels.map(l=>`<span class="tag label">${l}</span>`).join('')}<span class="tag label">Pass Culture</span></div><p class="lead">${L(v.desc)}</p><div class="acts">${fbtn(v.id,tr('cette salle','this venue'))}</div></div></div>
- <section class="sec" style="padding-block:34px"><div class="info"><div><h4>${tr('Adresse','Address')}</h4><p>${esc(v.addr)}</p><p>${esc(v.metro)}</p></div><div><h4>${tr('Salles','Screens')}</h4><p>${v.rooms.join(', ')} · ${v.seats} ${tr('places','seats')} · ${v.free?tr('placement libre','free seating'):tr('placement numéroté','numbered seats')}</p></div><div><h4>${tr('Accessibilité','Accessibility')}</h4><p>${v.acc?tr('Accès fauteuil roulant, boucle magnétique','Wheelchair access, hearing loop'):tr('Salle non accessible en fauteuil (escalier)','Not wheelchair accessible (stairs)')}</p></div><div><h4>${tr('Avant ou après','Before or after')}</h4><p>${L(v.bar)}</p></div></div></section>
- <section class="sec"><div class="sec-h"><div><p class="mono">${tr('Prix TTC, aucun frais ajouté','All-in prices, nothing added')}</p><h2>${tr('Tarifs','Prices')}</h2></div></div><table class="tar"><tbody>${T2.map(([a,b,p])=>`<tr><td><b>${a}</b>${b?`<small>${b}</small>`:''}</td><td>${fmtP(p)}</td></tr>`).join('')}</tbody></table></section>
- <section class="sec"><div class="sec-h"><div><p class="mono">${tr('Sept jours','Seven days')}</p><h2>${tr('Programme','Programme')}</h2></div></div><div id="vprog">${venueProg(v)}</div></section></div>`}
-function cycle(c){return `<div class="view wrap"><p class="crumb"><a href="#home">${tr('Accueil','Home')}</a> / <a href="#home" data-scroll="cycles">Cycles</a></p><div style="padding-block:22px 30px;max-width:900px"><p class="mono">${tr('Patrimoine et répertoire','Heritage and repertory')}</p><h1 style="font-size:clamp(40px,6.5vw,84px);margin:8px 0 14px">${L(c.t)}</h1><p class="lead" style="font-size:19px;margin-bottom:18px">${L(c.d)}</p>${fbtn(c.id,tr('ce cycle','this season'))}</div>
- <section class="sec"><p class="mono">${tr('Prochaines séances, toutes salles','Upcoming showtimes, all venues')}</p>${rows(ALL.filter(s=>c.w.includes(W[s.w].id)&&up(s)),{venue:true,day:true,max:5})}</section></div>`}
+ return `<div class="view wrap"><p class="crumb lab"><a href="#salles">${tr('Salles','Venues')}</a> / ${v.arr}</p>
+ <div class="detail"><span class="fac">${facade(v)}</span><div><p class="lab">${v.type==='cinema'?tr('Cinéma','Cinema'):tr('Théâtre','Theatre')} · ${v.arr} · ${esc(v.q)}</p><h1>${esc(v.name)}</h1><div class="tags">${v.labels.map(l=>`<span class="tag">${l}</span>`).join('')}<span class="tag">Pass Culture</span></div><p class="lead">${L(v.desc)}</p><div class="acts">${fbtn(v.id,tr('cette salle','this venue'))}</div></div></div>
+ <section class="sec"><div class="info"><div><h4>${tr('Adresse','Address')}</h4><p>${esc(v.addr)}</p><p>${esc(v.metro)}</p></div><div><h4>${tr('Salles','Screens')}</h4><p>${v.rooms.join(', ')} · ${v.seats} ${tr('places','seats')} · ${v.free?tr('placement libre','free seating'):tr('placement numéroté','numbered seats')}</p></div><div><h4>${tr('Accessibilité','Accessibility')}</h4><p>${v.acc?tr('Accès fauteuil roulant, boucle magnétique','Wheelchair access, hearing loop'):tr('Salle non accessible en fauteuil (escalier)','Not wheelchair accessible (stairs)')}</p></div><div><h4>${tr('Avant ou après','Before or after')}</h4><p>${L(v.bar)}</p></div></div></section>
+ <section class="sec"><div class="sec-h"><p class="lab">${tr('Prix TTC, aucun frais ajouté','All-in prices, nothing added')}</p><h2>${tr('Tarifs','Prices')}</h2></div><table class="tar"><tbody>${T2.map(([a,b,p])=>`<tr><td><b>${a}</b>${b?`<small>${b}</small>`:''}</td><td>${fmtP(p)}</td></tr>`).join('')}</tbody></table></section>
+ <section class="sec"><div class="sec-h"><p class="lab">${tr('Sept jours','Seven days')}</p><h2>Programme</h2></div><div id="vprog">${venueProg(v)}</div></section></div>`}
+function cycle(c){return `<div class="view wrap"><p class="crumb lab"><a href="#agenda">${tr('Rendez-vous','Events')}</a> / Cycles</p><div class="ptitle"><h1>${L(c.t)}</h1><p>${L(c.d)}</p><div>${fbtn(c.id,tr('ce cycle','this season'))}</div></div>
+ <section class="sec"><p class="lab">${tr('Prochaines séances, toutes salles','Upcoming showtimes, all venues')}</p>${rows(ALL.filter(s=>c.w.includes(W[s.w].id)&&up(s)),{venue:true,day:true,max:5})}</section></div>`}
 
 /* ---------- booking ---------- */
 const TAR=v=>{const a=[['full',tr('Plein tarif','Full price'),''],['red',tr('Tarif réduit','Reduced'),tr('Étudiant·e, −26 ans, demandeur·se d’emploi, 65 ans et +, sur justificatif','Students, under 26, jobseekers, 65 and over, with proof')],['child',tr('Enfant (−14 ans)','Child (under 14)'),'']];if(v.p.carnet)a.push(['carnet',tr('Place carnet','Carnet ticket'),tr('Carnet de 5 ou 10 places, valable un an','Book of 5 or 10 tickets, valid one year')]);return a};
@@ -689,46 +578,58 @@ const bkN=()=>Object.values(S.bk.qty).reduce((a,b)=>a+b,0);
 const bkTot=v=>Object.entries(S.bk.qty).reduce((a,[k,n])=>a+n*(v.p[k]||0),0);
 const taken=(s,i)=>((s.t*7+s.d*13+i*31+s.w*5)%7)<2;
 function booking(){const b=S.bk,s=ALL.find(x=>x.id===b.sid);
- if(!s)return `<div class="view wrap empty" style="padding-block:80px"><h3>${tr("Cette séance n'existe plus.",'This screening no longer exists.')}</h3><a class="btn" href="#home">${tr("Retour à l'accueil",'Back to home')}</a></div>`;
+ if(!s)return `<div class="view wrap empty" style="padding-block:80px"><h3>${tr("Cette séance n'existe plus",'This screening no longer exists')}</h3><a class="btn" href="#home">${tr("Retour à l'affiche",'Back to now showing')}</a></div>`;
  const w=W[s.w],v=V[s.v];
- if(!up(s)&&b.step<5)return `<div class="view wrap empty" style="padding-block:80px"><h3>${tr('Cette séance a déjà commencé.','This screening has already started.')}</h3><p>${tr("Nous ne vendons pas de billets pour une séance passée.","We don't sell tickets for a screening that has started.")}</p><a class="btn" href="#film-${w.id}">${tr('Voir les prochaines séances','See upcoming showtimes')}</a></div>`;
+ if(!up(s)&&b.step<5)return `<div class="view wrap empty" style="padding-block:80px"><h3>${tr('Cette séance a déjà commencé','This screening has already started')}</h3><p>${tr("Nous ne vendons pas de billets pour une séance commencée.","We don't sell tickets for a screening that has started.")}</p><a class="btn" href="#film-${w.id}">${tr('Voir les prochaines séances','See upcoming showtimes')}</a></div>`;
  const names=[tr('Tarif','Fare'),tr('Places','Seats'),tr('Récapitulatif','Summary'),tr('Paiement','Payment'),tr('E-billet','E-ticket')],n=bkN(),tot=bkTot(v);
  const steps=`<ol class="steps">${names.map((x,i)=>`<li class="${i+1<b.step?'done':i+1===b.step?'on':''}"><button data-act="step" data-v="${i+1}" ${i+1<b.step&&b.step<5?'':'disabled'} ${i+1===b.step?'aria-current="step"':''}>${x}</button></li>`).join('')}</ol>`;
- const lines=TAR(v).filter(([k])=>b.qty[k]).map(([k,l])=>`<div><span>${b.qty[k]} × ${l}</span><span>${fmtP(b.qty[k]*v.p[k])}</span></div>`).join('');
- const side=`<aside class="side" aria-label="${tr('Votre séance','Your screening')}"><div class="top">${poster(w)}<div><h3>${esc(w.t)}</h3><p>${esc(v.name)} · ${esc(s.room)}</p></div></div><p><b>${fmtDay(s.d)}</b><br>${fmtT(s.t)} → ≈ ${fmtT(endT(s))}${v.type==='cinema'&&!s.kind?` · ${tr('film à','film at')} ${fmtT(s.t+15)}`:''}</p><div class="tags">${verTag(s.ver,w)}${s.kind?`<span class="tag kind">${L(KIND[s.kind])}</span>`:''}</div><p style="font-size:14px;color:var(--ink-2)">${esc(v.addr)} · ${esc(v.metro)}</p><div class="lines">${lines}</div>${b.seats.length?`<p class="mono" style="color:var(--ink)">${tr('Places','Seats')} ${b.seats.join(', ')}</p>`:''}<div class="tot"><span>Total ${tr('TTC','incl. tax')}</span><output>${fmtP(tot)}</output></div><p class="pol">${tr("Aucun frais ne s'ajoute. Échange gratuit jusqu'à 2h avant la séance. Remboursement intégral si la séance est annulée.","Nothing is added. Free exchange up to 2 hours before. Full refund if the screening is cancelled.")}</p></aside>`;
+ const lines=TAR(v).filter(([k])=>b.qty[k]).map(([k,l])=>`<div><span>${b.qty[k]} × ${l}</span><span class="num">${fmtP(b.qty[k]*v.p[k])}</span></div>`).join('');
+ const side=`<aside class="side" aria-label="${tr('Votre séance','Your screening')}"><div class="st">${poster(w)}<div><h3>${esc(w.t)}</h3><p>${esc(v.name)} · ${esc(s.room)}</p></div></div><p><b>${fmtDay(s.d)}</b><br>${fmtT(s.t)} → ≈ ${fmtT(endT(s))}${v.type==='cinema'&&!s.kind?` · ${tr('film à','film at')} ${fmtT(s.t+15)}`:''}</p><div class="tags">${verTag(s.ver,w)}${s.kind?`<span class="tag kind">${L(KIND[s.kind])}</span>`:''}</div><p style="font-size:13.5px;color:var(--ink-2)">${esc(v.addr)} · ${esc(v.metro)}</p><div class="lines">${lines}</div>${b.seats.length?`<p class="lab" style="color:var(--ink)">${tr('Places','Seats')} ${b.seats.join(', ')}</p>`:''}<div class="tot"><span>Total ${tr('TTC','incl. tax')}</span><output>${fmtP(tot)}</output></div><p class="pol">${tr("Aucun frais ne s'ajoute. Échange gratuit jusqu'à 2h avant la séance. Remboursement intégral si la séance est annulée.","Nothing is added. Free exchange up to 2 hours before. Full refund if the screening is cancelled.")}</p></aside>`;
  let body='';
- if(b.step===1)body=`<h1>${tr('Choisissez vos tarifs','Choose your fares')}</h1><p class="sub">${tr("Prix TTC. Aucun frais ne s'ajoutera au paiement.",'All-in prices. Nothing will be added at payment.')}</p>${TAR(v).map(([k,l,d])=>`<div class="qrow"><div><b>${l}</b> <span class="pp">· ${fmtP(v.p[k])}</span>${d?`<small>${d}</small>`:''}</div><div class="stepper"><button data-act="qty" data-k="${k}" data-v="-1" aria-label="${tr('Retirer','Remove')} ${l}" ${b.qty[k]?'':'disabled'}>−</button><output aria-live="polite">${b.qty[k]}</output><button data-act="qty" data-k="${k}" data-v="1" aria-label="${tr('Ajouter','Add')} ${l}" ${n>=6?'disabled':''}>+</button></div></div>`).join('')}<p class="note">${tr('Pass Culture : accepté comme moyen de paiement à l’étape 4 (15–18 ans).','Pass Culture: accepted as a payment method at step 4 (ages 15–18).')}</p><div class="bnav"><button class="btn" data-act="next" ${n?'':'disabled'}>${tr('Continuer','Continue')}</button><a href="#film-${w.id}">${tr('Changer de séance','Change showtime')}</a></div>`;
- if(b.step===2){if(v.free)body=`<h1>${tr('Placement libre','Free seating')}</h1><p class="sub">${tr("Dans cette salle, on choisit son fauteuil en entrant.",'In this venue you choose your seat when you walk in.')}</p><p class="note">${tr(`Vos ${n>1?n+' places sont garanties':'place est garantie'}. Les portes ouvrent 20 minutes avant la séance : arrivez à ${fmtT(s.t-20)} pour choisir tranquillement.`,`Your ${n>1?n+' seats are':'seat is'} guaranteed. Doors open 20 minutes before: arrive at ${fmtT(s.t-20)} to choose at your own pace.`)}</p>${v.acc?`<p class="note">${tr('Emplacements fauteuil roulant au dernier rang, accès de plain-pied.','Wheelchair spaces in the back row, step-free access.')}</p>`:''}`;
-  else{let m='';'ABCDEFGH'.split('').forEach((r,ri)=>{m+=`<div class="r"><span>${r}</span>`;for(let c=1;c<=10;c++){const id=r+c,tk=taken(s,ri*10+c),on=b.seats.includes(id);m+=`<button class="seat" data-act="seat" data-v="${id}" aria-pressed="${on}" ${tk?'disabled':''} aria-label="${tr('Place','Seat')} ${id}${tk?tr(' occupée',' taken'):''}">${c}</button>`}m+='</div>'});
-   body=`<h1>${tr('Choisissez vos places','Choose your seats')}</h1><p class="sub" aria-live="polite">${b.seats.length} / ${n} ${tr('sélectionnée(s)','selected')}</p><div class="scr">${tr('Scène','Stage')}</div><div class="map">${m}</div><p class="legend"><span class="seat" style="width:20px;display:inline-block"></span>${tr('Libre','Free')}<span class="seat" aria-pressed="true" style="width:20px;display:inline-block"></span>${tr('Votre choix','Your choice')}<span class="seat" style="width:20px;display:inline-block;background:var(--paper-3);border-color:var(--line)"></span>${tr('Occupée','Taken')}</p>`}
-  body+=`<div class="bnav"><button class="btn" data-act="next" ${v.free||b.seats.length===n?'':'disabled'}>${tr('Continuer','Continue')}</button><button class="btn ghost sm" data-act="step" data-v="1">${tr('Retour','Back')}</button></div>`}
- if(b.step===3)body=`<h1>${tr('Vérifiez avant de payer','Check before you pay')}</h1><p class="sub">${tr('Tout ce que vous paierez est sur cette page.','Everything you will pay is on this page.')}</p><dl class="facts" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))"><div><dt>${w.type==='cinema'?'Film':tr('Pièce','Play')}</dt><dd>${esc(w.t)} · ${dur(w.dur)}</dd></div><div><dt>${tr('Quand','When')}</dt><dd>${fmtDay(s.d)}, ${fmtT(s.t)} → ≈ ${fmtT(endT(s))}</dd></div><div><dt>${tr('Où','Where')}</dt><dd>${esc(v.name)}, ${esc(s.room)}<br>${esc(v.addr)}</dd></div><div><dt>Version</dt><dd>${L(VERT[s.ver])}</dd></div><div><dt>${tr('Places','Seats')}</dt><dd>${n} · ${v.free?tr('placement libre','free seating'):b.seats.join(', ')}</dd></div><div><dt>Total ${tr('TTC','incl. tax')}</dt><dd>${fmtP(tot)} · ${tr('0 € de frais','€0 fees')}</dd></div></dl><p class="note">${tr("Échange gratuit jusqu'à 2h avant la séance depuis votre e-billet. Remboursement intégral et automatique si la salle annule.","Free exchange up to 2 hours before, from your e-ticket. Full, automatic refund if the venue cancels.")}</p><div class="bnav"><button class="btn" data-act="next">${tr('Passer au paiement','Go to payment')}</button><button class="btn ghost sm" data-act="step" data-v="2">${tr('Retour','Back')}</button></div>`;
+ if(b.step===1)body=`<h1>${tr('Vos <em>tarifs</em>','Your <em>fares</em>')}</h1><p class="sub">${tr("Prix TTC. Aucun frais ne s'ajoutera au paiement.",'All-in prices. Nothing will be added at payment.')}</p>${TAR(v).map(([k,l,d])=>`<div class="qrow"><div><b>${l}</b> <span class="pp">· ${fmtP(v.p[k])}</span>${d?`<small>${d}</small>`:''}</div><div class="stepper"><button data-act="qty" data-k="${k}" data-v="-1" aria-label="${tr('Retirer','Remove')} ${l}" ${b.qty[k]?'':'disabled'}>−</button><output aria-live="polite">${b.qty[k]}</output><button data-act="qty" data-k="${k}" data-v="1" aria-label="${tr('Ajouter','Add')} ${l}" ${n>=6?'disabled':''}>+</button></div></div>`).join('')}<p class="note">${tr('Pass Culture : accepté comme moyen de paiement à l’étape 4 (15–18 ans).','Pass Culture: accepted as a payment method at step 4 (ages 15–18).')}</p><div class="bnav"><button class="btn go" data-act="next" ${n?'':'disabled'}>${tr('Continuer','Continue')}</button><a href="#film-${w.id}">${tr('Changer de séance','Change showtime')}</a></div>`;
+ if(b.step===2){if(v.free)body=`<h1>${tr('Placement <em>libre</em>','Free <em>seating</em>')}</h1><p class="sub">${tr("Dans cette salle, on choisit son fauteuil en entrant.",'In this venue you choose your seat when you walk in.')}</p><p class="note">${tr(`Vos ${n>1?n+' places sont garanties':'place est garantie'}. Les portes ouvrent 20 minutes avant : arrivez à ${fmtT(s.t-20)} pour choisir tranquillement.`,`Your ${n>1?n+' seats are':'seat is'} guaranteed. Doors open 20 minutes before: arrive at ${fmtT(s.t-20)} to choose at your own pace.`)}</p>${v.acc?`<p class="note">${tr('Emplacements fauteuil roulant au dernier rang, accès de plain-pied.','Wheelchair spaces in the back row, step-free access.')}</p>`:''}`;
+  else{let m='';'ABCDEFGH'.split('').forEach((r,ri)=>{m+=`<div class="r"><span class="lab">${r}</span>`;for(let c=1;c<=10;c++){const id=r+c,tk=taken(s,ri*10+c),on=b.seats.includes(id);m+=`<button class="seat" data-act="seat" data-v="${id}" aria-pressed="${on}" ${tk?'disabled':''} aria-label="${tr('Place','Seat')} ${id}${tk?tr(' occupée',' taken'):''}">${c}</button>`}m+='</div>'});
+   body=`<h1>${tr('Vos <em>places</em>','Your <em>seats</em>')}</h1><p class="sub" aria-live="polite">${b.seats.length} / ${n} ${tr('sélectionnée(s)','selected')}</p><div class="scr lab">${tr('Scène','Stage')}</div><div class="map">${m}</div><p class="legend"><span class="seat" style="width:20px;display:inline-block"></span>${tr('Libre','Free')}<span class="seat" aria-pressed="true" style="width:20px;display:inline-block"></span>${tr('Votre choix','Your choice')}<span class="seat" style="width:20px;display:inline-block;background:var(--paper-3);border-color:transparent"></span>${tr('Occupée','Taken')}</p>`}
+  body+=`<div class="bnav"><button class="btn go" data-act="next" ${v.free||b.seats.length===n?'':'disabled'}>${tr('Continuer','Continue')}</button><button class="btn ghost sm" data-act="step" data-v="1">${tr('Retour','Back')}</button></div>`}
+ if(b.step===3)body=`<h1>${tr('Vérifiez avant de <em>payer</em>','Check before you <em>pay</em>')}</h1><p class="sub">${tr('Tout ce que vous paierez est sur cette page.','Everything you will pay is on this page.')}</p><dl class="facts" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))"><div><dt class="lab">${w.type==='cinema'?'Film':tr('Pièce','Play')}</dt><dd>${esc(w.t)} · ${dur(w.dur)}</dd></div><div><dt class="lab">${tr('Quand','When')}</dt><dd>${fmtDay(s.d)}, ${fmtT(s.t)} → ≈ ${fmtT(endT(s))}</dd></div><div><dt class="lab">${tr('Où','Where')}</dt><dd>${esc(v.name)}, ${esc(s.room)}<br>${esc(v.addr)}</dd></div><div><dt class="lab">Version</dt><dd>${L(VERT[s.ver])}</dd></div><div><dt class="lab">${tr('Places','Seats')}</dt><dd>${n} · ${v.free?tr('placement libre','free seating'):b.seats.join(', ')}</dd></div><div><dt class="lab">Total ${tr('TTC','incl. tax')}</dt><dd>${fmtP(tot)} · ${tr('0 € de frais','€0 fees')}</dd></div></dl><p class="note">${tr("Échange gratuit jusqu'à 2h avant la séance depuis votre e-billet. Remboursement intégral et automatique si la salle annule.","Free exchange up to 2 hours before, from your e-ticket. Full, automatic refund if the venue cancels.")}</p><div class="bnav"><button class="btn go" data-act="next">${tr('Passer au paiement','Go to payment')}</button><button class="btn ghost sm" data-act="step" data-v="2">${tr('Retour','Back')}</button></div>`;
  if(b.step===4)body=`<h1>${tr('Paiement','Payment')}</h1><p class="sub">${tr('Montant débité :','Amount charged:')} <b>${fmtP(tot)}</b>. ${tr('Rien de plus.','Nothing more.')}</p><div class="pay" role="radiogroup" aria-label="${tr('Moyen de paiement','Payment method')}">
    <label><input type="radio" name="pay" id="pay-card" value="card" ${b.pay==='card'?'checked':''}><span><b>${tr('Carte bancaire','Bank card')}</b><small>${tr("Formulaire sécurisé Stripe. Votre numéro de carte ne transite jamais par Strapontin et n'est pas conservé.","Secure Stripe form. Your card number never passes through Strapontin and is not stored.")}</small></span></label>
    <label><input type="radio" name="pay" id="pay-pass" value="pass" ${b.pay==='pass'?'checked':''}><span><b>Pass Culture</b><small>${tr('15–18 ans. Vous validez la réservation dans votre application Pass Culture.','Ages 15–18. You confirm the booking in your Pass Culture app.')}</small></span></label>
    ${v.p.carnet&&b.qty.carnet?`<label><input type="radio" name="pay" id="pay-carnet" value="carnet" ${b.pay==='carnet'?'checked':''}><span><b>${tr('Carnet Strapontin','Strapontin carnet')}</b><small>${tr('Vos places carnet sont décomptées de votre carnet en cours.','Your carnet tickets are deducted from your current book.')}</small></span></label>`:''}</div>
-   <p class="note"><b>${tr('Prototype','Prototype')}</b> · ${tr("Aucun paiement réel. Ici s'affichera le formulaire hébergé par Stripe (carte, 3-D Secure).",'No real payment. The Stripe-hosted form (card, 3-D Secure) would appear here.')}</p>
-   <div class="bnav"><button class="btn" data-act="pay">${tr('Payer','Pay')} ${fmtP(tot)}</button><button class="btn ghost sm" data-act="step" data-v="3">${tr('Retour','Back')}</button></div>`;
+   <p class="note"><b>${tr('Maquette','Mockup')}</b> · ${tr("Aucun paiement réel. Ici s'affichera le formulaire hébergé par Stripe.",'No real payment. The Stripe-hosted form would appear here.')}</p>
+   <div class="bnav"><button class="btn go" data-act="pay">${tr('Payer','Pay')} ${fmtP(tot)}</button><button class="btn ghost sm" data-act="step" data-v="3">${tr('Retour','Back')}</button></div>`;
  if(b.step===5){let qr='';for(let i=0;i<169;i++){const r=Math.floor(i/13),c=i%13,cor=(r<3&&c<3)||(r<3&&c>9)||(r>9&&c<3);qr+=`<i class="${cor||((i*i*7+s.t+i*s.w)%3===0)?'':'o'}"></i>`}
-  body=`<h1>${tr('C’est réservé.','You’re booked.')}</h1><p class="sub">${tr('Présentez ce billet à l’entrée, sur votre téléphone ou imprimé.','Show this ticket at the door, on your phone or printed.')}</p>
-  <div class="eticket"><div class="a"><p class="mono">${esc(v.name)} · ${esc(s.room)}</p><h2>${esc(w.t)}</h2><p><b>${fmtDay(s.d)}</b> · ${fmtT(s.t)} → ≈ ${fmtT(endT(s))}</p><div class="tags">${verTag(s.ver,w)}${s.kind?`<span class="tag kind">${L(KIND[s.kind])}</span>`:''}</div><p style="font-size:14.5px">${esc(v.addr)}<br>${esc(v.metro)}</p></div>
-  <div class="b"><div class="qr" role="img" aria-label="${tr('Code du billet (spécimen)','Ticket code (specimen)')}">${qr}</div><div><p class="mono">${tr('Réservation','Booking')} ${b.ref}</p><p><b>${n} ${n>1?tr('places','seats'):tr('place','seat')}</b> · ${v.free?tr('placement libre','free seating'):b.seats.join(', ')}</p><p>${fmtP(tot)} ${tr('TTC','incl. tax')}</p><p class="mono">${tr('Spécimen','Specimen')}</p></div></div></div>
-  <p class="note" style="max-width:400px;margin-top:22px"><b>${tr('Avant ou après la séance','Before or after')}</b><br>${L(v.bar)}</p>
-  <div class="bnav">${fbtn(v.id,tr('cette salle','this venue'))}<a class="btn ghost sm" href="#home">${tr("Retour à l'accueil",'Back to home')}</a></div>`}
+  body=`<h1>${tr('C’est <em>réservé</em>','You’re <em>booked</em>')}</h1><p class="sub">${tr('Présentez ce billet à l’entrée, sur votre téléphone ou imprimé.','Show this ticket at the door, on your phone or printed.')}</p>
+  <div class="eticket"><div class="a"><p class="lab">${esc(v.name)} · ${esc(s.room)}</p><h2>${esc(w.t)}</h2><p><b>${fmtDay(s.d)}</b> · ${fmtT(s.t)} → ≈ ${fmtT(endT(s))}</p><div class="tags">${verTag(s.ver,w)}${s.kind?`<span class="tag kind">${L(KIND[s.kind])}</span>`:''}</div><p style="font-size:14px">${esc(v.addr)}<br>${esc(v.metro)}</p></div>
+  <div class="b"><div class="qr" role="img" aria-label="${tr('Code du billet (spécimen)','Ticket code (specimen)')}">${qr}</div><div><p class="lab">${tr('Réservation','Booking')} ${b.ref}</p><p><b>${n} ${n>1?tr('places','seats'):tr('place','seat')}</b> · ${v.free?tr('placement libre','free seating'):b.seats.join(', ')}</p><p class="num">${fmtP(tot)} ${tr('TTC','incl. tax')}</p><p class="lab">${tr('Spécimen','Specimen')}</p></div></div></div>
+  <p class="note" style="max-width:390px;margin-top:20px"><b>${tr('Avant ou après la séance','Before or after')}</b><br>${L(v.bar)}</p>
+  <div class="bnav">${fbtn(v.id,tr('cette salle','this venue'))}<a class="btn ghost sm" href="#home">${tr("Retour à l'affiche",'Back to now showing')}</a></div>`}
  return `<div class="view wrap">${steps}<div class="book"><div>${body}</div>${b.step<5?side:''}</div></div>`}
 
-/* ---------- drawer, toast, cookie ---------- */
+/* ---------- overlays ---------- */
+function sheetHTML(){const w=W[wi(S.sheet)];if(!w)return '';let ss=finderSet().filter(s=>W[s.w]===w),filt=true;if(!ss.length){ss=ALL.filter(s=>W[s.w]===w&&up(s)).slice(0,6);filt=false}
+ return `<div class="scrim" data-act="sheet-close"></div><aside class="panel sheet" role="dialog" aria-modal="true" aria-label="${esc(w.t)}"><button class="x" data-act="sheet-close" aria-label="${tr('Fermer','Close')}" id="sx">×</button>
+ <div class="sh-top">${poster(w)}<div><p class="lab">${L(w.from)} · ${w.y} · ${dur(w.dur)}</p><h2>${esc(w.t)}</h2><p class="by">${w.role?L(w.role)+' ':''}${esc(w.by)}</p>${w.aw?`<p class="award">${L(w.aw)}</p>`:''}</div></div>
+ <p class="syn">${L(w.syn)}</p>
+ <div><p class="lab">${filt?tr('Séances','Showtimes')+' · '+WHEN().find(x=>x[0]===S.when)[2]:tr('Prochaines séances','Next showtimes')}</p><div class="tks" style="margin-top:8px">${ss.slice(0,6).map(s=>chip(s,{venue:true,day:true})).join('')}</div></div>
+ <div class="acts"><a class="btn sm" href="#film-${w.id}" data-act="sheet-close">${tr('Fiche et toutes les séances','Details and all showtimes')}</a><button class="fbtn" data-act="save" data-id="${w.id}" aria-pressed="${S.list.includes(w.id)}">${S.list.includes(w.id)?'✓ '+tr('Dans ma liste','In my list'):'+ '+tr('Ajouter à ma liste','Add to my list')}</button></div></aside>`}
 function layer(){const saved=S.list.map(id=>W[wi(id)]).filter(Boolean),fv=S.follow.map(id=>V[vi(id)]).filter(Boolean),fc=S.follow.map(id=>CYC.find(c=>c.id===id)).filter(Boolean);
  let h='';
- if(S.drawer)h+=`<div class="scrim" data-act="drawer-close"></div><aside class="drawer" role="dialog" aria-modal="true" aria-label="${tr('Ma liste','My list')}"><header><h2>${tr('Ma <em>liste</em>','My <em>list</em>')}</h2><button class="x" data-act="drawer-close" aria-label="${tr('Fermer','Close')}" id="dx">×</button></header>
-  <div><h3>${tr('À voir','To see')} (${saved.length})</h3>${saved.length?saved.map(w=>{const nx=ALL.find(s=>W[s.w]===w&&up(s));return `<div class="it">${poster(w)}<div><a href="#film-${w.id}" data-act="drawer-close">${esc(w.t)}</a><small>${nx?`${tr('Prochaine séance','Next')} : ${dayShort(nx.d)} ${fmtT(nx.t)} · ${esc(V[nx.v].name)}`:tr('Pas de séance cette semaine','No screenings this week')}</small></div><button class="x" data-act="save" data-id="${w.id}" aria-label="${tr('Retirer','Remove')}">×</button></div>`}).join(''):`<p style="color:var(--ink-2)">${tr('Touchez le signet sur une affiche pour garder un film de côté.','Tap the bookmark on a poster to keep a film for later.')}</p>`}</div>
-  <div><h3>${tr('Salles et cycles suivis','Followed venues and seasons')} (${fv.length+fc.length})</h3>${fv.map(v=>`<div class="it" style="grid-template-columns:1fr auto"><div><a href="#salle-${v.id}" data-act="drawer-close">${esc(v.name)}</a><small>${v.arr} · ${esc(v.q)}</small></div><button class="x" data-act="follow" data-id="${v.id}" aria-label="${tr('Ne plus suivre','Unfollow')}">×</button></div>`).join('')}${fc.map(c=>`<div class="it" style="grid-template-columns:1fr auto"><div><a href="#cycle-${c.id}" data-act="drawer-close">${L(c.t)}</a><small>Cycle</small></div><button class="x" data-act="follow" data-id="${c.id}" aria-label="${tr('Ne plus suivre','Unfollow')}">×</button></div>`).join('')}${fv.length+fc.length?'':`<p style="color:var(--ink-2)">${tr('Suivez une salle ou un cycle : nous vous prévenons quand une séance est ajoutée, jamais plus d’une fois par semaine.','Follow a venue or a season: we tell you when a screening is added, never more than once a week.')}</p>`}</div>
-  <p class="note">${tr('Votre liste est enregistrée sur cet appareil. Créez un compte pour la retrouver partout et recevoir vos alertes par e-mail.','Your list is saved on this device. Create an account to find it everywhere and get your alerts by email.')}</p></aside>`;
- if(S.cookie===null)h+=`<div class="cookie" role="region" aria-label="Cookies"><div class="wrap"><p>${tr("Nous utilisons des cookies strictement nécessaires au fonctionnement du site et, avec votre accord, des cookies de mesure d'audience.","We use cookies that are strictly necessary for the site to work and, with your consent, audience measurement cookies.")}</p><div class="two"><button data-act="cookie" data-v="no">${tr('Refuser','Decline')}</button><button data-act="cookie" data-v="yes">${tr('Accepter','Accept')}</button></div></div></div>`;
- h+=`<div class="moodsw" role="group" aria-label="Palette study"><span>Palette</span><button data-act="mood" data-v="faded" aria-pressed="${S.mood==='faded'}">Faded print</button><button data-act="mood" data-v="dusk" aria-pressed="${S.mood==='dusk'}">Dusk</button></div>`;
+ if(S.sheet)h+=sheetHTML();
+ if(S.drawer)h+=`<div class="scrim" data-act="drawer-close"></div><aside class="panel drawer" role="dialog" aria-modal="true" aria-label="${tr('Ma liste','My list')}"><header><h2>${tr('Ma <em>liste</em>','My <em>list</em>')}</h2><button class="x" data-act="drawer-close" aria-label="${tr('Fermer','Close')}" id="dx">×</button></header>
+  <div><p class="lab" style="margin-bottom:8px">${tr('À voir','To see')} (${saved.length})</p>${saved.length?saved.map(w=>{const nx=ALL.find(s=>W[s.w]===w&&up(s));return `<div class="it">${poster(w)}<div><a href="#film-${w.id}" data-act="drawer-close">${esc(w.t)}</a><small>${nx?`${dayShort(nx.d)} ${fmtT(nx.t)} · ${esc(V[nx.v].name)}`:tr('Pas de séance cette semaine','No screenings this week')}</small></div><button class="x" data-act="save" data-id="${w.id}" aria-label="${tr('Retirer','Remove')}">×</button></div>`}).join(''):`<p style="color:var(--ink-2)">${tr('Touchez le signet sur une affiche pour garder un film de côté.','Tap the bookmark on a poster to keep a film for later.')}</p>`}</div>
+  <div><p class="lab" style="margin-bottom:8px">${tr('Salles et cycles suivis','Followed venues and seasons')} (${fv.length+fc.length})</p>${fv.map(v=>`<div class="it" style="grid-template-columns:1fr auto"><div><a href="#salle-${v.id}" data-act="drawer-close">${esc(v.name)}</a><small>${v.arr} · ${esc(v.q)}</small></div><button class="x" data-act="follow" data-id="${v.id}" aria-label="${tr('Ne plus suivre','Unfollow')}">×</button></div>`).join('')}${fc.map(c=>`<div class="it" style="grid-template-columns:1fr auto"><div><a href="#cycle-${c.id}" data-act="drawer-close">${L(c.t)}</a><small>Cycle</small></div><button class="x" data-act="follow" data-id="${c.id}" aria-label="${tr('Ne plus suivre','Unfollow')}">×</button></div>`).join('')}${fv.length+fc.length?'':`<p style="color:var(--ink-2)">${tr('Suivez une salle ou un cycle pour être prévenu·e des nouvelles séances.','Follow a venue or a season to hear about new screenings.')}</p>`}</div>
+  <p class="note">${tr('Votre liste est enregistrée sur cet appareil.','Your list is saved on this device.')}</p></aside>`;
+ if(S.cookie===null)h+=`<div class="cookie" role="region" aria-label="Cookies"><div class="wrap"><p>${tr("Cookies nécessaires au fonctionnement du site et, avec votre accord, mesure d'audience.","Cookies needed for the site to work and, with your consent, audience measurement.")}</p><div class="two"><button class="btn ghost sm" data-act="cookie" data-v="no">${tr('Refuser','Decline')}</button><button class="btn ghost sm" data-act="cookie" data-v="yes">${tr('Accepter','Accept')}</button></div></div></div>`;
  $('#layer').innerHTML=h+(S.toast?`<div class="toast" role="status">${S.toast}</div>`:'');
- const n=$('#listn');if(n)n.textContent=S.list.length+S.follow.length}
+ document.body.style.overflow=S.sheet||S.drawer?'hidden':'';
+ document.querySelectorAll('#listn,.listn').forEach(n=>n.textContent=S.list.length+S.follow.length)}
 let tt;function toast(m){S.toast=m;layer();clearTimeout(tt);tt=setTimeout(()=>{S.toast='';const e=$('.toast');if(e)e.remove()},2600)}
+
+/* ---------- posters (mockup only): looked up on Wikipedia at view time, never stored in the project ---------- */
+async function loadPosters(){for(const w of W){if(!w.wk||S.img[w.id])continue;
+ try{const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(w.wk));if(!r.ok)continue;const j=await r.json(),u=(j.originalimage||j.thumbnail||{}).source;if(!u)continue;
+  S.img[w.id]=u;store.set('img',S.img);document.querySelectorAll(`[data-p="${w.id}"]`).forEach(e=>{e.outerHTML=poster(w)})}catch(e){return}}}
 
 /* ---------- router ---------- */
 function parse(){const h=location.hash.slice(1);let m;
@@ -736,72 +637,75 @@ function parse(){const h=location.hash.slice(1);let m;
  if((m=h.match(/^salle-(.+)$/))&&vi(m[1])>-1)return{n:'salle',id:m[1]};
  if((m=h.match(/^cycle-(.+)$/))&&CYC.some(c=>c.id===m[1]))return{n:'cycle',id:m[1]};
  if(m=h.match(/^reserver-(.+)$/))return{n:'book',id:m[1]};
+ if(h==='agenda'||h==='salles')return{n:h};
  return{n:'home'}}
-function view(){const r=S.route;return r.n==='film'?film(W[wi(r.id)]):r.n==='salle'?venue(V[vi(r.id)]):r.n==='cycle'?cycle(CYC.find(c=>c.id===r.id)):r.n==='book'?booking():home()}
+function view(){const r=S.route;return r.n==='film'?film(W[wi(r.id)]):r.n==='salle'?venue(V[vi(r.id)]):r.n==='cycle'?cycle(CYC.find(c=>c.id===r.id)):r.n==='book'?booking():r.n==='agenda'?agenda():r.n==='salles'?salles():home()}
 function paint(keep){const y=scrollY;$('#main').innerHTML=view();if(keep){const v=$('.view');if(v)v.style.animation='none';scrollTo({top:y,behavior:'instant'})}}
-let pending=null;
-function route(){const r=parse(),same=JSON.stringify(r)===JSON.stringify(S.route);S.route=r;
+let pending=null,booted=false;
+function route(){const r=parse(),same=JSON.stringify(r)===JSON.stringify(S.route);S.route=r;S.sheet=null;S.drawer=false;
  if(r.n==='book'&&(!S.bk||S.bk.sid!==r.id))S.bk={sid:r.id,step:1,qty:{full:1,red:0,child:0,carnet:0},seats:[],pay:'card',ref:''};
  if(r.n==='film'&&!same){S.fday=0;S.fver='all';S.fmom='all';S.facc=false;const k=wi(r.id),f=ALL.find(s=>s.w===k&&up(s));if(f)S.fday=f.d}
  if(r.n==='salle'&&!same)S.vday=0;
- const go=()=>{paint(false);const a=pending;pending=null;if(a&&document.getElementById(a))document.getElementById(a).scrollIntoView({behavior:'instant',block:'start'});else scrollTo({top:0,behavior:'instant'})};
+ const go=()=>{renderChrome();paint(false);layer();const a=pending;pending=null;if(a&&document.getElementById(a))document.getElementById(a).scrollIntoView({behavior:'instant',block:'start'});else scrollTo({top:0,behavior:'instant'})};
  if(same&&pending){const el=document.getElementById(pending);pending=null;if(el)el.scrollIntoView({behavior:'smooth'});return}
- if(document.startViewTransition&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const vt=document.startViewTransition(go);[vt.ready,vt.finished,vt.updateCallbackDone].forEach(p=>p&&p.catch(()=>{}))}else go();
- document.title=r.n==='home'?'Strapontin':(r.n==='film'?W[wi(r.id)].t:r.n==='salle'?V[vi(r.id)].name:r.n==='cycle'?L(CYC.find(c=>c.id===r.id).t):tr('Réserver','Book'))+' · Strapontin'}
+ go();
+ document.title=r.n==='home'?'Strapontin':(r.n==='film'?W[wi(r.id)].t:r.n==='salle'?V[vi(r.id)].name:r.n==='cycle'?L(CYC.find(c=>c.id===r.id).t):r.n==='agenda'?tr('Rendez-vous','Events'):r.n==='salles'?tr('Salles','Venues'):tr('Réserver','Book'))+' · Strapontin'}
 function part(id,html){const e=document.getElementById(id);if(e)e.innerHTML=html}
 
 /* ---------- search ---------- */
-function searchIndex(){return[...W.map(w=>({g:w.type==='cinema'?tr('Films','Films'):tr('Pièces','Plays'),t:w.t,s:w.by,k:norm(w.t+' '+w.by+' '+w.cast),h:'#film-'+w.id})),...CYC.map(c=>({g:tr('Cycles & rétrospectives','Seasons'),t:L(c.t),s:c.w.length+' films',k:norm(c.t.fr+' '+c.t.en+' '+c.d.fr+' '+c.w.map(id=>W[wi(id)].by).join(' ')),h:'#cycle-'+c.id})),...V.map(v=>({g:tr('Salles','Venues'),t:v.name,s:v.arr+' · '+v.q,k:norm(v.name+' '+v.q+' '+v.arr+' '+v.rooms.join(' ')),h:'#salle-'+v.id}))]}
+function searchIndex(){return[...W.map(w=>({g:w.type==='cinema'?tr('Films','Films'):tr('Pièces','Plays'),t:w.t,s:w.by,k:norm(w.t+' '+w.by+' '+w.cast+' '+(w.wk||'').replace(/_/g,' ')),h:'#film-'+w.id})),...CYC.map(c=>({g:tr('Cycles','Seasons'),t:L(c.t),s:c.w.length+' films',k:norm(c.t.fr+' '+c.t.en+' '+c.w.map(id=>W[wi(id)].by).join(' ')),h:'#cycle-'+c.id})),...V.map(v=>({g:tr('Salles','Venues'),t:v.name,s:v.arr+' · '+v.q,k:norm(v.name+' '+v.q+' '+v.arr+' '+v.rooms.join(' ')),h:'#salle-'+v.id}))]}
 let acSel=-1;
-function ac(){const q=norm(S.q.trim()),box=$('#acbox'),inp=$('#q');if(!q){box.innerHTML='';inp.setAttribute('aria-expanded','false');return}
+function ac(){const q=norm(S.q.trim()),box=$('#acbox'),inp=$('#q');if(!box)return;if(!q){box.innerHTML='';inp.setAttribute('aria-expanded','false');return}
  const res=searchIndex().filter(x=>x.k.includes(q)).slice(0,9),hl=t=>{const i=norm(t).indexOf(q);return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length))};
  let g='',h='';res.forEach((x,i)=>{if(x.g!==g){g=x.g;h+=`<h4>${g}</h4>`}h+=`<a href="${x.h}" role="option" id="ac${i}" aria-selected="${i===acSel}"><span>${hl(x.t)}</span><small>${hl(x.s)}</small></a>`});
- box.innerHTML=`<div class="ac" id="ac" role="listbox">${h||`<p class="none">${tr('Aucun résultat pour','No results for')} « ${esc(S.q)} ». ${tr('Essayez un titre, un·e cinéaste, un quartier.','Try a title, a director, a neighbourhood.')}</p>`}</div>`;inp.setAttribute('aria-expanded','true')}
+ box.innerHTML=`<div class="ac" id="ac" role="listbox">${h||`<p class="none">${tr('Aucun résultat pour','No results for')} « ${esc(S.q)} ».</p>`}</div>`;inp.setAttribute('aria-expanded','true')}
 const closeAc=()=>{S.q='';acSel=-1;const i=$('#q');if(i)i.value='';ac()};
 
 /* ---------- events ---------- */
+const refreshHome=()=>{part('hb',homeBody());const c=$('#whenw');if(c)c.textContent=WHEN().find(x=>x[0]===S.when)[2];document.querySelectorAll('.fb [data-act="when"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===S.when));document.querySelectorAll('.vt [data-act="view"]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===S.view));[['f-arr','arr'],['f-ver','ver'],['f-kind','kind']].forEach(([id,k])=>{const e=document.getElementById(id);if(e){e.value=S[k];e.classList.toggle('on',S[k]!=='all')}})};
 document.addEventListener('input',e=>{if(e.target.id==='q'){S.q=e.target.value;acSel=-1;ac()}});
 document.addEventListener('keydown',e=>{
- if(e.key==='Escape'){if(S.drawer){S.drawer=false;layer()}closeAc()}
+ if(e.key==='Escape'){if(S.drawer||S.sheet){S.drawer=false;S.sheet=null;layer()}closeAc()}
  if(e.target.id==='q'){const items=[...document.querySelectorAll('#ac a')];if(!items.length)return;
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();acSel=(acSel+(e.key==='ArrowDown'?1:-1)+items.length)%items.length;items.forEach((a,i)=>a.setAttribute('aria-selected',i===acSel));e.target.setAttribute('aria-activedescendant','ac'+acSel)}
   if(e.key==='Enter'){e.preventDefault();location.hash=(items[acSel<0?0:acSel]).getAttribute('href');closeAc();e.target.blur()}}});
 document.addEventListener('change',e=>{const a=e.target.dataset.act;
- if(a==='arr'){S.arr=e.target.value;part('finder',finderHTML());const s=$('#f-arr');if(s)s.focus()}
+ if(a==='arr'||a==='ver'||a==='kind'){S[a]=e.target.value;refreshHome()}
  if(a==='facc'){S.facc=e.target.checked;part('fsess',filmSessions(W[wi(S.route.id)]))}
  if(e.target.name==='pay'&&S.bk)S.bk.pay=e.target.value});
 document.addEventListener('click',e=>{
  if(e.target.id==='skip'){e.preventDefault();$('#main').focus();$('#main').scrollIntoView();return}
  if(!e.target.closest('.search'))closeAc();
  const sc=e.target.closest('[data-scroll]');
- if(sc){const id=sc.dataset.scroll,target=sc.getAttribute('href');if(('#'+(location.hash.slice(1)||'home'))===target||(target==='#home'&&S.route.n==='home')){e.preventDefault();const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'})}else pending=id;return}
+ if(sc){e.preventDefault();const el=document.getElementById(sc.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth'});return}
  const acA=e.target.closest('#ac a');if(acA){setTimeout(closeAc,0);return}
  const el=e.target.closest('[data-act]');if(!el)return;const a=el.dataset.act,v=el.dataset.v,b=S.bk;
  const refocus=sel=>{const x=$(sel);if(x)x.focus({preventScroll:true})};
- if(a==='lang'){S.lang=v;store.set('lang',v);renderChrome();paint(true);layer();bindScroll()}
- if(a==='when'||a==='ver'){S[a]=v;part('finder',finderHTML());if(a==='when'){const c=$('#whenw');if(c)c.textContent=WHEN().find(x=>x[0]===v)[2]}refocus(`#finder [data-act="${a}"][data-v="${v}"]`)}
+ if(a==='lang'){S.lang=v;store.set('lang',v);renderChrome();paint(true);layer()}
+ if(a==='so'){S.so=!S.so;$('#hd').classList.toggle('so',S.so);el.setAttribute('aria-expanded',S.so);if(S.so)refocus('#q')}
+ if(a==='when'){S.when=v;refreshHome()}
+ if(a==='view'){S.view=v;refreshHome();if(el.closest('.after'))scrollTo({top:0,behavior:'smooth'})}
+ if(a==='reset'){S.arr='all';S.ver='all';S.kind='all';S.when='week';refreshHome()}
+ if(a==='sheet'){S.sheet=el.dataset.id;layer();refocus('#sx')}
+ if(a==='lucky'){const pool=[...new Set(finderSet().map(s=>s.w))];if(pool.length){S.sheet=W[pool[Math.floor(Math.random()*pool.length)]].id;layer();refocus('#sx')}}
+ if(a==='sheet-close'){S.sheet=null;layer()}
  if(a==='fday'||a==='fver'||a==='fmom'){S[a]=a==='fday'?+v:v;part('fsess',filmSessions(W[wi(S.route.id)]));refocus(`#fsess [data-act="${a}"][data-v="${v}"]`)}
  if(a==='freset'){S.fver='all';S.fmom='all';S.facc=false;part('fsess',filmSessions(W[wi(S.route.id)]))}
  if(a==='vday'){S.vday=+v;part('vprog',venueProg(V[vi(S.route.id)]));refocus(`#vprog [data-act="vday"][data-v="${v}"]`)}
- if(a==='save'||a==='follow'){e.preventDefault();const id=el.dataset.id,arr=a==='save'?S.list:S.follow,i=arr.indexOf(id);if(i>-1)arr.splice(i,1);else arr.push(id);store.set(a==='save'?'list':'follow',arr);
-  document.querySelectorAll(`[data-act="${a}"][data-id="${id}"]`).forEach(x=>{if(x.closest('.drawer'))return;x.setAttribute('aria-pressed',i<0);if(x.classList.contains('bm')){x.classList.remove('popped');x.getBoundingClientRect();if(i<0)x.classList.add('popped')}else if(a==='save')x.textContent=i<0?'✓ '+tr('Dans ma liste','In my list'):'+ '+tr('Ajouter à ma liste','Add to my list');else x.textContent=i<0?'✓ '+tr('Suivi','Following'):'+ '+tr('Suivre','Follow')});
-  toast(a==='save'?(i<0?tr('Ajouté à votre liste','Added to your list'):tr('Retiré de votre liste','Removed from your list')):(i<0?tr('Suivi. Nous vous prévenons des nouvelles séances.','Following. We’ll tell you about new screenings.'):tr('Vous ne suivez plus','Unfollowed')))}
- if(a==='mood'){S.mood=v;store.set('mood',v);document.documentElement.dataset.mood=v;layer()}
- if(a==='peek'){setPeek(el.dataset.id)}
+ if(a==='save'||a==='follow'){e.preventDefault();const id=el.dataset.id,arr=a==='save'?S.list:S.follow,i=arr.indexOf(id);if(i>-1)arr.splice(i,1);else arr.push(id);store.set(a==='save'?'list3':'follow',arr);
+  if(el.closest('.drawer')){layer()}else document.querySelectorAll(`[data-act="${a}"][data-id="${id}"]`).forEach(x=>{x.setAttribute('aria-pressed',i<0);if(x.classList.contains('bm')){x.classList.remove('popped');x.getBoundingClientRect();if(i<0)x.classList.add('popped')}else if(a==='save')x.textContent=i<0?'✓ '+tr('Dans ma liste','In my list'):'+ '+tr('Ajouter à ma liste','Add to my list');else x.textContent=i<0?'✓ '+tr('Suivi','Following'):'+ '+tr('Suivre','Follow')});
+  document.querySelectorAll('#listn,.listn').forEach(n=>n.textContent=S.list.length+S.follow.length);
+  toast(a==='save'?(i<0?tr('Ajouté à votre liste','Added to your list'):tr('Retiré de votre liste','Removed from your list')):(i<0?tr('Suivi','Following'):tr('Vous ne suivez plus','Unfollowed')))}
  if(a==='drawer'){S.drawer=true;layer();refocus('#dx')}
  if(a==='drawer-close'){S.drawer=false;layer()}
- if(a==='cookie'){S.cookie=v;store.set('cookie',v);layer();toast(v==='yes'?tr('Cookies de mesure acceptés','Measurement cookies accepted'):tr('Cookies de mesure refusés','Measurement cookies declined'))}
+ if(a==='cookie'){S.cookie=v;store.set('cookie',v);layer()}
  if(a==='cookie-open'){S.cookie=null;layer()}
- if(!b)return;
+ if(!b||S.route.n!=='book')return;
  if(a==='qty'){const k=el.dataset.k;b.qty[k]=Math.max(0,b.qty[k]+ +v);b.seats=[];paint(true);refocus(`[data-act="qty"][data-k="${k}"][data-v="${v}"]:not(:disabled)`)}
  if(a==='seat'){const i=b.seats.indexOf(v);if(i>-1)b.seats.splice(i,1);else{if(b.seats.length>=bkN())b.seats.shift();b.seats.push(v)}paint(true);refocus(`[data-act="seat"][data-v="${v}"]`)}
  if(a==='step'||a==='next'){b.step=a==='next'?b.step+1:+v;paint(false);scrollTo({top:0,behavior:'smooth'});$('#main').focus({preventScroll:true})}
  if(a==='pay'){el.disabled=true;el.textContent=tr('Paiement en cours…','Processing…');setTimeout(()=>{b.ref='STR-'+(b.sid.replace(/x/g,'')*7%1e6).toString(36).toUpperCase().padStart(4,'7');b.step=5;paint(false);scrollTo({top:0,behavior:'smooth'});toast(tr('Réservation confirmée','Booking confirmed'))},900)}
 });
-function setPeek(id){if(S.peek===id||!$('#pk'))return;S.peek=id;part('pk',peekHTML());document.querySelectorAll('.th').forEach(t=>t.setAttribute('aria-pressed',t.dataset.id===id))}
-document.addEventListener('mouseover',e=>{const t=e.target.closest&&e.target.closest('.th');if(t)setPeek(t.dataset.id)});
-document.addEventListener('focusin',e=>{const t=e.target.closest&&e.target.closest('.th');if(t)setPeek(t.dataset.id)});
-function bindScroll(){const hd=$('#hd');const f=()=>hd.classList.toggle('scrolled',scrollY>8);f();window.onscroll=f}
 window.addEventListener('hashchange',route);
-renderChrome();route();layer();bindScroll();
+route();booted=true;loadPosters();
 </script>

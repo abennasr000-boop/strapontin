@@ -4,8 +4,8 @@ Discovery and booking for the independent cinemas and pocket theatres of Paris. 
 
 | What | Where |
 |---|---|
-| Clickable prototype (current, v2) | `site/index.html` · published: https://claude.ai/artifact/PonDzd9ciVRLD6E3mTyGti |
-| Brand identity guide (current, v2) | `site/identity.html` · published: https://claude.ai/artifact/P9mTAtbzP8mSTFsCnnUL5U |
+| Clickable prototype (current, v3) | `site/index.html` · published: https://claude.ai/artifact/PonDzd9ciVRLD6E3mTyGti |
+| Brand identity guide (current, v3) | `site/identity.html` · published: https://claude.ai/artifact/P9mTAtbzP8mSTFsCnnUL5U |
 | Earlier versions | `site/archive/` |
 | Original Lovable prototype (v0) | https://pocket-stage-passport.lovable.app/ |
 | Why things are the way they are | `docs/` (start with `docs/README.md`) |
@@ -22,6 +22,6 @@ Then open http://localhost:4173. Both pages are single self-contained HTML files
 
 ## Status (14 November 2026)
 
-- Functional fixes from the NCPI audit: done in the prototype (see `docs/knowledge/K04-ncpi-audit.md`).
-- Identity: v2 direction applied after the client review of v1. Two decisions are open: palette mood (D017) and the gallery-first homepage (D016).
-- Programme, venues and prices are fictional. Payment is simulated. Nothing has been tested with users yet.
+- v3: the home page is a filterable poster gallery with a list view (D021); identity follows the grid-sheet reference (D022).
+- The mockup shows real film posters looked up on Wikipedia when you run it locally. They are for internal review only, are not stored here, and their rights are not cleared (D023). The published page shows typographic tiles instead.
+- Venues, showtimes and prices are fictional. Payment is simulated. Nothing has been tested with users yet.
