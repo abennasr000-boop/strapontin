@@ -1,6 +1,6 @@
 # D024 · Home gallery layout: mosaic, drift or accordion
 
-**Status:** Open (waiting for the client's choice)
+**Status:** Decided: A · Mosaïque (client, 14 Nov 2026), built into `site/index.html`
 **Date:** 14 Nov 2026
 
 ## Context
@@ -22,3 +22,10 @@ F003: the v3 gallery (D021) works but its even, ruled grid feels rigid. The clie
 
 ## Next
 Client chooses; the choice is then built into `site/index.html` with the existing filters, list view and booking flow, and D021 is updated.
+
+## Outcome (F004, 14 Nov 2026)
+The client chose A and asked for: larger, slightly uneven margins; an opened film that adapts to the screen and stays fully visible; shading behind the text on posters; and a clear place for filters, search and buttons.
+
+Built: uneven tile sizes with wider, slightly varied gaps; a dark gradient and soft text shadow behind poster text; the opened film sized from the viewport and scrolled just under the filter line (side by side on desktop, stacked on phones) while the others shrink to small tiles; filters as a single text line (underlined active state, no drawn boxes) with Galerie / Liste at the right.
+
+Still open: the type filter is hidden on phones for lack of room; the mockup clock is held at 16h00 in the evening so "today" stays full; poster files are low resolution; nothing is user-tested.

@@ -54,4 +54,4 @@ Client and team reviews are logged in `feedback/`. The `contribution-matrix.md` 
 | D021 | Home page is a filterable poster gallery, with a list view | Accepted as goal; **untested** |
 | D022 | Identity v3: the grid sheet | Accepted (direction) |
 | D023 | Real film posters in the internal mockup | Internal review only; **rights not cleared** |
-| D024 | Home gallery layout: mosaic, drift or accordion | **Open** |
+| D024 | Home gallery layout: mosaic, drift or accordion | Decided: Mosaïque, built |
