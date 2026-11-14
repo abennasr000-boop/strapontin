@@ -205,9 +205,6 @@ main{display:block;min-height:70vh}
 .t .sc .nx b{font-weight:700;font-variant-numeric:tabular-nums}
 .t .sc .mo{font-size:12px;opacity:.85}
 .t .bm{top:10px;right:10px}
-.mos.has .t:not(.on){--c:1!important;--r:2!important;margin:0}
-.mos.has .t:not(.on) .sc{padding:50px 12px 11px}
-.mos.has .t:not(.on) .sc h3{font-size:13px}
 .t.on{grid-column:1/-1;grid-row:span 1;margin:0;background:var(--paper-2);color:var(--ink);overflow:visible;display:grid;scroll-margin-top:200px}
 .t.on .timg{position:relative;inset:auto;height:min(52vh,120vw);background:var(--a)}
 .t.on .timg img{object-fit:contain}
@@ -585,7 +582,8 @@ function renderChrome(){const r=S.route.n,cur=k=>k===r||(k==='home'&&['film','bo
 
 /* ---------- home: gallery / list ---------- */
 const WHEN=()=>[['today',tr("Aujourd'hui",'Today'),tr("aujourd'hui",'today')],['tonight',tr('Ce soir','Tonight'),tr('ce soir','tonight')],['tomorrow',tr('Demain','Tomorrow'),tr('demain','tomorrow')],['weekend',tr('Ce week-end','Weekend'),tr('ce week-end','this weekend')],['week',tr('7 jours','7 days'),tr('cette semaine','this week')]];
-const SPANS=[[2,4],[1,2],[1,2],[2,3],[1,2],[1,2],[2,3],[1,2],[1,2],[2,4],[1,2],[2,3]];
+const SPANS=[[3,4],[1,2],[2,3],[1,3],[1,2],[2,4],[1,2],[2,2],[1,3],[2,3],[1,2],[1,2],[2,4],[1,3]];
+const HSPANS=[[1,2],[1,3],[1,2],[2,3],[1,3],[1,2],[2,2],[1,2],[1,3],[2,3]];
 function openRows(){const W0=innerWidth,cols=W0>=1180?6:W0>=760?4:2,pad=W0>=1180?40:W0>=760?32:16,cg=W0>=1180?20:W0>=760?18:10,rg=W0>=1180?28:W0>=760?24:14,u=(W0-2*pad-(cols-1)*cg)/cols*.7;
  const hh=($('#hd')||{}).offsetHeight||58,avail=innerHeight-hh-34-84;let r=Math.floor((avail+rg)/(u+rg));r=Math.max(3,Math.min(6,r));if(cols===6&&r%2)r-=1;return Math.max(r,cols===6?4:3)}
 function homeBody(){const set=finderSet(),by=new Map();set.forEach(s=>{if(!by.has(s.w))by.set(s.w,[]);by.get(s.w).push(s)});
@@ -594,8 +592,8 @@ function homeBody(){const set=finderSet(),by=new Map();set.forEach(s=>{if(!by.ha
  const count=`<div class="meta pad"><h2 class="mt">${tr('À l’affiche','Now showing')} <em>${word}</em>${S.arr!=='all'?` <em>· ${S.arr}</em>`:''}</h2><p class="lab num" aria-live="polite">${ids.length} ${tr('titres','titles')} · ${set.length} ${tr('séances','showtimes')} · ${nv} ${nv>1?tr('salles','venues'):tr('salle','venue')} · ${tr('prix TTC sans frais','all-in prices')}</p><button class="vlink lab" data-act="view" data-v="${S.view==='gal'?'list':'gal'}">${S.view==='gal'?tr('Vue liste','List view'):tr('Vue galerie','Gallery view')}</button></div>`;
  if(!set.length)return `${count}<div class="empty pad"><h3>${tr('Rien à cette heure avec ces filtres','Nothing at this time with these filters')}</h3><p>${tr('Les dernières séances ont peut-être déjà commencé.','The last screenings may already have started.')}</p><div class="acts">${next!==S.when?`<button class="btn sm" data-act="when" data-v="${next}">${tr('Voir ','See ')+WHEN().find(x=>x[0]===next)[2]}</button>`:''}<button class="btn sm ghost" data-act="reset">${tr('Effacer les filtres','Clear filters')}</button></div></div>`;
  if(S.view==='list')return `${count}<div class="pad" style="margin-top:10px">${rows(set,{venue:true,day:multi,max:6})}</div>`;
- const has=S.open&&by.has(wi(S.open));
- return `${count}<div class="mos${has?' has':''}" style="--or:${openRows()}">${ids.map((i,n)=>{const w=W[i],ss=by.get(i),nx=ss[0],v=V[nx.v],nvv=new Set(ss.map(s=>s.v)).size,sp=SPANS[n%SPANS.length];
+ const has=S.open&&by.has(wi(S.open)),oi=has?ids.indexOf(wi(S.open)):-1;
+ return `${count}<div class="mos${has?' has':''}" style="--or:${openRows()}">${ids.map((i,n)=>{const w=W[i],ss=by.get(i),nx=ss[0],v=V[nx.v],nvv=new Set(ss.map(s=>s.v)).size,cols=innerWidth>=1180?6:innerWidth>=760?4:2,k=has?(n>oi?n-1:n):n,raw=has?HSPANS[k%HSPANS.length]:SPANS[k%SPANS.length],sp=[Math.min(raw[0],cols===2?2:3),raw[1]];
   const im=`<span class="timg" data-pt="${w.id}">${S.img[w.id]?`<img src="${esc(S.img[w.id])}" alt="${esc(tr('Affiche : ','Poster: ')+w.t)}" loading="lazy">`:''}</span>`;
   if(has&&S.open===w.id)return `<article class="t on" data-id="${w.id}" style="--a:${w.c[0]}">${im}<div class="oi"><button class="x" data-act="tclose" aria-label="${tr('Fermer','Close')}" id="tx">×</button><p class="lab">${L(w.from)} · ${w.y} · ${dur(w.dur)}</p><h2>${esc(w.t)}</h2><p class="by">${w.role?L(w.role)+' ':''}${esc(w.by)}</p>${w.aw?`<p class="award">${L(w.aw)}</p>`:''}<p class="syn">${L(w.syn)}</p><p class="lab">${tr('Séances','Showtimes')} · ${word}</p><div class="tks">${ss.slice(0,4).map(s=>chip(s,{venue:true,day:true})).join('')}</div><div class="acts"><a class="btn sm ghost" href="#film-${w.id}">${ss.length>4?`+${ss.length-4} · `:''}${tr('Fiche complète','Full details')}</a>${bm(w.id,'inline')}</div></div></article>`;
   return `<article class="t${sp[0]>1?' c2':''}" data-id="${w.id}" style="--c:${sp[0]};--r:${sp[1]};--a:${w.c[0]}">${im}${bm(w.id)}<div class="sc"><h3><button data-act="topen" data-id="${w.id}">${esc(w.t)}</button></h3><p class="by">${esc(w.by)}, ${w.y}</p><p class="nx"><b>${multi&&nx.d>0?dayShort(nx.d)+' ':''}${fmtT(nx.t)}</b> · ${esc(v.name)}, ${v.arr} · ${fmtP(v.p.full)}</p>${ss.length>1?`<p class="mo">+${ss.length-1} ${ss.length>2?tr('séances','showtimes'):tr('séance','showtime')} · ${nvv} ${nvv>1?tr('salles','venues'):tr('salle','venue')}</p>`:''}</div></article>`}).join('')}</div>
