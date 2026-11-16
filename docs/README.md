@@ -57,3 +57,4 @@ Client and team reviews are logged in `feedback/`. Ideas raised but not built li
 | D024 | Home gallery layout: mosaic, drift or accordion | Decided: Mosaïque, built |
 | D025 | Search and filters in a floating dock at the bottom centre | Accepted; **untested** |
 | D026 | Test catalogue is films only, every title with a poster | Accepted for the test; theatre to return |
+| D027 | Microsoft Clarity tracking tag kept on the prototype | Accepted for the test; **consent handling open** |
