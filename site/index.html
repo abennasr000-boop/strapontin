@@ -98,7 +98,7 @@ p{margin:0}
 .tabbar a,.tabbar button{display:grid;place-items:center;min-height:54px;padding:6px 2px;text-decoration:none;background:none;border:0;text-align:center;color:var(--ink-2)}
 .tabbar [aria-current=page]{color:var(--ink);font-weight:700;box-shadow:inset 0 2px 0 var(--ink)}
 .tabbar b{color:var(--accent)}
-body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}.cookie{bottom:calc(55px + env(safe-area-inset-bottom,0px))}.toast{bottom:calc(74px + env(safe-area-inset-bottom,0px))}footer .wrap{padding-bottom:40px}}
+body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}.optin{bottom:calc(55px + env(safe-area-inset-bottom,0px))}.toast{bottom:calc(74px + env(safe-area-inset-bottom,0px))}footer .wrap{padding-bottom:40px}}
 
 /* actions */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--paper-2);border:1px solid var(--ink);border-radius:2px;padding:13px 20px;font:600 12px var(--sans);font-stretch:118%;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s,transform .2s var(--ease)}
@@ -404,11 +404,11 @@ dl{margin:0}
 @media(min-width:760px){.sheet{left:auto;top:0;width:min(470px,100%);max-height:none;border-radius:0;border-top:0;border-left:1px solid var(--ink);padding:26px;animation:slide .4s var(--ease)}.sheet .sh-top{grid-template-columns:150px 1fr}.sheet h2{font-size:25px;padding-right:40px}}
 .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));translate:-50% 0;background:var(--ink);color:var(--paper-2);padding:11px 18px;border-radius:99px;z-index:90;font-size:14px;animation:toast 2.6s var(--ease) forwards;max-width:calc(100% - 32px);text-align:center}
 @keyframes toast{0%{opacity:0;transform:translateY(16px)}8%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(8px)}}
-.cookie{position:fixed;left:0;right:0;bottom:0;z-index:65;background:var(--paper-2);border-top:1px solid var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
-.cookie .wrap{display:flex;gap:12px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:12px}
-.cookie p{font-size:14px;max-width:70ch;flex:1 1 300px}
-.cookie .two{display:flex;gap:10px}
-.cookie .two .btn{min-width:112px}
+.optin{position:fixed;left:0;right:0;bottom:0;z-index:65;background:var(--paper-2);border-top:1px solid var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
+.optin .wrap{display:flex;gap:12px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:12px}
+.optin p{font-size:14px;max-width:70ch;flex:1 1 300px}
+.optin .two{display:flex;gap:10px}
+.optin .two .btn{min-width:112px}
 footer{border-top:1px solid var(--ink);margin-top:50px}
 footer .wrap{padding-block:34px 90px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
 @media(max-width:760px){footer .wrap{grid-template-columns:1fr}}
@@ -439,8 +439,8 @@ body{padding-bottom:0}
 .dk-sx{display:none}
 .dock .ac{position:absolute;left:0;right:0;top:auto;bottom:calc(100% + 12px);color:var(--ink);border-radius:14px;box-shadow:0 20px 44px -14px rgba(35,20,23,.6)}
 #acbox{position:static}
-.cookie{left:auto;right:max(12px,env(safe-area-inset-right,0px));bottom:auto;top:calc(var(--hh) + 12px + env(safe-area-inset-top,0px));max-width:min(380px,calc(100% - 24px));border:1px solid var(--ink)}
-.cookie .wrap{padding:14px 16px}
+.optin{left:auto;right:max(12px,env(safe-area-inset-right,0px));bottom:auto;top:calc(var(--hh) + 12px + env(safe-area-inset-top,0px));max-width:min(380px,calc(100% - 24px));border:1px solid var(--ink)}
+.optin .wrap{padding:14px 16px}
 .toast{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
 footer .wrap{padding-bottom:120px}
 .meta{display:flex;align-items:baseline;justify-content:space-between;gap:6px 20px;flex-wrap:wrap;padding-top:18px}
@@ -726,7 +726,7 @@ function layer(){const saved=S.list.map(id=>W[wi(id)]).filter(Boolean),fv=S.foll
   <div><p class="lab" style="margin-bottom:8px">${tr('À voir','To see')} (${saved.length})</p>${saved.length?saved.map(w=>{const nx=ALL.find(s=>W[s.w]===w&&up(s));return `<div class="it">${poster(w)}<div><a href="#film-${w.id}" data-act="drawer-close">${esc(w.t)}</a><small>${nx?`${dayShort(nx.d)} ${fmtT(nx.t)} · ${esc(V[nx.v].name)}`:tr('Pas de séance cette semaine','No screenings this week')}</small></div><button class="x" data-act="save" data-id="${w.id}" aria-label="${tr('Retirer','Remove')}">×</button></div>`}).join(''):`<p style="color:var(--ink-2)">${tr('Touchez le signet sur une affiche pour garder un film de côté.','Tap the bookmark on a poster to keep a film for later.')}</p>`}</div>
   <div><p class="lab" style="margin-bottom:8px">${tr('Salles et cycles suivis','Followed venues and seasons')} (${fv.length+fc.length})</p>${fv.map(v=>`<div class="it" style="grid-template-columns:1fr auto"><div><a href="#salle-${v.id}" data-act="drawer-close">${esc(v.name)}</a><small>${v.arr} · ${esc(v.q)}</small></div><button class="x" data-act="follow" data-id="${v.id}" aria-label="${tr('Ne plus suivre','Unfollow')}">×</button></div>`).join('')}${fc.map(c=>`<div class="it" style="grid-template-columns:1fr auto"><div><a href="#cycle-${c.id}" data-act="drawer-close">${L(c.t)}</a><small>Cycle</small></div><button class="x" data-act="follow" data-id="${c.id}" aria-label="${tr('Ne plus suivre','Unfollow')}">×</button></div>`).join('')}${fv.length+fc.length?'':`<p style="color:var(--ink-2)">${tr('Suivez une salle ou un cycle pour être prévenu·e des nouvelles séances.','Follow a venue or a season to hear about new screenings.')}</p>`}</div>
   <p class="note">${tr('Votre liste est enregistrée sur cet appareil.','Your list is saved on this device.')}</p></aside>`;
- if(S.cookie===null)h+=`<div class="cookie" role="region" aria-label="Cookies"><div class="wrap"><p>${tr("Cookies nécessaires au fonctionnement du site et, avec votre accord, mesure d'audience.","Cookies needed for the site to work and, with your consent, audience measurement.")}</p><div class="two"><button class="btn ghost sm" data-act="cookie" data-v="no">${tr('Refuser','Decline')}</button><button class="btn ghost sm" data-act="cookie" data-v="yes">${tr('Accepter','Accept')}</button></div></div></div>`;
+ if(S.cookie===null)h+=`<div class="optin" role="region" aria-label="Mesure d'audience"><div class="wrap"><p>${tr("Cookies nécessaires au fonctionnement du site et, avec votre accord, mesure d'audience.","Cookies needed for the site to work and, with your consent, audience measurement.")}</p><div class="two"><button class="btn ghost sm" data-act="cookie" data-v="no">${tr('Refuser','Decline')}</button><button class="btn ghost sm" data-act="cookie" data-v="yes">${tr('Accepter','Accept')}</button></div></div></div>`;
  $('#layer').innerHTML=h+(S.toast?`<div class="toast" role="status">${S.toast}</div>`:'');
  document.body.style.overflow=S.sheet||S.drawer?'hidden':'';
  document.querySelectorAll('#listn,.listn').forEach(n=>n.textContent=S.list.length+S.follow.length)}
