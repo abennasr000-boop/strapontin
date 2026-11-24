@@ -30,5 +30,5 @@ A dark, pill-shaped dock floats at the bottom centre of the screen on every page
 ## Update (F005, 14 Nov 2026)
 The client found the dark dock counter-intuitive. It is now light (paper tone, slightly translucent) with a soft glow and a fine edge so it still separates from posters behind it; an active filter turns ink. The client called this a first version to refine later. Risk to watch: a light dock over a light poster has less separation than the dark one; the glow and edge carry it.
 
-## Update (F006, 24 Nov 2026)
-First phone test showed the dock lagging and typing failing; causes and fixes are in F006. The selects are now a visible label with the native select laid over it at 16px (no iOS zoom). The resting state names the category ("Paris", "Version") and the active state names the value. On phones the dock spans the width, and the keyboard pushes it up on iOS. Labels are whole words: no "Tmrw" or "Auj.".
+## Update (F006, F007, 24 Nov 2026)
+First phone test (F006): the dock lagged and typing failed. The causes and the rules that prevent them are in D035. The filters were rebuilt as native selects under a visible label, with whole-word wording rules (D034). Focus and target size follow D032 and D033. On phones the dock now spans the width, and on iOS it moves above the keyboard.

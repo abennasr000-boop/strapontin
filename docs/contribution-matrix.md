@@ -13,8 +13,12 @@ Read across: a source, and the concrete things in the product that exist because
 | **K07 UX and compliance references** | Autocomplete; no carousel; freshness guard; equal cookie buttons; contrast and focus rules; no card fields | D005, D012, D013, D016, D019 |
 | **F002 Client review of v2** | Gallery home with sticky filters and list view; grid-sheet identity; real films and posters; removal of textures and opening statement | D021, D022, D023 |
 | **F001 Client review of v1** | The whole v2 identity; removal of the circled word; new logo; palette study; sticky fix; this documentation | D015–D018, D020 |
+| **K08 WCAG 2.2 AAA criteria and measurements** | 7:1 colour values; 44px targets; two-tone focus ring; hidden context on links and buttons; one status region; heading order; the axe test method | D029, D030, D031, D032, D033 |
+| **F006 First phone test and audit** | Search that keeps its text; resize and keyboard rules; native 16px filters with whole-word labels; lines that break between items; one name for the agenda page; header that fits 320px | D034, D035, D036 |
+| **F007 External accessibility review** | Full names for "FR", "EN" and the list counter; keyboard-visible filters; the AAA target and its exception list | D029–D034 |
 
 ## Where the grounding is thin
-- **No user evidence anywhere.** Every "segment" argument is a hypothesis.
+- **No user evidence anywhere.** Every "segment" argument is a hypothesis. F006 is a single informal phone test.
+- **Accessibility is checked by tools only (K08).** No test with screen-reader users or on real devices yet; D029's AAA claim means "no automated violations".
 - **Hofstede scores and external statistics are quoted, not verified** (K03, K06, K07).
 - **D016 and D017** rest mostly on taste so far. D016 has a test plan; D017 needs the client's call and ideally a quick preference test with people from the three segments.

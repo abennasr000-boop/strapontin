@@ -23,3 +23,6 @@ Sage paper #D8D9CC, near-black wine ink, visible hairline grid, no grain, no fra
 
 ## Where it shows
 `site/index.html`, `site/identity.html`.
+
+## Update (24 Nov 2026)
+Colour values darkened for 7:1 text contrast: secondary grey, orangeade and award green, plus a separate darker orangeade for text (D030, under the AAA target of D029). Hues and direction unchanged.
