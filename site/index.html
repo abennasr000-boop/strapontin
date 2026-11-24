@@ -11,6 +11,22 @@ function loadClarity(){
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   })(window, document, "clarity", "script", "zeku8v4fl1");
 }
+/* Google Analytics 4 (D028). Same gating as Clarity: loaded only after "Accepter" (D019). Keep in every version. */
+var GA4_ID="G-XXXXXXXXXX"; /* replace with the property's measurement ID */
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+function loadGA4(){
+  if(window.__ga4Loaded||!/^G-[A-Z0-9]+$/.test(GA4_ID)||GA4_ID==="G-XXXXXXXXXX")return;window.__ga4Loaded=true;
+  window['ga-disable-'+GA4_ID]=false;
+  gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted'});
+  gtag('js',new Date());gtag('config',GA4_ID);
+  var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;
+  document.head.appendChild(s);
+}
+function revokeGA4(){
+  window['ga-disable-'+GA4_ID]=true;
+  if(window.__ga4Loaded)gtag('consent','update',{analytics_storage:'denied'});
+}
 </script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Instrument+Serif:ital@0;1&family=Archivo:wdth,wght@62..125,100..900&display=swap">
@@ -448,7 +464,7 @@ footer .wrap{padding-bottom:120px}
 /* ---------- state ---------- */
 const S={lang:'fr',when:null,arr:'all',ver:'all',kind:'all',view:'gal',list:[],follow:[],cookie:null,fday:0,fver:'all',fmom:'all',facc:false,vday:0,bk:null,route:{n:'home'},drawer:false,sheet:null,q:'',img:{}};
 const store={get(k,d){try{const v=localStorage.getItem('strp_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('strp_'+k,JSON.stringify(v))}catch(e){}}};
-S.lang=store.get('lang','fr');S.list=store.get('list3',[]);S.follow=store.get('follow',[]);S.cookie=store.get('cookie',null);if(S.cookie==='yes')loadClarity();S.img=store.get('img',{});
+S.lang=store.get('lang','fr');S.list=store.get('list3',[]);S.follow=store.get('follow',[]);S.cookie=store.get('cookie',null);if(S.cookie==='yes'){loadClarity();loadGA4()}S.img=store.get('img',{});
 const tr=(fr,en)=>S.lang==='fr'?fr:en;
 const L=x=>x&&typeof x==='object'&&!Array.isArray(x)?x[S.lang]:x;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -796,7 +812,7 @@ document.addEventListener('click',e=>{
   toast(a==='save'?(i<0?tr('Ajouté à votre liste','Added to your list'):tr('Retiré de votre liste','Removed from your list')):(i<0?tr('Suivi','Following'):tr('Vous ne suivez plus','Unfollowed')))}
  if(a==='drawer'){S.drawer=true;layer();refocus('#dx')}
  if(a==='drawer-close'){S.drawer=false;layer()}
- if(a==='cookie'){S.cookie=v;store.set('cookie',v);if(v==='yes')loadClarity();else if(window.clarity)clarity('consent',false);layer()}
+ if(a==='cookie'){S.cookie=v;store.set('cookie',v);if(v==='yes'){loadClarity();loadGA4()}else{if(window.clarity)clarity('consent',false);revokeGA4()}layer()}
  if(a==='cookie-open'){S.cookie=null;layer()}
  if(!b||S.route.n!=='book')return;
  if(a==='qty'){const k=el.dataset.k;b.qty[k]=Math.max(0,b.qty[k]+ +v);b.seats=[];paint(true);refocus(`[data-act="qty"][data-k="${k}"][data-v="${v}"]:not(:disabled)`)}
