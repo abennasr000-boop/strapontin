@@ -5,7 +5,7 @@ This folder is the project's memory. It answers two questions for anyone on the 
 1. **What do we know, and where does it come from?** → `knowledge/`
 2. **What did we decide, on what grounds, and is it still valid?** → `decisions/`
 
-Client and team reviews are logged in `feedback/`. Ideas raised but not built live in `ideas/`. The `contribution-matrix.md` file links the two: for each piece of knowledge, the concrete things it changed in the product.
+Client and team reviews are logged in `feedback/`. Dated changes to the prototype, with links to the records behind them, are in `changelog.md`. Ideas raised but not built live in `ideas/`. The `contribution-matrix.md` file links the two: for each piece of knowledge, the concrete things it changed in the product.
 
 ## How the system works
 
@@ -49,13 +49,21 @@ Client and team reviews are logged in `feedback/`. Ideas raised but not built li
 | D016 | Homepage opens on the photo gallery, finder second | Superseded by D021 |
 | D017 | Palette mood: Faded print or Dusk | Closed by D022 |
 | D018 | Sticky header | Accepted |
-| D019 | Accessibility and consent baseline | Accepted |
+| D019 | Accessibility and consent baseline | Accepted; raised to AAA by D029 |
 | D020 | This documentation system | Accepted |
 | D021 | Home page is a filterable poster gallery, with a list view | Accepted as goal; **untested** |
-| D022 | Identity v3: the grid sheet | Accepted (direction) |
+| D022 | Identity v3: the grid sheet | Accepted (direction); colour values revised by D030 |
 | D023 | Real film posters in the internal mockup | Internal review only; **rights not cleared** |
 | D024 | Home gallery layout: mosaic, drift or accordion | Decided: Mosaïque, built |
-| D025 | Search and filters in a floating dock at the bottom centre | Accepted; **untested** |
+| D025 | Search and filters in a floating dock at the bottom centre | Accepted; refined by D034, D035; first phone test F006 |
 | D026 | Test catalogue is films only, every title with a poster | Accepted for the test; theatre to return |
 | D027 | Microsoft Clarity tracking tag kept on the prototype | Accepted for the test; loads only after cookie consent |
 | D028 | Google Analytics 4 tag on the prototype | Accepted for the test; loads only after cookie consent |
+| D029 | Accessibility target: WCAG 2.2 AAA where it can be met, with named exceptions | Accepted; automated checks only |
+| D030 | Colour values revised for 7:1 text contrast | Accepted; client to confirm the darker look |
+| D031 | Accessible names, link context, status announcements, heading structure | Accepted |
+| D032 | Keyboard focus ring and dialog behaviour | Accepted |
+| D033 | Targets of at least 44 × 44 px | Accepted; seat map excepted |
+| D034 | Dock filters: native selects under a visible label, and their wording | Accepted |
+| D035 | Phone performance rules: what may re-render, what is too costly | Accepted; **not yet confirmed on real devices** |
+| D036 | Interface wording and the header on narrow phones | Accepted |
