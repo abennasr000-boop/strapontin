@@ -1,6 +1,6 @@
 # D028 · Google Analytics 4 tag on the prototype, behind cookie consent
 
-**Status:** Accepted for the test; **measurement ID still to fill in**
+**Status:** Accepted for the test
 **Date:** 24 Nov 2026
 
 ## Context
@@ -11,7 +11,7 @@ The GA4 `gtag.js` snippet sits in the same `<script>` block as Clarity in the `<
 - Nothing from Google loads before a choice is made.
 - "Accepter" (or a stored "Accepter" on a later visit) calls `loadGA4()`, which loads `gtag.js` with analytics storage granted and all ad signals denied.
 - "Refuser" never loads it; a later refusal calls `revokeGA4()`, which sets `ga-disable-<ID>` and updates consent to denied.
-- The measurement ID is the `GA4_ID` constant. While it is the placeholder `G-XXXXXXXXXX`, nothing loads.
+- The measurement ID is the `GA4_ID` constant: `G-437TB35RBD`.
 
 Keep it in every version of the prototype pages, like Clarity.
 
