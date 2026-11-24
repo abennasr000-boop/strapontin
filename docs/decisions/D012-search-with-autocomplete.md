@@ -17,4 +17,4 @@ Accent-insensitive autocomplete grouped by films, plays, seasons and venues, wit
 - Matches substrings only; no typo tolerance.
 
 ## Where it shows
-Header search.
+Search field in the floating dock (D025); on phones it opens from the magnifier icon over the filters.
